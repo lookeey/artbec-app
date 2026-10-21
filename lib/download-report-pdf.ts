@@ -1,0 +1,2 @@
+import type {TabularReport} from './tabular-report-pdf';
+export async function downloadReportPdf(report:TabularReport,filename:string){const {renderTabularReportPdf}=await import('./tabular-report-pdf');const bytes=await renderTabularReportPdf(report),url=URL.createObjectURL(new Blob([new Uint8Array(bytes).buffer],{type:'application/pdf'})),link=document.createElement('a');link.href=url;link.download=filename.endsWith('.pdf')?filename:filename+'.pdf';document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}

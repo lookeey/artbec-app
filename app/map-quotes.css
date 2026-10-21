@@ -1,0 +1,18 @@
+.quote-section-kicker{margin:7px 0 2px;padding:9px 12px;border-left:3px solid #178da9;border-radius:5px;background:#eef8fb;color:#184d68;font-size:11px;font-weight:850;letter-spacing:.06em;text-transform:uppercase}
+.quote-recipient-switch{display:flex;gap:7px;padding:5px;border:1px solid #dce9ef;border-radius:11px;background:#f2f7fa}
+.quote-recipient-switch button{flex:1;padding:9px;border-radius:8px;color:#5a7586;font-size:11px;font-weight:800}
+.quote-recipient-switch button.active{background:#fff;color:#0c6d91;box-shadow:0 2px 8px #123b5517}
+.quote-lead-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.quote-lead-fields label:last-child{grid-column:span 2}
+.quote-line-main{display:grid!important;grid-template-columns:82px minmax(0,1fr)!important;align-items:start!important;gap:12px!important}
+.quote-product-photo{display:grid;place-items:center;width:82px;height:82px;overflow:hidden;border:1px dashed #b9d9e5;border-radius:12px;background:#eef8fb;color:#54a6b9}
+.quote-product-photo img{width:100%;height:100%;object-fit:contain;background:#fff}
+.quote-upload{display:inline-flex!important;align-items:center;justify-content:center;gap:6px;margin-top:7px;padding:7px 10px;border-radius:7px;background:#e6f5f8;color:#147a9a!important;cursor:pointer;font-size:10px!important}
+.quote-upload input{display:none}
+.quote-remove-photo{margin:8px;color:#ad6b69;font-size:10px;text-decoration:underline}
+.quote-line-values{display:grid;grid-template-columns:75px 150px 1fr 28px;gap:8px;align-items:end}
+.quote-line-values strong{align-self:center;color:#18556a;font-size:11px;text-align:right}
+.quote-line-values button{color:#b46562}
+.routes-live-map{position:relative;overflow:hidden;margin:14px 0 17px;border:1px solid #d4e5ed;border-radius:18px;background:#fff;box-shadow:0 8px 30px #18384f0b}
+.routes-live-map-header{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:16px 20px}
+@media(max-width:700px){.quote-lead-fields{grid-template-columns:1fr}.quote-lead-fields label:last-child{grid-column:auto}.quote-line-values{grid-template-columns:1fr 1fr}}

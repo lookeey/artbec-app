@@ -1,0 +1,4 @@
+import {z} from 'zod';
+import {authorize,changePassword} from '@/lib/auth';
+const schema=z.object({currentPassword:z.string().min(8).max(200),newPassword:z.string().min(10).max(200).regex(/[A-Za-z]/).regex(/[0-9]/)});
+export async function POST(request:Request){if(request.headers.get('origin')!==new URL(request.url).origin)return Response.json({error:'Origem inválida.'},{status:403});const auth=await authorize(request);if(auth.error)return auth.error;const parsed=schema.safeParse(await request.json());if(!parsed.success)return Response.json({error:'A nova senha precisa ter ao menos 10 caracteres, uma letra e um número.'},{status:400});const ok=await changePassword(auth.user!.id,parsed.data.currentPassword,parsed.data.newPassword);return ok?Response.json({ok:true}):Response.json({error:'A senha atual está incorreta.'},{status:400})}

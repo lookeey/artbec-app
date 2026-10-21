@@ -1,0 +1,30 @@
+.view-notes .notes-workspace{border-radius:20px;overflow:hidden}
+.notes-workspace .panel-heading h2{display:flex;align-items:center;gap:10px;font-size:20px}
+.notes-workspace .panel-heading h2 svg{color:#148bac}
+.notes-workspace .filters{padding:20px 24px;gap:16px;background:#fff}
+.notes-workspace .filters .search{border-radius:12px;background:#f6faff}
+.notes-workspace .filters [role=combobox]{min-height:44px;border-radius:12px;font-size:14px}
+.notes-workspace th{font-size:13px;letter-spacing:.03em;padding:16px 20px;white-space:nowrap}
+.notes-workspace .note-row td{padding:18px 20px;vertical-align:middle;border-bottom:1px solid #e9eff5}
+.notes-workspace .client-cell{min-width:220px;gap:12px}
+.notes-workspace .client-cell strong{font-size:15px;line-height:1.5}
+.notes-workspace .client-cell small{font-size:13px;color:#72849a;margin-top:3px}
+.notes-workspace .avatar{border-radius:14px;background:#e7f4fc;color:#176b99;width:42px;height:42px;flex-shrink:0}
+.notes-workspace .issued .avatar{background:#e6f6ed;color:#247453}
+.view-notes .notes-workspace .notes-day-divider:hover{background:transparent}
+.notes-workspace .notes-day-divider td{padding:12px 20px;background:linear-gradient(100deg,#edf7fc,#f4f8fc);border-block:1px solid #d9eaf4}
+.notes-workspace .notes-day-divider td>div{display:flex;align-items:center;gap:14px}
+.notes-workspace .notes-day-divider span{display:inline-flex;align-items:center;gap:8px;color:#185577;font-size:15px;font-weight:750}
+.notes-workspace .notes-day-divider small{font-size:13px;color:#657f92}
+.notes-date-badge{display:inline-flex;justify-content:center;white-space:nowrap;min-width:64px;padding:8px 10px;background:#eef6ff;border:1px solid #d7e8f5;color:#21658b;border-radius:10px;font-size:14px;font-weight:700}
+.notes-due-day{font-size:14px;white-space:nowrap;color:#64788c}
+.notes-workspace .requirement-toggles{min-width:195px;max-width:240px;gap:7px}
+.notes-workspace .requirement-toggles button{padding:8px 10px;border-radius:9px;font-size:13px;font-weight:600;background:#f6f8fb;color:#788696;border-color:#e1e8ef}
+.view-notes .notes-workspace .requirement-toggles button.active{background:#e7f7ff;border-color:#a2d7ed;color:#11678b;box-shadow:inset 0 0 0 1px #fff}
+.notes-workspace .requirement-toggles button svg{width:15px;height:15px}
+.notes-workspace .requirement-toggles button:focus-visible{outline:2px solid #2385ad;outline-offset:3px}
+.notes-workspace .inline-status{font-size:14px;min-height:40px;width:138px;border-radius:10px}
+.notes-workspace .inline-status.overdue{background:#fff5df;border-color:#efd69f;color:#8a6416}
+.notes-workspace .edit-button{width:38px;height:38px;border-radius:10px;background:#f0f6fc;color:#347399;border:1px solid #dbe8f2}
+.view-notes .note-stats{gap:18px}
+@media(max-width:700px){.notes-workspace .filters{padding:16px;flex-wrap:wrap}.notes-workspace .filters .search{width:100%}.notes-workspace .panel-heading{padding:18px}.notes-workspace .panel-heading h2{font-size:18px}.notes-workspace .note-row td{padding:16px}.notes-workspace .notes-day-divider td{padding:12px 16px}}

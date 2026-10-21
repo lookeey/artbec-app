@@ -1,0 +1,10 @@
+'use client';
+import {useRef,useState} from 'react';
+import {Download,FileText,Upload,ExternalLink} from 'lucide-react';
+import {toast} from 'sonner';
+import type {BikeItem} from './operations-panel';
+export default function BikeDocumentUpload({item,enabled,onChange}:{item:BikeItem;enabled:boolean;onChange:(item:BikeItem)=>void}){
+ const input=useRef<HTMLInputElement>(null),[busy,setBusy]=useState(false),url=item.documentKey?`/api/fleet-documents?key=${encodeURIComponent(item.documentKey)}`:'';
+ async function upload(file:File){if(busy)return;if(!file.size||file.size>8_000_000){toast.error('Escolha um PDF de até 8 MB.');return}setBusy(true);try{const form=new FormData();form.set('file',file);form.set('bikeId',item.id);form.set('version',String(item.version));const response=await fetch('/api/fleet-documents',{method:'POST',body:form}),payload=await response.json() as {item:BikeItem;error?:string};if(!response.ok)throw Error(payload.error||'Não foi possível salvar o documento.');onChange(payload.item);toast.success('Documento da moto salvo')}catch(error){toast.error((error as Error).message)}finally{setBusy(false)}}
+ return <div className="fleet-document-upload" aria-busy={busy}><div className="fleet-document-title"><FileText/><div><strong>Documento da moto</strong><small>{item.documentName||'Anexe o CRLV ou outro documento em PDF'}</small></div></div><input ref={input} hidden type="file" accept="application/pdf,.pdf" onChange={event=>{const file=event.target.files?.[0];if(file)void upload(file);event.target.value=''}}/><div className="fleet-document-buttons"><button className="primary" disabled={!enabled||busy} onClick={()=>input.current?.click()}><Upload size={16}/>{busy?'Salvando…':url?'Substituir PDF':'Anexar PDF'}</button>{url&&<><a className="secondary" href={url} target="_blank" rel="noopener noreferrer"><ExternalLink size={16}/> Visualizar</a><a className="secondary" href={`${url}&download=1`}><Download size={16}/> Baixar PDF</a></>}</div><small>PDF de até 8 MB · salvo no cadastro desta moto</small></div>
+}

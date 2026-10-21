@@ -1,0 +1,5 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {collectSyncDetails} from './sync-details.ts';
+test('une início e conclusão sem perder o total antes e depois',()=>{const details=collectSyncDetails([{metadata:JSON.stringify({syncId:'sync-a',before:100,after:120,startDate:'2026-10-01',scope:'tasks',userId:7})},{metadata:JSON.stringify({syncId:'sync-a',before:100,startDate:'2026-10-01',scope:'tasks',userId:7})}]);assert.equal(details.get('sync-a')?.before,100);assert.equal(details.get('sync-a')?.after,120);assert.equal(details.get('sync-a')?.userId,7)});
+test('não inventa totais em registros antigos nem retorna credenciais adicionais',()=>{const details=collectSyncDetails([{metadata:'invalid'},{metadata:'null'},{metadata:JSON.stringify({startDate:'2026-09-01'})},{metadata:JSON.stringify({syncId:'sync-b',before:40,after:40,token:'secret',error:'x'})}]);assert.equal(details.size,1);assert.deepEqual(details.get('sync-b'),{before:40,after:40});assert.equal(details.get('antigo'),undefined)});

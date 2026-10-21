@@ -1,0 +1,4 @@
+import {z} from 'zod';
+import {login,sessionCookie} from '@/lib/auth';
+const schema=z.object({username:z.string().trim().min(2).max(40),password:z.string().min(8).max(200)});
+export async function POST(request:Request){if(request.headers.get('origin')!==new URL(request.url).origin)return Response.json({error:'Origem inválida.'},{status:403});try{const parsed=schema.safeParse(await request.json());if(!parsed.success)return Response.json({error:'Informe usuário e senha.'},{status:400});const result=await login(parsed.data.username,parsed.data.password);if(!result)return Response.json({error:'Usuário ou senha incorretos.'},{status:401});return Response.json({user:result.user},{headers:{'Set-Cookie':sessionCookie(result.token,result.expires),'Cache-Control':'no-store'}})}catch(error){console.error('Login failed',error);return Response.json({error:'Não foi possível entrar agora.'},{status:503})}}

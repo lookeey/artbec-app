@@ -1,0 +1,24 @@
+import {authorize} from '@/lib/auth';
+import {database,getRecords} from '@/lib/finance-store';
+import {getOperations} from '@/lib/operations-store';
+import {getManagement} from '@/lib/management-store';
+import {buildCashForecast} from '@/lib/cash-forecast';
+import {businessToday} from '@/lib/month-rollover';
+import {previousComparisonMonth,comparisonRange,comparisonMetric,type ComparisonRow} from '@/lib/executive-comparison';
+import type {Complaint} from '@/lib/complaints';
+export async function GET(request:Request){
+ const auth=await authorize(request,['executive-summary']);if(auth.error)return auth.error;
+ const p=new URL(request.url).searchParams,period=p.get('period')??'',basis=p.get('basis')??'matched';if(!/^\d{4}-(0[1-9]|1[0-2])$/.test(period)||!['matched','full'].includes(basis))return Response.json({error:'Período inválido.'},{status:400});
+ try{
+ const [records,operations,management,loans,manuals,complaints]=await Promise.all([getRecords(),getOperations(),getManagement(),database().prepare("SELECT data FROM operation_changes WHERE entity='payrollLoan' AND deleted=0").all<{data:string}>(),database().prepare("SELECT data,version FROM operation_changes WHERE entity='cashManual' AND deleted=0").all<{data:string;version:number}>(),database().prepare("SELECT data FROM operation_changes WHERE entity='complaint' AND deleted=0").all<{data:string}>()]);
+ const today=businessToday(),previousPeriod=previousComparisonMonth(period),matched=basis==='matched',currentRange=comparisonRange(period,matched,today),previousRange=comparisonRange(previousPeriod,matched,today);
+ const input={manual:manuals.results.map(r=>({...JSON.parse(r.data),version:r.version})),services:records.filter(r=>r.kind==='Serviço'),monthly:records.filter(r=>r.kind==='Mensalidade'),sales:operations.sales,academyInvoices:operations.academyInvoices,fuel:operations.fuel,oil:operations.oil,maintenance:operations.maintenance,payroll:operations.payroll,fines:management.fines,payrollLoans:loans.results.map(r=>JSON.parse(r.data))} as Parameters<typeof buildCashForecast>[0];
+ const currentCash=buildCashForecast(input,currentRange.start,currentRange.end),previousCash=buildCashForecast(input,previousRange.start,previousRange.end),allComplaints=complaints.results.map(r=>JSON.parse(r.data) as Complaint);
+ function cashRows(cash:typeof currentCash,direction:'in'|'out'):ComparisonRow[]{return cash.rows.filter(r=>r.direction===direction&&(direction==='out'||r.certainty==='confirmed')).map(r=>({id:r.id,date:r.date,title:r.label,detail:r.category+' · '+r.note,amount:r.amount,status:r.certainty==='confirmed'?'Registrado / marcado como pago':'Previsto'}))}
+ function overdue(range:{start:string;end:string}):ComparisonRow[]{return records.filter(r=>r.kind==='Mensalidade'&&r.date>=range.start&&r.date<=range.end&&r.date<today&&r.status!=='paid').map(r=>({id:r.id,date:r.date,title:r.client,detail:r.payment||'Forma não informada',amount:r.amount??0,status:r.amount===null?'Valor não informado':'Vencido ainda em aberto'}))}
+ function complaintRows(range:{start:string;end:string}):ComparisonRow[]{return allComplaints.filter(c=>c.occurredOn>=range.start&&c.occurredOn<=range.end).map(c=>({id:c.id,date:c.occurredOn,title:c.clientName,detail:c.title+' · '+c.category+(c.archived?' · Arquivada':''),amount:1,status:c.status==='resolved'?(c.clientConfirmation?'Cliente confirmou':'Equipe concluiu'):'Não resolvida'}))}
+ const metrics=[comparisonMetric('receipts','Recebimentos marcados como pagos','money','cash-flow',cashRows(currentCash,'in'),cashRows(previousCash,'in')),comparisonMetric('expenses','Despesas registradas + previstas','money','cash-flow',cashRows(currentCash,'out'),cashRows(previousCash,'out')),comparisonMetric('overdue','Mensalidades vencidas ainda em aberto','money','monthly',overdue(currentRange),overdue(previousRange)),comparisonMetric('complaints','Reclamações recebidas','count','complaints',complaintRows(currentRange),complaintRows(previousRange))];
+ for(const metric of metrics)for(const rows of [metric.currentRows,metric.previousRows])rows.sort((a,b)=>a.date.localeCompare(b.date)||a.title.localeCompare(b.title,'pt-BR'));
+ return Response.json({period,previousPeriod,matched,today,currentRange,previousRange,metrics,missingDates:records.filter(r=>r.kind==='Mensalidade'&&[period,previousPeriod].includes(r.period)&&(!r.date||r.amount===null)).length,note:'Usamos as datas de referência do fluxo de caixa, que podem ser vencimentos ou entregas, pois nem todos os pagamentos têm data real de liquidação. Despesas incluem previsões de folha. Vencidos refletem a situação atual dos lançamentos de cada período, não uma fotografia da inadimplência no passado. Reclamações incluem arquivadas e excluem as apagadas.'},{headers:{'Cache-Control':'private, no-store'}});
+ }catch(error){console.error('Executive comparison failed',error);return Response.json({error:'Não foi possível comparar os meses.'},{status:503})}
+}

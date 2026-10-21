@@ -1,0 +1,7 @@
+import {z} from 'zod';
+import {actorFrom,adminOnly,validJson} from '@/lib/auvo/access';
+import {audit,listAuvoUsers,saveMapping} from '@/lib/auvo/store';
+import {getManagement} from '@/lib/management-store';
+
+const schema=z.object({technicianId:z.string().trim().min(1).max(200),auvoUserId:z.number().int().positive().nullable()});
+export async function POST(request:Request){const denied=await adminOnly(request);if(denied)return denied;if(!validJson(request))return Response.json({error:'Origem ou formato inválido.'},{status:403});try{const parsed=schema.safeParse(await request.json());if(!parsed.success)return Response.json({error:'Vínculo inválido.'},{status:400});const {technicianId,auvoUserId}=parsed.data,[management,users]=await Promise.all([getManagement(),listAuvoUsers()]);if(!management.staff.some(person=>person.id===technicianId&&person.role==='Técnico'))return Response.json({error:'Técnico não encontrado.'},{status:404});if(auvoUserId&&!users.some(user=>user.auvoId===auvoUserId))return Response.json({error:'Usuário Auvo não encontrado.'},{status:404});await saveMapping(technicianId,auvoUserId);await audit(actorFrom(request),auvoUserId?'auvo.technician.linked':'auvo.technician.unlinked',{technicianId,auvoUserId});return Response.json({ok:true})}catch(error){const message=error instanceof Error&&error.message.includes('UNIQUE')?'Este usuário Auvo já está vinculado a outro técnico.':'Não foi possível salvar o vínculo.';return Response.json({error:message},{status:409})}}

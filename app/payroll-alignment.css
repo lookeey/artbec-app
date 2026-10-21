@@ -1,0 +1,21 @@
+.payroll-v2-overview th{padding:16px 20px;font-size:13px;line-height:1.5}
+.payroll-v2-overview td{padding:18px 20px;font-size:15px;vertical-align:middle;font-variant-numeric:tabular-nums}
+.payroll-v2-overview td:first-child{display:table-cell;min-width:230px}
+.payroll-team-name{display:flex;align-items:center;gap:12px}
+.payroll-team-name strong{font-size:15px;line-height:1.5;white-space:normal}
+.payroll-v2-avatar{width:38px;height:38px;font-size:13px;border-radius:12px}
+.payroll-v2-overview td:nth-child(4){min-width:200px}
+.payroll-advance-cell{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:8px}
+.payroll-advance-cell>strong{font-size:15px;font-weight:650;line-height:1.4;white-space:nowrap}
+.payroll-extra{display:inline-flex;align-items:center;justify-content:space-between;gap:12px;background:#f1ebfb;border:1px solid #e1d5f3;border-radius:8px;padding:5px 9px;color:#745397;font-size:13px;line-height:1.5;white-space:nowrap}
+.payroll-extra span{font-weight:500}
+.payroll-extra b{font-weight:650}
+.payroll-v2-person-math>span{min-width:0;font-size:13px;line-height:1.5;padding:12px}
+.payroll-v2-person-math strong{font-size:15px;line-height:1.5;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.payroll-v2-person-math .payroll-card-extra{display:block;margin-top:7px;padding-top:7px;border-top:1px solid #dce6ec;font-size:13px;line-height:1.5;color:#775591}
+.payroll-v2-overview td button{font-size:13px;padding:9px 13px}
+@media(max-width:700px){.payroll-v2-overview th,.payroll-v2-overview td{padding:14px 16px}.payroll-v2-person-math{grid-template-columns:1fr}.payroll-v2-person-math>span{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:6px 10px}.payroll-v2-person-math strong{margin:0;text-align:right}.payroll-v2-person-math .payroll-card-extra{grid-column:1/-1;text-align:right}}
+
+.payroll-loan-box{margin:14px 18px;padding:14px;background:var(--muted);border:1px solid var(--border);border-radius:12px;color:var(--foreground)}.payroll-loan-box header{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.payroll-loan-box h4{margin:0;font-size:13px}.payroll-loan-box small{display:block;font-size:11px;color:var(--muted-foreground);line-height:1.5}.payroll-loan-box button{font-size:12px;padding:7px 10px;border:1px solid var(--border);background:var(--card);color:var(--foreground);border-radius:7px}.payroll-loan-box details{padding:10px 0;border-top:1px solid var(--border);margin-top:10px}.payroll-loan-box summary{cursor:pointer;font-weight:600;font-size:13px}.payroll-loan-box p{font-size:12px;margin:10px 0}.payroll-loan-box fieldset{border:0;padding:0;margin-top:14px;min-width:0}.payroll-loan-box label{display:block;font-size:12px}.payroll-loan-box input,.payroll-loan-box select{width:100%;padding:8px;border:1px solid var(--border);background:var(--card);color:var(--foreground);border-radius:7px;min-width:0;margin:5px 0}.payroll-loan-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.payroll-loan-row{display:grid;gap:8px;padding:12px;margin:12px 0;border:1px solid var(--border);border-radius:9px;background:var(--card)}.payroll-loan-actions,.payroll-loan-installment{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px}.payroll-loan-installment span{font-size:12px}.payroll-loan-installment strong{display:block;margin-top:4px}
+
+.payroll-loan-box .payroll-thirteenth-toggle{display:flex;align-items:center;gap:9px;margin:14px 0;font-size:13px;cursor:pointer}.payroll-loan-box .payroll-thirteenth-toggle input{width:17px;height:17px;margin:0;flex:none}.payroll-thirteenth-linked{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:12px 0}.payroll-thirteenth-linked span{background:var(--card);padding:6px 9px;border-radius:7px;font-size:12px}.payroll-thirteenth-net{display:grid;gap:8px;margin:14px 0}.payroll-thirteenth-net>span{display:flex;justify-content:space-between;gap:10px;font-size:12px}.payroll-thirteenth-net strong{color:var(--foreground)}

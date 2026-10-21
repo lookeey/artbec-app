@@ -1,0 +1,35 @@
+import {PDFDocument,StandardFonts,rgb,type PDFFont,type PDFPage} from 'pdf-lib';
+import {artbecLogoBase64} from './artbec-logo.ts';
+import type {PerformanceInsights} from './auvo/insights.ts';
+
+const navy=rgb(.035,.16,.30),teal=rgb(.04,.53,.57),muted=rgb(.43,.52,.59),pale=rgb(.94,.97,.99),white=rgb(1,1,1);
+const clean=(s:string)=>s.replace(/[\u2010-\u2015]/g,'-').replace(/[^\u0020-\u00ff\n]/g,' ');
+const date=(s:string)=>s.slice(0,10).split('-').reverse().join('/');
+const minutes=(n:number|null)=>n===null?'Sem horário':`${n} min`;
+const pct=(n:number)=>`${n.toLocaleString('pt-BR',{maximumFractionDigits:1})}%`;
+function wrap(s:string,font:PDFFont,size:number,width:number){let line='';const rows:string[]=[];for(const word of clean(s).split(/\s+/)){if(line&&font.widthOfTextAtSize(line+' '+word,size)>width){rows.push(line);line=''}for(const char of word){if(font.widthOfTextAtSize(line+char,size)>width){rows.push(line);line=''}line+=char}line+=' '}if(line.trim())rows.push(line.trim());return rows.length?rows:['-']}
+
+export async function renderPerformancePdf(data:PerformanceInsights,now=new Date()){
+ const pdf=await PDFDocument.create(),regular=await pdf.embedFont(StandardFonts.Helvetica),bold=await pdf.embedFont(StandardFonts.HelveticaBold),logo=await pdf.embedPng(Uint8Array.from(atob(artbecLogoBase64),c=>c.charCodeAt(0))),W=595,H=842,M=42,C=W-2*M;
+ pdf.setTitle('Artbec - Desempenho da equipe');pdf.setAuthor('Artbec Piscinas');pdf.setCreationDate(now);
+ let page:PDFPage,y=0;
+ const text=(s:string,x:number,top:number,size=10,font=regular,color=navy)=>page.drawText(clean(s),{x,y:H-top-size,size,font,color});
+ const box=(x:number,top:number,width:number,height:number,color=pale)=>page.drawRectangle({x,y:H-top-height,width,height,color});
+ const addPage=(title:string)=>{page=pdf.addPage([W,H]);box(0,0,W,116,navy);box(0,116,W,4,teal);page.drawCircle({x:M+23,y:H-47,size:25,color:white});const d=logo.scaleToFit(42,42);page.drawImage(logo,{x:M+23-d.width/2,y:H-47-d.height/2,...d});text('Artbec',M+60,24,25,bold,white);text('P I S C I N A S',M+62,58,8,regular,white);text('DESEMPENHO DA EQUIPE',M,84,13,bold,white);text(`${date(data.period.start)} a ${date(data.period.end)}`,330,88,9,regular,white);y=141;for(const line of wrap(title,bold,18,C)){text(line,M,y,18,bold);y+=24}y+=12};
+ const ensure=(height:number,title='Continuação do relatório')=>{if(y+height>H-55)addPage(title)};
+ const paragraph=(s:string)=>{for(const line of wrap(s,regular,10,C)){ensure(16);text(line,M,y,10,regular,muted);y+=16}y+=12};
+ const table=(labels:string[],widths:number[],rows:string[][],title:string)=>{const header=()=>{box(M,y,C,27,navy);let x=M;labels.forEach((label,i)=>{text(label,x+8,y+8,8,bold,white);x+=widths[i]});y+=27};const rowLines=(row:string[])=>row.map((cell,i)=>wrap(cell,regular,9,widths[i]-16));const first=rows.length?Math.max(31,...rowLines(rows[0]).map(lines=>lines.length*13+14)):31;ensure(27+first,title);header();rows.forEach((row,index)=>{const lines=rowLines(row),height=Math.max(31,...lines.map(parts=>parts.length*13+14));if(y+height>H-55){addPage(title);header()}if(index%2===0)box(M,y,C,height);let x=M;lines.forEach((parts,i)=>{parts.forEach((part,j)=>text(part,x+8,y+7+j*13,9));x+=widths[i]});y+=height});y+=20};
+ addPage('Visão geral da operação');
+ const current=data.quality.current;
+ const stats=[['Concluídos',String(current.finished)],['Clientes',String(current.customers)],['Horários válidos',pct(current.coverage)]];
+ stats.forEach(([label,value],index)=>{const x=M+index*(C/3+3);box(x,y,C/3-8,67);text(label,x+12,y+12,9,regular,muted);text(value,x+12,y+32,22,bold,teal)});y+=87;
+ paragraph(`Emissão: ${now.toLocaleString('pt-BR',{timeZone:'America/Sao_Paulo'})}. ${current.scheduled} tarefas programadas; ${data.alerts.length} atendimentos sinalizados para conferência.`);
+ table(['Colaborador','Concluídos','Clientes','Tempo médio','Cobertura'],[171,80,60,100,100],data.technicians.map(person=>[person.name,`${person.finished}/${person.scheduled}`,String(person.customers),minutes(person.averageMinutes),pct(person.coverage)]),'Comparativo da equipe');
+ if(!data.technicians.length)paragraph('Nenhum atendimento sincronizado para este período e filtro.');
+ for(const person of data.technicians){addPage(person.name);paragraph(`Comparação: ${date(data.previousPeriod.start)} a ${date(data.previousPeriod.end)}. Os períodos têm a mesma quantidade de dias.`);table(['Indicador','Período anterior','Período atual'],[231,140,140],[['Atendimentos concluídos',String(person.previous.finished),String(person.finished)],['Tarefas programadas',String(person.previous.scheduled),String(person.scheduled)],['Clientes atendidos',String(person.previous.customers),String(person.customers)],['Taxa de conclusão',pct(person.previous.completion),pct(person.completion)],['Tempo médio por atendimento',minutes(person.previous.averageMinutes),minutes(person.averageMinutes)],['Amostras com horários válidos',String(person.previous.timingSamples),String(person.timingSamples)],['Cobertura dos horários',pct(person.previous.coverage),pct(person.coverage)],['Horas registradas em atendimento',(person.previous.serviceMinutes/60).toFixed(1)+'h',(person.serviceMinutes/60).toFixed(1)+'h']],person.name);paragraph(person.visitChange===null?'Sem base comparável de atendimentos sincronizados.':`Variação de atendimentos concluídos: ${person.visitChange>0?'+':''}${pct(person.visitChange)}.`);table(['Tipo de serviço programado','Quantidade'],[401,110],person.services.map(service=>[service.name,String(service.count)]),`${person.name} - Serviços`)}
+ addPage('Histórico de clientes e piscinas');paragraph(`Mostrando ${Math.min(50,data.pools.length)} de ${data.pools.length} combinações de cliente e serviço. A referência considera os 180 dias anteriores. O histórico completo e os horários individuais estão disponíveis no site.`);table(['Cliente / serviço','Média atual','Referência','Amostras'],[241,90,90,90],data.pools.slice(0,50).map(pool=>[`${pool.customer} - ${pool.service}`,minutes(pool.averageMinutes),minutes(pool.baselineMinutes),`${pool.timingSamples} atuais / ${pool.baselineSamples} anteriores`]),'Histórico por piscina');
+ addPage('Atendimentos para conferir');paragraph(`Mostrando ${Math.min(30,data.alerts.length)} de ${data.alerts.length} atendimentos sinalizados. Todos podem ser consultados na aba Atenção do site.`);table(['Cliente / técnico','Data','Sinalização'],[231,80,200],data.alerts.slice(0,30).map(alert=>[`${alert.customer} - ${alert.technician}`,date(alert.date),alert.reasons.join('; ')]),'Atendimentos para conferir');if(!data.alerts.length)paragraph('Nenhum alerta encontrado nos dados sincronizados do período.');
+ ensure(140,'Critérios da análise');paragraph(data.methodology);paragraph('Alertas de tempo longo usam o maior valor entre 120 minutos e duas vezes a média histórica, quando há pelo menos 3 amostras. Estes sinais pedem revisão; não determinam a qualidade do serviço.');
+ pdf.getPages().forEach((p,index)=>{page=p;text('ARTBEC PISCINAS | Uso interno',M,H-30,8,regular,muted);text(`${index+1} / ${pdf.getPageCount()}`,W-M-35,H-30,8,regular,muted)});
+ return pdf.save();
+}

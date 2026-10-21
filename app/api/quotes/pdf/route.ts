@@ -1,0 +1,7 @@
+import {authorize} from '@/lib/auth';
+import {database} from '@/lib/finance-store';
+import {renderQuotePdf} from '@/lib/quote-pdf';
+import type {Quote} from '@/lib/quotes';
+import {env} from 'cloudflare:workers';
+
+export async function GET(request:Request){const auth=await authorize(request,['quotes']);if(auth.error)return auth.error;try{const id=new URL(request.url).searchParams.get('id')??'';if(!/^quote-[0-9a-f-]{36}$/i.test(id))return Response.json({error:'Orçamento inválido.'},{status:400});const row=await database().prepare("SELECT data FROM operation_changes WHERE id=? AND entity='quote' AND deleted=0").bind(id).first<{data:string}>();if(!row)return Response.json({error:'Orçamento não encontrado.'},{status:404});const quote=JSON.parse(row.data) as Quote,images=new Map<string,Uint8Array>();const bucket=((env as unknown) as {DOCUMENTS:R2Bucket}).DOCUMENTS;await Promise.all(quote.items.filter(item=>item.imageKey?.startsWith(`quote-images/${id}/`)).map(async item=>{if(!item.imageKey)return;const file=await bucket.get(item.imageKey);if(file)images.set(item.imageKey,new Uint8Array(await file.arrayBuffer()))}));const pdf=await renderQuotePdf(quote,images);return new Response(pdf as BodyInit,{headers:{'Content-Type':'application/pdf','Content-Disposition':`attachment; filename="artbec-orcamento-${id.slice(6,14)}.pdf"`,'Cache-Control':'no-store'}})}catch(error){console.error('Quote PDF failed',error);return Response.json({error:'Não foi possível gerar o PDF.'},{status:503})}}

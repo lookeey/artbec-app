@@ -1,0 +1,3 @@
+export const stockImageKey=(key:string)=>/^stock-images\/stock-[a-z0-9][a-z0-9-]{0,199}\/[0-9a-f-]{36}\.(png|jpg|webp)$/i.test(key);
+export const stockImageFor=(key:string,id:string)=>stockImageKey(key)&&key.startsWith(`stock-images/${id}/`);
+export function stockImageMime(bytes:Uint8Array){if(bytes.length>=8&&[137,80,78,71,13,10,26,10].every((b,i)=>bytes[i]===b))return 'image/png';if(bytes.length>=3&&bytes[0]===255&&bytes[1]===216&&bytes[2]===255)return 'image/jpeg';if(bytes.length>=12&&String.fromCharCode(...bytes.slice(0,4))==='RIFF'&&String.fromCharCode(...bytes.slice(8,12))==='WEBP')return 'image/webp';return null}

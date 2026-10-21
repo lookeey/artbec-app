@@ -1,0 +1,26 @@
+'use client';
+import {useEffect,useState} from 'react';
+import {Search,Star,ArrowUpRight,Wallet,ShoppingBag,Wrench,Users,ChartNoAxesColumnIncreasing,type LucideIcon} from 'lucide-react';
+
+type Link={v:string;t:string;Icon:LucideIcon};
+const groups=[
+ {title:'Financeiro',description:'Recebimentos e contas',color:'blue',Icon:Wallet,views:['monthly','annual-adjustments','services','notes','cash-flow','history']},
+ {title:'Comercial',description:'Propostas e vendas',color:'purple',Icon:ShoppingBag,views:['quotes','product-sales','product-agenda','vita-sales','academy-sales','product-growth']},
+ {title:'Operação',description:'Produtos, tarefas e veículos',color:'green',Icon:Wrench,views:['clients','complaints','inventory','resolution-tasks','reminders','preventive-maintenance','processes','expense-overview','fuel','oil','fleet']},
+ {title:'Equipe e gestão',description:'Pessoas e administração',color:'orange',Icon:Users,views:['technicians','administrative','payroll','fines','performance','profitability','access','data-security','monthly-review','backup']},
+ {title:'Resultados',description:'Indicadores e evolução',color:'cyan',Icon:ChartNoAxesColumnIncreasing,views:['personal-tasks','overview','executive-summary','auvo-center','growth']},
+];
+const normalize=(s:string)=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+export default function HomeNavigation({links,navigate,userId}:{links:Link[];navigate:(view:string)=>void;userId:string}){
+ const [search,setSearch]=useState(''),[favorites,setFavorites]=useState<string[]>([]),[notice,setNotice]=useState('');
+ const storageKey=`artbec-home-favorites-v1:${userId}`;
+ useEffect(()=>{try{const saved=localStorage.getItem(storageKey);if(saved){const parsed:unknown=JSON.parse(saved);if(Array.isArray(parsed)){setFavorites([...new Set(parsed.filter((v):v is string=>typeof v==='string'))].slice(0,6));return}}}catch{/* Navegação continua disponível sem armazenamento local. */}setFavorites(['monthly','product-agenda','inventory','resolution-tasks'])},[storageKey]);
+ const accessible=links.filter(l=>l.v!=='home'),needle=normalize(search.trim()),shown=groups.map(g=>({...g,items:g.views.flatMap(v=>{const l=accessible.find(l=>l.v===v);return l&&(!needle||normalize(`${l.t} ${g.title} ${g.description}`).includes(needle))?[l]:[]})})).filter(g=>g.items.length),favoriteLinks=favorites.flatMap(v=>{const l=accessible.find(l=>l.v===v);return l?[l]:[]});
+ function toggle(v:string){const removing=favorites.includes(v),current=favorites.filter(id=>accessible.some(l=>l.v===id));if(!removing&&current.length>=6){setNotice('Você pode escolher até 6 favoritos. Remova uma estrela para adicionar outro.');return}const next=removing?current.filter(id=>id!==v):[...current,v];setFavorites(next);setNotice('');try{localStorage.setItem(storageKey,JSON.stringify(next))}catch{setNotice('Favoritos atualizados nesta sessão; este navegador não permitiu salvar a preferência.')}}
+ return <section className="home-directory" aria-labelledby="home-directory-title"><div className="directory-welcome"><div className="directory-heading"><div><p className="eyebrow">SEU ESPAÇO DE TRABALHO</p><h2 id="home-directory-title">Tudo ao seu alcance</h2></div><label className="directory-search"><span className="directory-search-icon"><Search size={19}/></span><input type="search" placeholder="Encontre uma aba…" aria-label="Buscar abas no início" value={search} onChange={e=>setSearch(e.target.value)}/></label></div>
+ {!needle&&<div className="directory-favorites"><div className="directory-favorites-title"><Star size={14}/><span>Favoritos</span><small>Use as estrelas para escolher até 6</small></div><div className="directory-favorite-links">{favoriteLinks.map(({v,t,Icon})=><button key={v} data-color={groups.find(g=>g.views.includes(v))?.color||'blue'} onClick={()=>navigate(v)}><span className="favorite-symbol"><Icon size={18}/></span><span>{t}</span><ArrowUpRight size={13}/></button>)}{!favoriteLinks.length&&<p>Marque a estrela ao lado das abas que mais usa.</p>}</div></div>}
+ </div>
+ {notice&&<p className="directory-notice" role="status">{notice}</p>}
+ {shown.length?<div className="directory-grid">{shown.map(({title,description,color,Icon,items})=><article className={`directory-category directory-${color}`} key={title}><header><span className="directory-icon"><Icon size={22}/></span><div><h3>{title}</h3><p>{description}</p></div></header><div className="directory-links">{items.map(({v,t,Icon:ItemIcon})=><div key={v} className="directory-row"><button className="directory-link" onClick={()=>navigate(v)}><ItemIcon size={16}/><span>{t}</span><ArrowUpRight size={13}/></button><button className={`directory-star ${favorites.includes(v)?'selected':''}`} onClick={()=>toggle(v)} aria-pressed={favorites.includes(v)} aria-label={`${favorites.includes(v)?'Remover':'Adicionar'} ${t} ${favorites.includes(v)?'dos':'aos'} favoritos`} title={`${favorites.includes(v)?'Remover dos':'Adicionar aos'} favoritos`}><Star size={15}/></button></div>)}</div></article>)}</div>:<div className="directory-empty"><Search size={24}/><p>{needle?'Nenhuma aba encontrada. Tente outro nome.':'Nenhuma área disponível para este login.'}</p>{needle&&<button onClick={()=>setSearch('')}>Limpar busca</button>}</div>}
+ </section>
+}
