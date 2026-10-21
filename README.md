@@ -1,5 +1,8 @@
 # vinext-starter
 
+Para executar o Artbec em Docker com SQLite e arquivos locais, veja
+[o guia de Docker](docs/docker.md).
+
 A clean full-stack starter running on [vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and Drizzle support.
 
 ## Prerequisites

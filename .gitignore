@@ -47,3 +47,5 @@ next-env.d.ts
 /artbec-deploy-*.tgz
 /.npm-cache/
 /tmp/
+/docker-data/
+/artbec-backup*.tgz

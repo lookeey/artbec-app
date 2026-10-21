@@ -1,0 +1,22 @@
+services:
+  app:
+    build: .
+    init: true
+    ports:
+      - "${ARTBEC_BIND_IP:-127.0.0.1}:${ARTBEC_PORT:-3000}:3000"
+    environment:
+      AUVO_ENCRYPTION_KEY: ${AUVO_ENCRYPTION_KEY:-}
+      AUVO_WEBHOOK_SECRET: ${AUVO_WEBHOOK_SECRET:-}
+    volumes:
+      - artbec-data:/app/.wrangler/state
+    restart: unless-stopped
+    stop_grace_period: 30s
+    healthcheck:
+      test: ["CMD", "node", "/app/docker/healthcheck.mjs"]
+      interval: 30s
+      timeout: 10s
+      start_period: 90s
+      retries: 3
+
+volumes:
+  artbec-data:
