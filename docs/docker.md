@@ -75,6 +75,22 @@ evitando que o HTTPS externo seja comparado com o HTTP interno. O cookie da
 sessão mantém `Secure`, pois o navegador acessa o domínio por HTTPS.
 Não é necessário certificado no container nem desativar a validação TLS no proxy.
 
+As chamadas de saída para a API Auvo usam HTTPS no workerd. A imagem instala
+`ca-certificates` para validar os certificados dos servidores externos. Sem esse
+pacote, a base `node:24-bookworm-slim` causa `unable to get local issuer certificate`
+e a integração retorna HTTP 502 com uma referência de erro interno.
+Após atualizar o Dockerfile, faça um novo build e deploy no Dokploy.
+Não é necessário alterar as variáveis Auvo ou a configuração do proxy para esse erro.
+
+Para verificar o TLS da Auvo na imagem construída, sem usar credenciais reais:
+
+```sh
+docker compose run --rm --no-deps --entrypoint node app --test docker/auvo-tls.test.mjs
+```
+
+Esse teste precisa de acesso à internet e verifica a conexão HTTPS com a API;
+a autenticação com credenciais reais deve ser conferida pela tela de integração.
+
 Para abrir só a tela via rede local, defina `ARTBEC_BIND_IP=0.0.0.0` e acesse
 `http://IP-DO-SERVIDOR:3000`. Para usar login fora de localhost, use o domínio
 HTTPS do proxy, pois navegadores não enviam o cookie Secure por HTTP comum.
