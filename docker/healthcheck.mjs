@@ -1,8 +1,6 @@
-import https from 'node:https';
+import http from 'node:http';
 
-// The local Wrangler endpoint uses a self-signed certificate.
-const request = https.get('https://127.0.0.1:3000/api/auth/session', {
-  rejectUnauthorized: false,
+const request = http.get('http://127.0.0.1:3000/api/auth/session', {
   timeout: 8000,
 }, response => {
   response.resume();

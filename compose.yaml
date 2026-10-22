@@ -5,6 +5,7 @@ services:
     ports:
       - "${ARTBEC_BIND_IP:-127.0.0.1}:${ARTBEC_PORT:-3000}:3000"
     environment:
+      ARTBEC_PUBLIC_ORIGIN: ${ARTBEC_PUBLIC_ORIGIN:-}
       AUVO_ENCRYPTION_KEY: ${AUVO_ENCRYPTION_KEY:-}
       AUVO_WEBHOOK_SECRET: ${AUVO_WEBHOOK_SECRET:-}
     volumes:

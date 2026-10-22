@@ -5,8 +5,8 @@ docker compose up -d --build
 docker compose logs -f app
 ```
 
-Abra https://localhost:3000 e aceite o certificado local autoassinado. HTTPS
-preserva o cookie Secure usado pelo login. Use os usuários e senhas já configurados
+Abra http://localhost:3000. O container serve HTTP; em hospedagem, o proxy
+termina o HTTPS. Use os usuários e senhas já configurados
 no app; as migrations incluem os cadastros existentes, sem uma nova senha padrão.
 
 O container executa o build pelo Wrangler/Miniflare, com D1 (SQLite) e R2 locais.
@@ -48,6 +48,8 @@ O compose aceita variáveis pelo shell ou por um `.env` local:
 ```dotenv
 ARTBEC_PORT=3000
 ARTBEC_BIND_IP=127.0.0.1
+# Em hospedagem, use o domínio HTTPS configurado no proxy:
+ARTBEC_PUBLIC_ORIGIN=
 # Opcionais, apenas para a integração Auvo:
 AUVO_ENCRYPTION_KEY=
 AUVO_WEBHOOK_SECRET=
@@ -57,9 +59,24 @@ Para salvar credenciais Auvo, defina uma chave de criptografia com pelo menos
 32 caracteres e guarde a mesma chave junto dos backups. Por exemplo, gere uma com
 `openssl rand -hex 32`. Se importar credenciais criptografadas, use a chave original.
 
-Para acessar por outro computador, defina `ARTBEC_BIND_IP=0.0.0.0` e abra
-`https://IP-DO-SERVIDOR:3000`. Se colocar um proxy na frente, preserve a origem
-(host e protocolo) das requisições: a API confere o cabeçalho Origin.
+## Dokploy
+
+No domínio do Dokploy, configure o destino com protocolo **HTTP** e porta
+interna **3000**. Ative HTTPS no domínio público e defina a variável:
+
+```dotenv
+ARTBEC_PUBLIC_ORIGIN=https://app.seudominio.com
+```
+
+O fluxo fica `navegador HTTPS → proxy Dokploy → HTTP app:3000`. Essa variável
+informa ao Worker a origem pública usada nas verificações de Origin das APIs,
+evitando que o HTTPS externo seja comparado com o HTTP interno. O cookie da
+sessão mantém `Secure`, pois o navegador acessa o domínio por HTTPS.
+Não é necessário certificado no container nem desativar a validação TLS no proxy.
+
+Para abrir só a tela via rede local, defina `ARTBEC_BIND_IP=0.0.0.0` e acesse
+`http://IP-DO-SERVIDOR:3000`. Para usar login fora de localhost, use o domínio
+HTTPS do proxy, pois navegadores não enviam o cookie Secure por HTTP comum.
 
 ## Backup e atualização
 
@@ -77,6 +94,11 @@ Guarde também o `.env` separadamente se usar Auvo. Para atualizar, rode novamen
 também preserva os dados; `docker compose down -v` apaga os volumes.
 
 ## Validação
+
+Após o ajuste para proxy: validado HTTP na porta 3000, healthcheck HTTP, login e
+sessão com origem pública HTTPS, cookie Secure/HttpOnly e rejeição de uma origem
+externa com HTTP 403. O teste usou a imagem compilada e os scripts Docker
+atualizados montados, sem repetir o build do frontend.
 
 Validado em container: build, aplicação das 13 migrations, página de login,
 sessão autenticada, criação/download de backup no R2 local e persistência de
