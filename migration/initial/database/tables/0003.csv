@@ -1,0 +1,5 @@
+﻿"id","username","display_name","password_hash","password_salt","role","permissions","active","created_at","updated_at"
+"user-leticia","leticia","Letícia","1nMgaG54qV5o0DntUHrkPPzoPmasUgLTalkSvwEsnzo=","ZjDLGUUOEcSiavKK2/sPig==","admin","[]","1","2026-09-28 20:42:25","2026-10-19T18:55:47.330Z"
+"user-luiz","luiz","Luiz Henrique","tMbosyfOs9kW/tZLZzWRrgNBoOoDVQMLKMhAV9NsMBI=","ZY5mx4lfa1jr0qIHJR26gA==","member","[""history"",""growth"",""overview"",""notes"",""services"",""monthly"",""product-growth"",""academy-sales"",""vita-sales"",""product-agenda"",""product-sales"",""payroll"",""administrative"",""fines"",""performance"",""technicians"",""fleet"",""oil"",""fuel"",""expense-overview"",""inventory"",""clients"",""processes"",""profitability""]","1","2026-09-28 20:42:25","2026-10-19T18:55:47.330Z"
+"user-muriel","muriel","Muriel","in00LSbNbvFMGrfOsHvCmsxfDFXLPK3KwCGJDLeW6fw=","Ry2E6wNQrr4S5rh31k1Skg==","member","[]","1","2026-09-28 20:42:25","2026-10-19T18:55:47.330Z"
+"user-marilene","marilene","Marilene","/sq7kTEVtTPOclRuD12mC7oQaEbBHWU35Hs24rw6T/Y=","QLFJvH+pPrdQEDT7ec5/Ug==","member","[]","1","2026-09-28 20:42:25","2026-10-19T18:55:47.330Z"

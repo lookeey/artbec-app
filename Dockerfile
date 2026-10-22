@@ -4,7 +4,7 @@ ENV WRANGLER_SEND_METRICS=false CLOUDFLARE_CF_FETCH_ENABLED=false
 COPY package.json package-lock.json .npmrc ./
 RUN npm ci --include=dev --include=optional --no-audit --no-fund
 COPY . .
-RUN npm run build
+RUN node docker/prepare-migration.mjs && npm run build
 
 FROM build AS runtime
 ENV NODE_ENV=production \

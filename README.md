@@ -127,3 +127,5 @@ The portable build runs Vinext directly without a host `timeout` command. The ma
 
 - [vinext Documentation](https://github.com/cloudflare/vinext)
 - [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+
+A build de migração inclui o export de 22/10/2026 e o importa uma única vez na inicialização. Veja [migração inicial](docs/initial-migration.md).

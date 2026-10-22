@@ -49,3 +49,5 @@ next-env.d.ts
 /tmp/
 /docker-data/
 /artbec-backup*.tgz
+
+/artbec-completo-*.zip

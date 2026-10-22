@@ -1,0 +1,3 @@
+# Checksums in the portable export describe the exact original bytes.
+migration/initial/** binary
+docker/*.sh text eol=lf

@@ -38,7 +38,8 @@ sudo chown -R 1000:1000 docker-data
 Não é necessário montar código, `node_modules` ou `data/`: estão na imagem.
 A primeira execução cria o banco e aplica as migrations; os reinícios aplicam
 somente as pendentes. Um volume novo começa com os dados versionados do projeto.
-Dados e anexos do site hospedado precisam ser exportados e importados à parte.
+Esta build inclui a [migração inicial dos dados exportados](initial-migration.md),
+executada automaticamente antes de abrir o servidor.
 Não compartilhe esse volume com várias instâncias simultâneas.
 
 ## Configuração
