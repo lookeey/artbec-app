@@ -122,10 +122,19 @@ sessão autenticada, criação/download de backup no R2 local e persistência de
 registros e arquivos após reiniciar. A etapa final da imagem foi testada
 reaproveitando o build já concluído, devido ao pouco espaço no disco do host.
 
-No teste de gravação de notas, o endpoint `/api/notes` respondeu HTTP 409 mesmo
-com o registro persistido e legível após reiniciar. Isso precisa de investigação
-na lógica de gravação/contagem de alterações do app; a configuração Docker não
-altera essa lógica. Evite reenviar uma nota sem recarregar a lista nesse caso.
+A confirmação dos salvamentos auditados usa `SELECT changes()` imediatamente
+após cada escrita, na mesma transação, para contar somente as linhas alteradas
+pelo comando do app. O `meta.changes` bruto do D1 também inclui os triggers de
+histórico e provocava HTTP 409 mesmo quando o registro havia sido salvo.
+
+Validado com D1/Miniflare e as migrations reais nas seis tabelas auditadas:
+criação, edição, exclusão, lotes, rollback, concorrência e preservação dos dados
+de auditoria. Os endpoints reais de notas, vendas, preços, conferência mensal e
+fotos também foram exercitados. Rode a regressão com:
+
+```sh
+node --experimental-strip-types --test tests/audited-saves.test.mjs
+```
 
 Referência do armazenamento local e da opção `--persist-to`:
 [documentação do D1](https://developers.cloudflare.com/d1/best-practices/local-development/).

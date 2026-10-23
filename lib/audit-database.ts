@@ -21,8 +21,27 @@ export function auditedDatabase(db:D1Database,actor:Actor,originals:Map<string,O
   }
   const before=[...seeds].map(([key,row])=>db.prepare('INSERT OR IGNORE INTO audit_originals (key,data) VALUES (?,?)').bind(key,JSON.stringify(row.data)));
   before.push(db.prepare('INSERT INTO audit_context (id,actor_id,actor_name) VALUES (1,?,?) ON CONFLICT(id) DO UPDATE SET actor_id=excluded.actor_id,actor_name=excluded.actor_name').bind(actor.id,actor.displayName));
-  const result=await db.batch([...before,...statements.map((s,i)=>infos[i]?.native??s),db.prepare('DELETE FROM audit_context WHERE id=1')]);
-  return result.slice(before.length,before.length+statements.length);
+  // D1 meta.changes includes writes made by audit triggers. Read SQLite's
+  // direct changes immediately after each tracked write in the same batch;
+  // changes() excludes triggers and remains zero for a rejected version guard.
+  const writes:D1PreparedStatement[]=[],positions:{result:number;count?:number}[]=[];
+  statements.forEach((statement,index)=>{
+   const position:{result:number;count?:number}={result:before.length+writes.length};
+   writes.push(infos[index]?.native??statement);
+   if(infos[index]&&tracked(infos[index]!.sql)){
+    position.count=before.length+writes.length;
+    writes.push(db.prepare('SELECT changes() AS direct_changes'));
+   }
+   positions.push(position);
+  });
+  const result=await db.batch([...before,...writes,db.prepare('DELETE FROM audit_context WHERE id=1')]);
+  return positions.map(position=>{
+   const saved=result[position.result];
+   if(position.count===undefined)return saved;
+   const count=Number((result[position.count].results[0] as {direct_changes:number}).direct_changes);
+   if(!Number.isSafeInteger(count)||count<0)throw new Error('Não foi possível confirmar a gravação.');
+   return {...saved,meta:{...saved.meta,changes:count}};
+  });
  }
  return new Proxy(db,{get(target,key){if(key==='prepare')return (sql:string)=>wrap(target.prepare(sql),sql);if(key==='batch')return execute;const value=Reflect.get(target,key);return typeof value==='function'?value.bind(target):value}}) as D1Database;
 }
