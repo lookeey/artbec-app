@@ -13,7 +13,7 @@ test('complaint API enforces real session permissions, saves history and rejects
   db.prepare('INSERT INTO app_users VALUES(?,?,?,?,?,?,?,1)').run(id,id,name,'test','AAAA',role,permissions);
   db.prepare('INSERT INTO app_sessions VALUES(?,?,?,?)').run(createHash('sha256').update('qa-'+id).digest('base64'),id,'2099-01-01T00:00:00Z','2026-10-15T00:00:00Z');
  }
- const binding={prepare(sql:string){const stmt=db.prepare(sql);let args:any[]=[];const api={bind(...values:any[]){args=values;return api},async first(){return stmt.get(...args)??null},async all(){return {results:stmt.all(...args)}},async run(){return {meta:{changes:Number(stmt.run(...args).changes)}}}};return api}};
+ const binding={prepare(sql:string){const stmt=db.prepare(sql);let args:any[]=[];const api={bind(...values:any[]){args=values;return api},async first(){return stmt.get(...args)??null},async all(){return {results:stmt.all(...args)}},async run(){if(/RETURNING/i.test(sql))return {results:stmt.all(...args)};return {meta:{changes:Number(stmt.run(...args).changes)}}}};return api}};
  (globalThis as any).__complaintDb=binding;
  const root=path.resolve('.'),dir=path.join(root,'tmp','complaints-api');mkdirSync(dir,{recursive:true});
  const auth=readFileSync('lib/auth.ts','utf8').replace("'./configured-password-update'","'../../lib/configured-password-update.ts'").replace("import {database} from '@/lib/finance-store';",'const database=()=>globalThis.__complaintDb;');

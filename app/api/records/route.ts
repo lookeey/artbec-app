@@ -20,7 +20,7 @@ try{
  if(current&&current.kind!==input.kind)return Response.json({error:'O tipo do lançamento não pode ser alterado.'},{status:409});
  if((existing?.version??0)!==input.version)return Response.json({error:'Este lançamento mudou em outra janela. Recarregue a página antes de editar.'},{status:409});
  const record={dateNote:'',amountNote:'',sourceStatus:'',profit:null,...current,...input,billingDay:input.kind==='Mensalidade'?(Number(input.date.slice(8,10))||current?.billingDay):undefined,source:current?.source??'Cadastro no site',sourceRow:current?.sourceRow??0,kind:current?.kind??input.kind,version:input.version+1};
- const saved=await db.prepare('INSERT INTO finance_changes (id,data,version,updated_at) VALUES (?,?,?,?) ON CONFLICT(id) DO UPDATE SET data=excluded.data,version=excluded.version,updated_at=excluded.updated_at WHERE finance_changes.version=?').bind(record.id,JSON.stringify(record),record.version,new Date().toISOString(),input.version).run();
- if(saved.meta.changes!==1)return Response.json({error:'O lançamento mudou. Recarregue a página e tente novamente.'},{status:409});
+ const saved=await db.prepare('INSERT INTO finance_changes (id,data,version,updated_at) VALUES (?,?,?,?) ON CONFLICT(id) DO UPDATE SET data=excluded.data,version=excluded.version,updated_at=excluded.updated_at WHERE finance_changes.version=? RETURNING id').bind(record.id,JSON.stringify(record),record.version,new Date().toISOString(),input.version).run<{id:string}>();
+ if(!saved.results.some(row=>row.id===record.id))return Response.json({error:'O lançamento mudou. Recarregue a página e tente novamente.'},{status:409});
  return Response.json({record},{headers:{'Cache-Control':'no-store'}});
 }catch(e){console.error('Finance write failed',e);return Response.json({error:'Não foi possível salvar. Os dados do formulário foram mantidos.'},{status:503})}}
