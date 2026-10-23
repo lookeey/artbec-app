@@ -20,3 +20,12 @@ test('só sugere correspondências exatas e mantém a quantidade informada',()=>
  assert.deepEqual(suggestedDeliveryItems('2 Clarificante',null,available),[{productId:'stock-a',quantity:2}]);
  assert.deepEqual(suggestedDeliveryItems('Cloro',1,available),[{productId:'',quantity:1}]);
 });
+
+test('um produto composto cadastrado é vinculado inteiro antes de separar quantidades',()=>{
+ const kits=stockAvailability([{id:'stock-kit',product:'5 Metros de mangueira e 3 ponteiras',initial:5,incoming:0,outgoing:0}],[],[]);
+ assert.deepEqual(suggestedDeliveryItems('5 Metros de mangueira e 3 ponteiras',null,kits),[{productId:'stock-kit',quantity:1}]);
+ assert.deepEqual(suggestedDeliveryItems('5 metros de mangueira e 3 ponteiras',2,kits),[{productId:'stock-kit',quantity:2}]);
+ assert.deepEqual(suggestedDeliveryItems('5 Metros de mangueira e 3 ponteiras',1,[...kits,{...kits[0],id:'stock-duplicate'}]),[{productId:'',quantity:1}]);
+ const sale={id:'sale-kit',deliveryStatus:'delivered',stockItems:suggestedDeliveryItems(kits[0].product,null,kits)};
+ assert.equal(stockAvailability([{id:'stock-kit',product:kits[0].product,initial:5,incoming:0,outgoing:0}],[],[sale])[0].available,4);
+});

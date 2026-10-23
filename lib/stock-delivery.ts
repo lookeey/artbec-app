@@ -7,6 +7,9 @@ export type StockAvailability={id:string;product:string;available:number;deliver
 const normalize=(value:string)=>value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('pt-BR').replace(/[^a-z0-9]+/g,' ').trim();
 
 export function suggestedDeliveryItems(product:string,quantity:number|null,stock:StockAvailability[]):DeliveryAllocation[]{
+ // A complete stock name may itself contain quantities or describe a kit.
+ const exact=stock.filter(item=>normalize(item.product)===normalize(product));
+ if(exact.length)return [{productId:exact.length===1?exact[0].id:'',quantity:quantity??1}];
  const parts=product.split(/\s+e\s+(?=\d+\s)|,\s*(?=\d+\s)/i);
  return parts.map(part=>{const match=/^(\d+(?:[.,]\d+)?)\s+(.+)$/.exec(part.trim()),name=(match?match[2]:part).trim(),amount=match?Number(match[1].replace(',','.')):parts.length===1?(quantity??1):1;
   const matches=stock.filter(item=>normalize(item.product)===normalize(name));
