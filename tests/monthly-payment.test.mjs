@@ -22,7 +22,7 @@ test('payment saves in real D1 with audit triggers, returns the new version and 
   globalThis.__monthlyOriginals=new Map([[original.id,original]]);
   globalThis.__monthlyDb=auditedDatabase(raw,actor,new Map([['finance_changes:'+original.id,{table:'finance_changes',id:original.id,data:original}]]));
   let source=await readFile('app/api/records/route.ts','utf8');
-  source=source.replace("'@/lib/service-execution'","'../../lib/service-execution.ts'")
+  source=source.replace("'@/lib/service-execution'","'../../lib/service-execution.ts'").replace("'@/lib/monthly-billing'","'../../lib/monthly-billing.ts'").replace("'@/lib/annual-adjustments'","'../../lib/annual-adjustments.ts'")
    .replace("import {database,getRecords,originals} from '@/lib/finance-store';","const database=()=>globalThis.__monthlyDb,originals=globalThis.__monthlyOriginals,getRecords=async()=>[];")
    .replace("import {authorize,canAccess} from '@/lib/auth';","const authorize=async()=>({user:{id:'test-admin',displayName:'Teste'},error:null}),canAccess=()=>true;");
   await writeFile(resolve(folder,'route.ts'),'// @ts-nocheck\n'+source);

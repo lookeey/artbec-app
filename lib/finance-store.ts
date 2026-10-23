@@ -1,3 +1,4 @@
+import {monthlyCancellations,monthlyCancelled,monthlyPaymentStatus} from './monthly-billing';
 import {auditedDatabase} from './audit-database';
 import {businessOriginals} from './original-business';
 import {env} from 'cloudflare:workers';
@@ -5,7 +6,7 @@ import source from '@/data/source.json';
 import noteSource from '@/data/notes.json';
 import managementSource from '@/data/management.json';
 import {billingKey} from '@/lib/annual-adjustments';
-import {currentPeriod,nextPeriod,moveDueDate} from '@/lib/month-rollover';
+import {businessToday,currentPeriod,nextPeriod,moveDueDate} from '@/lib/month-rollover';
 export const originals=new Map(source.records.map(r=>[r.id,r]));
 export const originalNotes=new Map(noteSource.notes.map(r=>[r.id,r]));
 export const originalFines=new Map(managementSource.fines.map(r=>[r.id,r]));
@@ -14,7 +15,7 @@ type StoredRecord=typeof source.records[number]&{serviceStatus?:'unknown'|'pendi
 export async function getRecords(){
  const db=database();
  const read=async()=>db.prepare('SELECT id, data, version FROM finance_changes').all<{id:string;data:string;version:number}>();
- const saved=await read();
+ const saved=await read(),cancellations=await monthlyCancellations(db);
  const items=new Map<string,StoredRecord>(originals as Map<string,StoredRecord>);
  for(const row of saved.results)items.set(row.id,{...JSON.parse(row.data),version:row.version});
  const target=currentPeriod();
@@ -26,7 +27,7 @@ export async function getRecords(){
   // e INSERT OR IGNORE tornam a geração segura para acessos simultâneos.
   for(let count=0;previous<target&&count<36;count++){
    const period=nextPeriod(previous);
-   const templates=[...items.values()].filter(row=>row.kind==='Mensalidade'&&row.period===previous);
+   const templates=[...items.values()].filter(row=>row.kind==='Mensalidade'&&row.period===previous&&!monthlyCancelled({...row,period},cancellations));
    const existing=new Map<string,number>();
    for(const row of items.values())if(row.kind==='Mensalidade'&&row.period===period){const key=row.client.trim().toLocaleLowerCase('pt-BR');existing.set(key,(existing.get(key)??0)+1)}
    const seen=new Map<string,number>();
@@ -52,7 +53,8 @@ export async function getRecords(){
   const updated=await read();
   for(const row of updated.results)items.set(row.id,{...JSON.parse(row.data),version:row.version});
  }
- return [...items.values()];
+ const today=businessToday();
+ return [...items.values()].filter(row=>!monthlyCancelled(row,cancellations)).map(row=>({...row,status:monthlyPaymentStatus(row,today)}));
 }
 export async function getNotes(){const saved=await database().prepare('SELECT id, data, version FROM note_changes').all<{id:string;data:string;version:number}>();const items=new Map(originalNotes);for(const row of saved.results)items.set(row.id,{...JSON.parse(row.data),version:row.version});return [...items.values()]}
 export async function getFines(){const saved=await database().prepare('SELECT id, data, version FROM fine_changes').all<{id:string;data:string;version:number}>();const items=new Map(originalFines);for(const row of saved.results)items.set(row.id,{...JSON.parse(row.data),version:row.version});return [...items.values()]}

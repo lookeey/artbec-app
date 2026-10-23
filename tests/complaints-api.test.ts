@@ -78,7 +78,7 @@ test('complaint API enforces real session permissions, saves history and rejects
  assert.equal((await post({...input,version:deletionVersion+1})).status,409);
  assert.equal(db.prepare('SELECT deleted FROM operation_changes WHERE id=?').get(id)!.deleted,1);
  db.exec('CREATE TABLE finance_changes(id TEXT PRIMARY KEY,data TEXT,version INTEGER,updated_at TEXT)');
- let financeSource=readFileSync('app/api/records/route.ts','utf8').replace("'@/lib/service-execution'","'../../lib/service-execution.ts'").replace("import {database,getRecords,originals} from '@/lib/finance-store';","const database=()=>globalThis.__complaintDb;const originals=new Map();const getRecords=async()=>[];").replace("'@/lib/auth'","'./auth.ts'");
+ let financeSource=readFileSync('app/api/records/route.ts','utf8').replace("'@/lib/service-execution'","'../../lib/service-execution.ts'").replace("'@/lib/monthly-billing'","'../../lib/monthly-billing.ts'").replace("'@/lib/annual-adjustments'","'../../lib/annual-adjustments.ts'").replace("import {database,getRecords,originals} from '@/lib/finance-store';","const database=()=>globalThis.__complaintDb;const originals=new Map();const getRecords=async()=>[];").replace("'@/lib/auth'","'./auth.ts'");
  writeFileSync(path.join(dir,'records.ts'),'// @ts-nocheck\n'+financeSource);
  const financeApi=await import(pathToFileURL(path.join(dir,'records.ts')).href);
  const service={id:'new-'+randomUUID(),version:0,kind:'Serviço',period:'2026-10',client:'Ana',date:'2026-10-13',serviceScheduledDate:'2026-10-22',serviceStatus:'pending',serviceDate:'',amount:45000,net:null,payment:'PIX',description:'Troca do timer',netNote:'',status:'pending'};
