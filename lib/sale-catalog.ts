@@ -6,7 +6,8 @@ const productKey=(name:string)=>name.trim().replace(/\s+/g,' ').toLocaleLowerCas
 export function saleCatalogFor(source:CatalogSource,customers:string[]=[]):SaleCatalog{
  const prices=source.prices.filter((item):item is {product:string;price:number}=>typeof item==='object'&&item!==null&&'kind' in item&&item.kind==='Revenda'&&'product' in item&&typeof item.product==='string'&&'price' in item&&typeof item.price==='number'&&Number.isFinite(item.price)&&item.price>=0).map(({product,price})=>({product,price}));
  const stock=source.stock.flatMap(item=>typeof item==='object'&&item!==null&&'product' in item&&typeof item.product==='string'?[item.product]:[]);
- return {products:[...new Set([...prices.map(p=>p.product),...stock])],customers,prices};
+ // Product choices follow inventory names; price-only aliases are not products.
+ return {products:[...new Set(stock)],customers,prices};
 }
 
 export function saleProductPrice(product:string,prices:SaleCatalog['prices']):number|null{
