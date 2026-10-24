@@ -42,6 +42,22 @@ Esta build inclui a [migração inicial dos dados exportados](initial-migration.
 executada automaticamente antes de abrir o servidor.
 Não compartilhe esse volume com várias instâncias simultâneas.
 
+Após a importação inicial, `docker/regularize-historical-sales.mjs` aplica uma
+correção histórica solicitada em 23/10/2026: somente vendas do canal **Clientes**
+com competência válida até **08/2026**, inclusive, ficam pagas e entregues.
+Vita, Academia, competências posteriores, registros excluídos e estoque ficam
+preservados. A base é mesclada com as alterações atuais antes de selecionar as
+vendas. Valores, produtos, datas e alocações existentes não são alterados; não
+se inventa uma data de pagamento ou entrega nem se cria uma saída de estoque.
+As gravações, a auditoria e o marcador em `_artbec_data_repairs` são atômicos.
+O marcador guarda as vendas anteriores completas e impede repetir a correção
+nos próximos reinícios, inclusive após edições manuais. O servidor só inicia
+depois do sucesso. Teste com:
+
+```sh
+node --test docker/regularize-historical-sales.test.mjs
+```
+
 ## Configuração
 
 O compose aceita variáveis pelo shell ou por um `.env` local:
