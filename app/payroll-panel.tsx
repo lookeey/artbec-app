@@ -2,8 +2,9 @@
 
 import {useEffect,useState} from 'react';
 import PayrollLoansPanel from './payroll-loans-panel';
+import AreaReminders from './area-reminders';
 import {loanDeductions,type PayrollLoan} from '@/lib/payroll-loans';
-import {CalendarDays,ChevronDown,Info,Plus,RotateCcw,Save,Search,Trash2,Users,Wallet} from 'lucide-react';
+import {ChevronDown,Info,Plus,RotateCcw,Save,Search,Trash2,Users,Wallet} from 'lucide-react';
 import type {OperationsSource,PayrollItem} from './operations-panel';
 import type {FineDeduction} from '@/lib/fine-payroll';
 import {currentPeriod,periodOptions} from '@/lib/month-rollover';
@@ -35,7 +36,7 @@ export default function PayrollPanel({items,fineDeductions,meta,enabled,savingId
   <div className="payroll-v2-note"><Info size={16}/><span>A cada novo mês, os colaboradores e os valores mensais são copiados da folha anterior. O 13º deve ser informado no mês do pagamento; os empréstimos seguem os meses do plano, sem repetir parcelas. Revise adicionais e descontos e salve os ajustes nos cartões. Suas alterações ficam guardadas apenas na competência editada.</span></div>
   <section className="payroll-v2-overview"><div className="payroll-v2-heading"><div><h3>Visão da equipe</h3><p>{monthly.length} colaborador{monthly.length===1?'':'es'} em {month(period)} · clique em “Abrir” para editar</p></div><label className="payroll-v2-search"><Search size={17}/><input value={query} onChange={event=>setQuery(event.target.value)} placeholder="Buscar colaborador" aria-label="Buscar colaborador"/>{query&&<button onClick={()=>setQuery('')} aria-label="Limpar busca">×</button>}</label></div><div className="payroll-v2-table-scroll"><table><thead><tr><th>Colaborador</th><th>Proventos</th><th>Descontos</th><th>Adiantamento dia 15</th><th>Saldo dia 30</th><th></th></tr></thead><tbody>{visible.map(item=>{const automatic=automaticAmount(item);return <tr key={item.id}><td><div className="payroll-team-name"><span className="payroll-v2-avatar">{item.employee.split(' ').filter(Boolean).slice(0,2).map(word=>word[0]).join('')}</span><strong>{item.employee}</strong></div></td><td>{brl(earnings(item))}</td><td>{brl(deductions(item,automatic,scheduledFor(item)))}</td><td><div className="payroll-advance-cell"><strong>{brl(item.advance15-scheduledFor(item).advance15)}</strong>{item.advance>0&&<small className="payroll-extra"><span>Extra</span><b>{brl(item.advance)}</b></small>}</div></td><td className={due(item,automatic,scheduledFor(item))<0?'negative':'balance'}>{brl(due(item,automatic,scheduledFor(item)))}</td><td><button onClick={()=>openPerson(item)}>Abrir</button></td></tr>})}</tbody></table>{!visible.length&&<p className="payroll-v2-empty">Nenhum colaborador encontrado nesta competência.</p>}</div></section>
   <section id="payroll-cards" className="payroll-v2-people"><div className="payroll-v2-heading"><div><h3>Editar por colaborador</h3><p>Os totais são recalculados enquanto você altera os campos. Salve cada cartão ao terminar.</p></div>{query&&<button className="payroll-v2-show-all" onClick={()=>setQuery('')}><Users size={16}/> Mostrar todos</button>}</div><div className="payroll-v2-grid">{visible.map((item,index)=><PayrollPerson key={`${item.id}-${item.version}`} item={item} automaticFines={automaticFor(item)} loans={loans} loanReady={loanReady} saveLoan={saveLoan} tone={index%5} enabled={enabled} saving={savingIds.includes(item.id)} save={save} remove={()=>remove(item)}/>)}</div></section>
-  {!!meta.reminders.length&&<details className="payroll-v2-reminders"><summary><CalendarDays size={18}/> Lembretes da folha <ChevronDown size={17}/></summary><div>{meta.reminders.map((reminder,index)=><p key={index}>{reminder}</p>)}</div></details>}
+  <AreaReminders area="payroll" title="Lembretes da folha" initialReminders={meta.reminders}/>
  </div>
 }
 

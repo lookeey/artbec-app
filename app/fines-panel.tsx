@@ -6,6 +6,7 @@ import {CalendarDays,FileWarning,Pencil,Plus,Search,ShieldCheck,Trash2,WalletCar
 import {Select,SelectContent,SelectItem,SelectTrigger,SelectValue} from '@/components/ui/select';
 import {fineInstallmentAmount,shiftPeriod} from '@/lib/fine-payroll';
 import type {FineItem} from './management-panel';
+import AreaReminders from './area-reminders';
 
 const brl=(cents:number|null)=>((cents??0)/100).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
 const date=(value:string)=>/^\d{4}-\d{2}-\d{2}$/.test(value)?value.split('-').reverse().join('/'):value||'Não informado';
@@ -27,6 +28,7 @@ export default function FinesPanel({fines,query,setQuery,filter,setFilter,ready,
   </article>})}</section>
   {!visible.length&&<div className="fines-modern-empty"><ShieldCheck size={32}/><h3>Nenhuma multa encontrada</h3><p>Altere os filtros ou adicione uma nova multa.</p></div>}
   <p className="fines-v2-footnote">O desconto começa no mês escolhido e segue mensalmente pelo número de parcelas. Multas em recurso ficam suspensas.</p>
+  <AreaReminders area="fines" title="Lembretes das multas"/>
  </div>;
 
 }
