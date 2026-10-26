@@ -1,0 +1,1 @@
+.expense-history-toggle{display:flex;align-items:center;gap:10px;margin:0 0 20px;color:var(--muted-foreground);font-size:13px;cursor:pointer}.expense-history-toggle input{width:17px;height:17px;flex-shrink:0;accent-color:#147c70}

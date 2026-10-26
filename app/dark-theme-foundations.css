@@ -1,0 +1,25 @@
+/* Shared semantic surfaces; layout imports this after component styles. */
+@media screen{
+ html.dark .workspace{--page-soft:color-mix(in srgb,var(--page-accent) 14%,var(--app-surface))}
+ html.dark :is(.payroll-card,.payroll-v2-person){--card-soft:var(--app-raised)}
+ html.dark body,html.dark [data-slot=sidebar-inset]{background:var(--app-canvas);color:var(--app-text)}
+ html.dark .workspace:not(.view-home) th{background:var(--app-raised)!important;color:var(--app-text)!important}
+ html.dark .workspace:not(.view-home) .primary{background:#147c70;color:#fff;border-color:#459e8b}
+ html.dark :is(input,select,textarea){color-scheme:dark;accent-color:#65d1b5}
+ html.dark :is(input,select,textarea):focus-visible,html.dark button:focus-visible{outline:2px solid var(--app-info);outline-offset:3px}
+ html.dark :is(.area-reminders,.area-reminders-body article,.stock-monthly-history,.sale-form-main,.sale-product-line,.sale-form-option){background:var(--app-surface);border-color:var(--app-border);color:var(--app-text)}
+ html.dark :is(.area-reminders>summary,.area-reminder-default,.area-reminders-body article button,.stock-history-totals article,.stock-history-totals article+article,.sale-option-body){background:var(--app-raised);border-color:var(--app-border);color:var(--app-text)}
+ html.dark :is(.area-reminders>summary>span,.stock-history-totals small,.stock-history-message,.sale-option-hint,.sale-products-heading span,.sale-product-heading,.sale-option-body label){color:var(--app-muted)}
+ html.dark :is(.stock-history-totals article>svg,.stock-history-direction.in){color:var(--app-success)}
+ html.dark .stock-history-direction.in{background:#173c30}
+ html.dark :is(.stock-history-totals article+article>svg,.stock-history-direction.out){color:var(--app-warning)}
+ html.dark .stock-history-direction.out{background:#45341a}
+ html.dark :is(.status.paid,.inline-status.paid,.payment-tag.pix,.task-status.status-finalizada){background:#173c30;color:var(--app-success);border-color:#35634e}
+ html.dark :is(.status.pending,.inline-status.pending){background:#45341a;color:var(--app-warning);border-color:#796039}
+ html.dark :is(.status.overdue,.inline-status.overdue,.error,.login-error){background:#45272d;color:var(--app-danger);border-color:#81505a}
+ html.dark :is(.status.review,.inline-status.review){background:#34294b;color:#d6c1ff;border-color:#6d5b8e}
+ html.dark :is(.sale-card.paid select,.boleto-card.paid select){background:#173c30;color:var(--app-success)}
+ html.dark :is(.sale-card.pending select,.boleto-card.pending select){background:#45341a;color:var(--app-warning)}
+ html.dark .danger,html.dark .icon-danger{color:var(--app-danger)!important}
+ html.dark :is(.sale-product-line input,.area-reminder-form textarea){background:#122334;color:var(--app-text);border-color:var(--app-border)}
+}

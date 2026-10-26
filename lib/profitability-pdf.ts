@@ -66,16 +66,16 @@ export async function renderProfitabilityPdf(report:ProfitabilityReport,technici
    ['Gasolina',money(person.fuelCost),'Periculosidade',money(person.hazardPay)],
    ['Óleo',money(person.oilCost),'Horas extras + bônus',money(person.overtime+person.bonus)],
    ['Manutenção',money(person.maintenanceCost),'Faltas + INSS',money(person.absences+person.inss)],
-   ['Produtos utilizados',money(person.productCost),'Empréstimo + multas',money(person.loan+person.fines)],
-   ['Custo direto total',money(person.directCost),'Adiantamentos',money(person.advance+person.advance15)],
-   ['Custo por visita',money(person.costPerVisit),'Saldo da folha',money(person.remainingPay)],
+   ['Custo direto total',money(person.directCost),'Empréstimo + multas',money(person.loan+person.fines)],
+   ['Custo por visita',money(person.costPerVisit),'Adiantamentos',money(person.advance+person.advance15)],
+   ['Custo por cliente',money(person.costPerClient),'Saldo da folha',money(person.remainingPay)],
   ],[1,3],person.name);
   paragraph(`Horas em atendimento: ${person.serviceHours}h | Horas disponíveis: ${person.availableHours}h | Ocupação: ${percent(person.utilization)} | Cobertura dos horários: ${percent(person.timingCoverage)}. ${person.payrollMatched?'Folha vinculada.':'Folha não localizada; custo incompleto.'}`);
   paragraph(`Custo por cliente: ${money(person.costPerClient)} | Resultado parcial por cliente: ${person.clients?money(Math.round(person.profit/person.clients)):'Sem clientes'} | Receita por hora registrada: ${person.totalMinutes?money(person.revenuePerHour):'Sem horários'} | Custo por hora registrada: ${person.costPerRecordedHour===null?'Sem horários':money(person.costPerRecordedHour)}. Indicadores por hora dividem os valores atribuídos pelas horas de chegada e saída registradas no Auvo; horários incompletos limitam a comparação.`);
   ensure(110,'Clientes e piscinas atendidos');heading('Clientes e piscinas atendidos');
   const rows=person.customers.filter(customer=>`${customer.name} ${person.name}`.toLocaleLowerCase('pt-BR').includes(query.trim().toLocaleLowerCase('pt-BR'))).sort((a,b)=>a.name.localeCompare(b.name,'pt-BR'));
   if(query)paragraph(`Busca de clientes: ${query}. Os totais do colaborador incluem toda a carteira; a busca filtra somente o detalhamento abaixo.`);
-  table(['Cliente / piscina','Visitas','Tempo médio','Receita','Custo estimado','Resultado'],[250,55,85,125,130,125],rows.map(customer=>[customer.name,String(customer.visits),minutes(customer.averageMinutes),customer.revenueMatched||customer.productRevenue?money(customer.revenue):'Não vinculada',money(customer.allocatedCost),customer.revenueMatched||customer.productRevenue?money(customer.profit):'Não apurado']),[1,2,3,4,5],`${person.name} - Clientes`);
+  table(['Cliente / piscina','Visitas','Tempo médio','Receita','Custo estimado','Resultado'],[250,55,85,125,130,125],rows.map(customer=>[customer.name,String(customer.visits),minutes(customer.averageMinutes),customer.revenueMatched?money(customer.revenue):'Não vinculada',money(customer.allocatedCost),customer.revenueMatched?money(customer.profit):'Não apurado']),[1,2,3,4,5],`${person.name} - Clientes`);
   if(!rows.length)paragraph('Nenhum cliente encontrado com os filtros selecionados.');
  }
  addPage('Critérios e qualidade dos dados');heading('Como interpretar o resultado');
@@ -84,8 +84,6 @@ export async function renderProfitabilityPdf(report:ProfitabilityReport,technici
  heading('Qualidade dos dados da operação');
  paragraph(`Horários completos: ${percent(report.quality.timingCoverage)}. Clientes com mensalidade vinculada: ${percent(report.quality.revenueCoverage)} (${report.quality.matchedClients} de ${report.quality.totalClients}).`);
  if(report.quality.unmatchedPayroll.length)paragraph(`Folhas não localizadas: ${report.quality.unmatchedPayroll.join(', ')}.`);
- if(report.quality.missingProductCosts)paragraph(`${report.quality.missingProductCosts} item(ns) sem custo de compra identificado. O resultado pode estar acima do real.`);
- if(report.quality.unattributedProductRevenue)paragraph(`Vendas de produtos sem técnico vinculado: ${money(report.quality.unattributedProductRevenue)}; não incluídas no resultado por colaborador.`);
  if(report.quality.shortVisits)paragraph(`${report.quality.shortVisits} visitas com duração de até 5 minutos precisam de conferência.`);
  pdf.getPages().forEach((p,index)=>{page=p;box(M,H-32,C,1,pale);text('ARTBEC PISCINAS  |  Uso interno  |  Valores em reais',M,H-24,8,regular,muted);text(`${index+1} / ${pdf.getPageCount()}`,W-M-45,H-24,8,regular,muted)});
  return pdf.save();

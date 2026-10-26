@@ -17,13 +17,15 @@ import "./payroll-alignment.css";
 import "./profitability-workspace.css";
 import "./reminders.css";
 import "./management-hubs.css";
-import "./dark-theme.css";
+
 import "./sale-form.css";
 import "./personal-tasks.css";
 import "./login-workspace.css";
 import "./finance-list.css";
 import "./product-agenda.css";
 import "./complaints.css";
+import "./dark-theme.css";
+import "./dark-theme-foundations.css";
 
 export const metadata: Metadata = {
   title: "Artbec | Gestão",
