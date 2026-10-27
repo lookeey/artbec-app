@@ -1,0 +1,889 @@
+{
+  "format": "artbec-vita-history-prices-v1",
+  "source": {
+    "file": "Artbec - Vendas - Estoque e Motossss.xlsx",
+    "sha256": "8881e4911da90d8d4d48c435e5d5fcd79ce7dac3031695cf826b471851f8ecee",
+    "sheets": [
+      "V. Abr Vita ",
+      "V. Maio Vita",
+      "V. Junho Vita",
+      "V. Julho Vita",
+      "V. Agosto Vita"
+    ]
+  },
+  "prices": {
+    "cloro": {
+      "product": "Cloro líquido 5 L",
+      "unitPrice": 4000,
+      "sheet": "V. Jan Vita",
+      "range": "F13:G13",
+      "divisor": 4
+    },
+    "redutor": {
+      "product": "Redutor de pH 5 L",
+      "unitPrice": 8500,
+      "sheet": "V. Fev Vita ",
+      "range": "F27:G27",
+      "divisor": 4
+    },
+    "elevador": {
+      "product": "Elevador de Alcalinidade",
+      "unitPrice": 5000,
+      "sheet": "V. Jan Vita",
+      "range": "F15:G15",
+      "divisor": 2
+    },
+    "algicida": {
+      "product": "Algicida Manutenção HTH",
+      "unitPrice": 4500,
+      "sheet": "V. Fev Vita ",
+      "range": "F13:G13",
+      "divisor": 2
+    },
+    "choque": {
+      "product": "Algicida Choque HTH",
+      "unitPrice": 4500,
+      "sheet": "V. Mar Vita ",
+      "range": "F22:G22",
+      "divisor": 2
+    },
+    "clarificante": {
+      "product": "Clarificante",
+      "unitPrice": 3000,
+      "sheet": "Valores Produtos",
+      "range": "I17:J17",
+      "divisor": 1
+    },
+    "oleosidade": {
+      "product": "Removedor de Oleosidade",
+      "unitPrice": 4500,
+      "sheet": "Valores Produtos",
+      "range": "I22:J22",
+      "divisor": 1
+    },
+    "pastilha": {
+      "product": "Kit de Pastilha em Gel",
+      "unitPrice": 4700,
+      "sheet": "Valores Produtos",
+      "range": "I24:J24",
+      "divisor": 1
+    },
+    "hth": {
+      "product": "Cloro Granulado HTH",
+      "unitPrice": 35000,
+      "sheet": "V. Mar Vita ",
+      "range": "F21:G21",
+      "divisor": 1
+    },
+    "mangueira": {
+      "product": "Mangueira (metro)",
+      "unitPrice": 2200,
+      "sheet": "Valores Produtos",
+      "range": "I32:J32",
+      "divisor": 1
+    },
+    "ponteira": {
+      "product": "Ponteira de mangueira",
+      "unitPrice": 800,
+      "sheet": "Valores Produtos",
+      "range": "I43:J43",
+      "divisor": 1
+    },
+    "semanal": {
+      "product": "Tratamento Semanal",
+      "unitPrice": null,
+      "source": "Manter sem valor, conforme solicitação de 27/10/2026"
+    }
+  },
+  "rows": [
+    {
+      "id": "sale-v-abr-vita-13",
+      "lineItems": [
+        {
+          "product": "Elevador de Alcalinidade",
+          "quantity": 2,
+          "unitPrice": 5000
+        },
+        {
+          "product": "Algicida Choque HTH",
+          "quantity": 1,
+          "unitPrice": 4500
+        },
+        {
+          "product": "Clarificante",
+          "quantity": 1,
+          "unitPrice": 3000
+        },
+        {
+          "product": "Removedor de Oleosidade",
+          "quantity": 2,
+          "unitPrice": 4500
+        },
+        {
+          "product": "Kit de Pastilha em Gel",
+          "quantity": 1,
+          "unitPrice": 4700
+        }
+      ],
+      "total": 31200
+    },
+    {
+      "id": "sale-v-abr-vita-14",
+      "lineItems": [
+        {
+          "product": "Algicida Choque HTH",
+          "quantity": 3,
+          "unitPrice": 4500
+        },
+        {
+          "product": "Elevador de Alcalinidade",
+          "quantity": 2,
+          "unitPrice": 5000
+        }
+      ],
+      "total": 23500
+    },
+    {
+      "id": "sale-v-abr-vita-15",
+      "lineItems": [
+        {
+          "product": "Algicida Choque HTH",
+          "quantity": 2,
+          "unitPrice": 4500
+        },
+        {
+          "product": "Tratamento Semanal",
+          "quantity": 2,
+          "unitPrice": null
+        }
+      ],
+      "total": 9000
+    },
+    {
+      "id": "sale-v-abr-vita-19",
+      "lineItems": [
+        {
+          "product": "Elevador de Alcalinidade",
+          "quantity": 4,
+          "unitPrice": 5000
+        },
+        {
+          "product": "Tratamento Semanal",
+          "quantity": 4,
+          "unitPrice": null
+        },
+        {
+          "product": "Algicida Manutenção HTH",
+          "quantity": 2,
+          "unitPrice": 4500
+        }
+      ],
+      "total": 29000
+    },
+    {
+      "id": "sale-v-abr-vita-28",
+      "lineItems": [
+        {
+          "product": "Cloro líquido 5 L",
+          "quantity": 2,
+          "unitPrice": 4000
+        },
+        {
+          "product": "Redutor de pH 5 L",
+          "quantity": 2,
+          "unitPrice": 8500
+        },
+        {
+          "product": "Elevador de Alcalinidade",
+          "quantity": 2,
+          "unitPrice": 5000
+        }
+      ],
+      "total": 35000
+    },
+    {
+      "id": "sale-v-abr-vita-29",
+      "lineItems": [
+        {
+          "product": "Cloro líquido 5 L",
+          "quantity": 2,
+          "unitPrice": 4000
+        },
+        {
+          "product": "Redutor de pH 5 L",
+          "quantity": 2,
+          "unitPrice": 8500
+        }
+      ],
+      "total": 25000
+    },
+    {
+      "id": "sale-v-abr-vita-30",
+      "lineItems": [
+        {
+          "product": "Redutor de pH 5 L",
+          "quantity": 4,
+          "unitPrice": 8500
+        },
+        {
+          "product": "Elevador de Alcalinidade",
+          "quantity": 2,
+          "unitPrice": 5000
+        }
+      ],
+      "total": 44000
+    },
+    {
+      "id": "sale-v-abr-vita-31",
+      "lineItems": [
+        {
+          "product": "Cloro líquido 5 L",
+          "quantity": 2,
+          "unitPrice": 4000
+        },
+        {
+          "product": "Redutor de pH 5 L",
+          "quantity": 2,
+          "unitPrice": 8500
+        }
+      ],
+      "total": 25000
+    },
+    {
+      "id": "sale-v-abr-vita-36",
+      "lineItems": [
+        {
+          "product": "Redutor de pH 5 L",
+          "quantity": 2,
+          "unitPrice": 8500
+        },
+        {
+          "product": "Cloro líquido 5 L",
+          "quantity": 2,
+          "unitPrice": 4000
+        }
+      ],
+      "total": 25000
+    },
+    {
+      "id": "sale-v-abr-vita-37",
+      "lineItems": [
+        {
+          "product": "Redutor de pH 5 L",
+          "quantity": 2,
+          "unitPrice": 8500
+        },
+        {
+          "product": "Cloro líquido 5 L",
+          "quantity": 2,
+          "unitPrice": 4000
+        },
+        {
+          "product": "Elevador de Alcalinidade",
+          "quantity": 2,
+          "unitPrice": 5000
+        }
+      ],
+      "total": 35000
+    },
+    {
+      "id": "sale-v-maio-vita-13",
+      "lineItems": [
+        {
+          "product": "Redutor de pH 5 L",
+          "quantity": 4,
+          "unitPrice": 8500
+        }
+      ],
+      "total": 34000
+    },
+    {
+      "id": "sale-v-maio-vita-14",
+      "lineItems": [
+        {
+          "product": "Redutor de pH 5 L",
+          "quantity": 4,
+          "unitPrice": 8500
+        }
+      ],
+      "total": 34000
+    },
+    {
+      "id": "sale-v-maio-vita-19",
+      "lineItems": [
+        {
+          "product": "Cloro Granulado HTH",
+          "quantity": 1,
+          "unitPrice": 35000
+        },
+        {
+          "product": "Tratamento Semanal",
+          "quantity": 4,
+          "unitPrice": null
+        }
+      ],
+      "total": 35000
+    },
+    {
+      "id": "sale-v-maio-vita-20",
+      "lineItems": [
+        {
+          "product": "Elevador de Alcalinidade",
+          "quantity": 2,
+          "unitPrice": 5000
+        }
+      ],
+      "total": 10000
+    },
+    {
+      "id": "sale-v-maio-vita-21",
+      "lineItems": [
+        {
+          "product": "Elevador de Alcalinidade",
+          "quantity": 2,
+          "unitPrice": 5000
+        },
+        {
+          "product": "Redutor de pH 5 L",
+          "quantity": 2,
+          "unitPrice": 8500
+        }
+      ],
+      "total": 27000
+    },
+    {
+      "id": "sale-v-maio-vita-28",
+      "lineItems": [
+        {
+          "product": "Cloro líquido 5 L",
+          "quantity": 2,
+          "unitPrice": 4000
+        },
+        {
+          "product": "Redutor de pH 5 L",
+          "quantity": 2,
+          "unitPrice": 8500
+        }
+      ],
+      "total": 25000
+    },
+    {
+      "id": "sale-v-maio-vita-29",
+      "lineItems": [
+        {
+          "product": "Cloro líquido 5 L",
+          "quantity": 2,
+          "unitPrice": 4000
+        },
+        {
+          "product": "Elevador de Alcalinidade",
+          "quantity": 2,
+          "unitPrice": 5000
+        },
+        {
+          "product": "Redutor de pH 5 L",
+          "quantity": 2,
+          "unitPrice": 8500
+        }
+      ],
+      "total": 35000
+    },
+    {
+      "id": "sale-v-maio-vita-30",
+      "lineItems": [
+        {
+          "product": "Mangueira (metro)",
+          "quantity": 10,
+          "unitPrice": 2200
+        }
+      ],
+      "total": 22000
+    },
+    {
+      "id": "sale-v-maio-vita-36",
+      "lineItems": [
+        {
+          "product": "Cloro líquido 5 L",
+          "quantity": 2,
+          "unitPrice": 4000
+        },
+        {
+          "product": "Redutor de pH 5 L",
+          "quantity": 2,
+          "unitPrice": 8500
+        },
+        {
+          "product": "Elevador de Alcalinidade",
+          "quantity": 2,
+          "unitPrice": 5000
+        }
+      ],
+      "total": 35000
+    },
+    {
+      "id": "sale-v-maio-vita-37",
+      "lineItems": [
+        {
+          "product": "Cloro líquido 5 L",
+          "quantity": 2,
+          "unitPrice": 4000
+        },
+        {
+          "product": "Redutor de pH 5 L",
+          "quantity": 2,
+          "unitPrice": 8500
+        },
+        {
+          "product": "Elevador de Alcalinidade",
+          "quantity": 2,
+          "unitPrice": 5000
+        }
+      ],
+      "total": 35000
+    },
+    {
+      "id": "sale-v-junho-vita-13",
+      "lineItems": [
+        {
+          "product": "Elevador de Alcalinidade",
+          "quantity": 2,
+          "unitPrice": 5000
+        },
+        {
+          "product": "Redutor de pH 5 L",
+          "quantity": 2,
+          "unitPrice": 8500
+        }
+      ],
+      "total": 27000
+    },
+    {
+      "id": "sale-v-junho-vita-14",
+      "lineItems": [
+        {
+          "product": "Elevador de Alcalinidade",
+          "quantity": 2,
+          "unitPrice": 5000
+        },
+        {
+          "product": "Redutor de pH 5 L",
+          "quantity": 2,
+          "unitPrice": 8500
+        }
+      ],
+      "total": 27000
+    },
+    {
+      "id": "sale-v-junho-vita-28",
+      "lineItems": [
+        {
+          "product": "Elevador de Alcalinidade",
+          "quantity": 2,
+          "unitPrice": 5000
+        },
+        {
+          "product": "Redutor de pH 5 L",
+          "quantity": 4,
+          "unitPrice": 8500
+        }
+      ],
+      "total": 44000
+    },
+    {
+      "id": "sale-v-junho-vita-29",
+      "lineItems": [
+        {
+          "product": "Elevador de Alcalinidade",
+          "quantity": 2,
+          "unitPrice": 5000
+        },
+        {
+          "product": "Cloro líquido 5 L",
+          "quantity": 2,
+          "unitPrice": 4000
+        }
+      ],
+      "total": 18000
+    },
+    {
+      "id": "sale-v-junho-vita-30",
+      "lineItems": [
+        {
+          "product": "Redutor de pH 5 L",
+          "quantity": 2,
+          "unitPrice": 8500
+        },
+        {
+          "product": "Elevador de Alcalinidade",
+          "quantity": 2,
+          "unitPrice": 5000
+        }
+      ],
+      "total": 27000
+    },
+    {
+      "id": "sale-v-junho-vita-31",
+      "lineItems": [
+        {
+          "product": "Cloro líquido 5 L",
+          "quantity": 2,
+          "unitPrice": 4000
+        },
+        {
+          "product": "Redutor de pH 5 L",
+          "quantity": 2,
+          "unitPrice": 8500
+        }
+      ],
+      "total": 25000
+    },
+    {
+      "id": "sale-v-julho-vita-13",
+      "lineItems": [
+        {
+          "product": "Redutor de pH 5 L",
+          "quantity": 2,
+          "unitPrice": 8500
+        }
+      ],
+      "total": 17000
+    },
+    {
+      "id": "sale-v-julho-vita-14",
+      "lineItems": [
+        {
+          "product": "Redutor de pH 5 L",
+          "quantity": 2,
+          "unitPrice": 8500
+        },
+        {
+          "product": "Algicida Manutenção HTH",
+          "quantity": 2,
+          "unitPrice": 4500
+        }
+      ],
+      "total": 26000
+    },
+    {
+      "id": "sale-v-julho-vita-19",
+      "lineItems": [
+        {
+          "product": "Redutor de pH 5 L",
+          "quantity": 2,
+          "unitPrice": 8500
+        }
+      ],
+      "total": 17000
+    },
+    {
+      "id": "sale-v-julho-vita-20",
+      "lineItems": [
+        {
+          "product": "Redutor de pH 5 L",
+          "quantity": 2,
+          "unitPrice": 8500
+        },
+        {
+          "product": "Algicida Manutenção HTH",
+          "quantity": 2,
+          "unitPrice": 4500
+        },
+        {
+          "product": "Elevador de Alcalinidade",
+          "quantity": 2,
+          "unitPrice": 5000
+        }
+      ],
+      "total": 36000
+    },
+    {
+      "id": "sale-v-julho-vita-28",
+      "lineItems": [
+        {
+          "product": "Elevador de Alcalinidade",
+          "quantity": 3,
+          "unitPrice": 5000
+        },
+        {
+          "product": "Kit de Pastilha em Gel",
+          "quantity": 1,
+          "unitPrice": 4700
+        }
+      ],
+      "total": 19700
+    },
+    {
+      "id": "sale-v-julho-vita-29",
+      "lineItems": [
+        {
+          "product": "Cloro líquido 5 L",
+          "quantity": 2,
+          "unitPrice": 4000
+        },
+        {
+          "product": "Redutor de pH 5 L",
+          "quantity": 2,
+          "unitPrice": 8500
+        },
+        {
+          "product": "Tratamento Semanal",
+          "quantity": 1,
+          "unitPrice": null
+        }
+      ],
+      "total": 25000
+    },
+    {
+      "id": "sale-v-julho-vita-30",
+      "lineItems": [
+        {
+          "product": "Elevador de Alcalinidade",
+          "quantity": 2,
+          "unitPrice": 5000
+        }
+      ],
+      "total": 10000
+    },
+    {
+      "id": "sale-v-julho-vita-36",
+      "lineItems": [
+        {
+          "product": "Redutor de pH 5 L",
+          "quantity": 2,
+          "unitPrice": 8500
+        }
+      ],
+      "total": 17000
+    },
+    {
+      "id": "sale-v-julho-vita-37",
+      "lineItems": [
+        {
+          "product": "Elevador de Alcalinidade",
+          "quantity": 2,
+          "unitPrice": 5000
+        }
+      ],
+      "total": 10000
+    },
+    {
+      "id": "sale-v-julho-vita-38",
+      "lineItems": [
+        {
+          "product": "Cloro líquido 5 L",
+          "quantity": 2,
+          "unitPrice": 4000
+        },
+        {
+          "product": "Redutor de pH 5 L",
+          "quantity": 2,
+          "unitPrice": 8500
+        }
+      ],
+      "total": 25000
+    },
+    {
+      "id": "sale-v-julho-vita-39",
+      "lineItems": [
+        {
+          "product": "Redutor de pH 5 L",
+          "quantity": 2,
+          "unitPrice": 8500
+        },
+        {
+          "product": "Cloro líquido 5 L",
+          "quantity": 2,
+          "unitPrice": 4000
+        }
+      ],
+      "total": 25000
+    },
+    {
+      "id": "sale-v-julho-vita-40",
+      "lineItems": [
+        {
+          "product": "Cloro líquido 5 L",
+          "quantity": 2,
+          "unitPrice": 4000
+        },
+        {
+          "product": "Redutor de pH 5 L",
+          "quantity": 2,
+          "unitPrice": 8500
+        },
+        {
+          "product": "Elevador de Alcalinidade",
+          "quantity": 2,
+          "unitPrice": 5000
+        }
+      ],
+      "total": 35000
+    },
+    {
+      "id": "sale-v-agosto-vita-13",
+      "lineItems": [
+        {
+          "product": "Elevador de Alcalinidade",
+          "quantity": 2,
+          "unitPrice": 5000
+        }
+      ],
+      "total": 10000
+    },
+    {
+      "id": "sale-v-agosto-vita-14",
+      "lineItems": [
+        {
+          "product": "Redutor de pH 5 L",
+          "quantity": 2,
+          "unitPrice": 8500
+        },
+        {
+          "product": "Elevador de Alcalinidade",
+          "quantity": 2,
+          "unitPrice": 5000
+        }
+      ],
+      "total": 27000
+    },
+    {
+      "id": "sale-v-agosto-vita-19",
+      "lineItems": [
+        {
+          "product": "Redutor de pH 5 L",
+          "quantity": 2,
+          "unitPrice": 8500
+        },
+        {
+          "product": "Elevador de Alcalinidade",
+          "quantity": 2,
+          "unitPrice": 5000
+        }
+      ],
+      "total": 27000
+    },
+    {
+      "id": "sale-v-agosto-vita-28",
+      "lineItems": [
+        {
+          "product": "Algicida Manutenção HTH",
+          "quantity": 2,
+          "unitPrice": 4500
+        },
+        {
+          "product": "Elevador de Alcalinidade",
+          "quantity": 2,
+          "unitPrice": 5000
+        }
+      ],
+      "total": 19000
+    },
+    {
+      "id": "sale-v-agosto-vita-29",
+      "lineItems": [
+        {
+          "product": "Elevador de Alcalinidade",
+          "quantity": 2,
+          "unitPrice": 5000
+        }
+      ],
+      "total": 10000
+    },
+    {
+      "id": "sale-v-agosto-vita-30",
+      "lineItems": [
+        {
+          "product": "Elevador de Alcalinidade",
+          "quantity": 2,
+          "unitPrice": 5000
+        }
+      ],
+      "total": 10000
+    },
+    {
+      "id": "sale-v-agosto-vita-31",
+      "lineItems": [
+        {
+          "product": "Cloro líquido 5 L",
+          "quantity": 2,
+          "unitPrice": 4000
+        },
+        {
+          "product": "Redutor de pH 5 L",
+          "quantity": 2,
+          "unitPrice": 8500
+        },
+        {
+          "product": "Elevador de Alcalinidade",
+          "quantity": 2,
+          "unitPrice": 5000
+        }
+      ],
+      "total": 35000
+    },
+    {
+      "id": "sale-v-agosto-vita-32",
+      "lineItems": [
+        {
+          "product": "Mangueira (metro)",
+          "quantity": 7,
+          "unitPrice": 2200
+        },
+        {
+          "product": "Ponteira de mangueira",
+          "quantity": 3,
+          "unitPrice": 800
+        }
+      ],
+      "total": 17800
+    },
+    {
+      "id": "sale-v-agosto-vita-36",
+      "lineItems": [
+        {
+          "product": "Elevador de Alcalinidade",
+          "quantity": 2,
+          "unitPrice": 5000
+        }
+      ],
+      "total": 10000
+    },
+    {
+      "id": "sale-v-agosto-vita-37",
+      "lineItems": [
+        {
+          "product": "Cloro líquido 5 L",
+          "quantity": 2,
+          "unitPrice": 4000
+        },
+        {
+          "product": "Elevador de Alcalinidade",
+          "quantity": 2,
+          "unitPrice": 5000
+        },
+        {
+          "product": "Redutor de pH 5 L",
+          "quantity": 2,
+          "unitPrice": 8500
+        }
+      ],
+      "total": 35000
+    },
+    {
+      "id": "sale-v-agosto-vita-39",
+      "lineItems": [
+        {
+          "product": "Cloro líquido 5 L",
+          "quantity": 2,
+          "unitPrice": 4000
+        },
+        {
+          "product": "Redutor de pH 5 L",
+          "quantity": 1,
+          "unitPrice": 8500
+        }
+      ],
+      "total": 16500
+    }
+  ]
+}

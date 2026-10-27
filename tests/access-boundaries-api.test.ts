@@ -67,5 +67,12 @@ test('matriz de acessos: dados, alterações, anexos, sessões e administração
  const missing=summarizeVitaHalf([vita],'2026-10',vita.client,'first');
  assert.equal(missing.undated,1);
  assert.equal((await o.POST(request('/api/operations','vita','POST',{entity:'vitaClosing',item:{...closing,...missing,id:vitaClosingId('2026-10',vita.client,'first'),version:0,period:'2026-10',half:'first'}}))).status,409);
+ // Historical Vita may keep only Tratamento Semanal unpriced, including quick payment updates.
+ const historic={...sale('sale-v-abr-vita-15','Vita',9000),date:'2026-04-08',deliveryDate:'2026-04-08',period:'2026-04',deliveryStatus:'delivered',quantity:null,unitPrice:null,lineItems:[{product:'Algicida Choque HTH',quantity:2,unitPrice:4500},{product:'Tratamento Semanal',quantity:2,unitPrice:null}]};
+ (operations.sales as any[]).push(historic);(globalThis as any).__accessOriginalOperations.sale.set(historic.id,historic);
+ for(const update of [{total:9100},{period:'2026-10'},{channel:'Clientes'},{lineItems:[historic.lineItems[0],{...historic.lineItems[1],product:'Outro produto'}]}])assert.equal((await o.POST(request('/api/operations','vita','POST',{entity:'sale',item:{...historic,...update}}))).status,400);
+ const historicalSaved=await o.POST(request('/api/operations','vita','POST',{entity:'sale',item:{...historic,status:'paid'}}));assert.equal(historicalSaved.status,200);
+ const historicalItem=(await json(historicalSaved)).item;assert.equal(historicalItem.total,9000);assert.equal(historicalItem.lineItems[1].unitPrice,null);assert.equal(historicalItem.status,'paid');
+ const complete=await o.POST(request('/api/operations','vita','POST',{entity:'sale',item:{...historicalItem,total:15000,lineItems:[historic.lineItems[0],{...historic.lineItems[1],unitPrice:3000}]}}));assert.equal(complete.status,200);assert.equal((await json(complete)).item.total,15000);
  assert.equal(sqlite.prepare('SELECT COUNT(*) as n FROM management_changes').get()!.n,1);assert.equal(sqlite.prepare('SELECT COUNT(*) as n FROM finance_changes').get()!.n,1);
 });

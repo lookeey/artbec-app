@@ -61,7 +61,10 @@ node --test docker/regularize-historical-sales.test.mjs
 O entrypoint também recupera o [histórico Vita de abril a agosto de 2026](vita-history-recovery.md)
 **depois** da importação inicial, antes de abrir o servidor. A recuperação só inclui
 saídas ausentes; preserva edições, exclusões, outubro e o estoque atual. O marcador
-persistido impede repetir a recuperação nos reinícios.
+persistido impede repetir a recuperação nos reinícios. Em seguida,
+`docker/price-vita-history.mjs` preenche somente os preços históricos ainda
+vazios desses cadastros, mantendo Tratamento Semanal sem valor e preservando
+preços manuais, outubro e estoque. Essa etapa também tem seu próprio marcador.
 
 ## Configuração
 
