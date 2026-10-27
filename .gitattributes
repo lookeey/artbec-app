@@ -1,3 +1,6 @@
 # Checksums in the portable export describe the exact original bytes.
 migration/initial/** binary
 docker/*.sh text eol=lf
+
+# Keep the Vita recovery payload byte-identical on Windows and Docker Linux.
+migration/vita-history-2026-04-08.json text eol=lf

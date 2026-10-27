@@ -58,5 +58,5 @@ if __name__ == '__main__':
     payload = dict(format='artbec-vita-history-v1', source=dict(file=args.workbook.name,
         sha256=hashlib.sha256(args.workbook.read_bytes()).hexdigest(), sheets=[name for name, _ in SHEETS]), sales=sales)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(payload, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
+    args.output.write_text(json.dumps(payload, ensure_ascii=False, indent=2)+'\n', encoding='utf-8', newline='\n')
     print(json.dumps(dict(records=len(sales), months=EXPECTED, missingAmounts=sum(s['total'] is None for s in sales)), ensure_ascii=False))

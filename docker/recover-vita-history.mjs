@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { migrationRuntime } from './import-initial-data.mjs';
 
 export const repairId = 'vita-deliveries-2026-04-through-08-v1';
-export const payloadHash = '29badd08cb2200bdffa0590efcae52c4381993ee99fc9ea6cd9b04fa9680543c';
+export const payloadHash = '8f4240b8c5205329205e3e964dce14732880d1629e949089acccdb678d2616a7';
 const expectedCounts = { '2026-04': 10, '2026-05': 10, '2026-06': 6, '2026-07': 13, '2026-08': 11 };
 const sourceMonths = { 'V. Abr Vita': '2026-04', 'V. Maio Vita': '2026-05', 'V. Junho Vita': '2026-06', 'V. Julho Vita': '2026-07', 'V. Agosto Vita': '2026-08' };
 const sourceKey = item => item.channel === 'Vita' && item.source && item.sourceRow ? `${item.source.trim()}|${item.sourceRow}` : '';
