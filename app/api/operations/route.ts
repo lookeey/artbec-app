@@ -52,7 +52,7 @@ export async function POST(request:Request){
    if(closing.id!==vitaClosingId(closing.period,closing.location,closing.half))return Response.json({error:'Fechamento inválido.'},{status:400});
    if(closing.status==='closed'){
     const operations=await getOperations();const summary=summarizeVitaHalf((operations.sales as unknown as (VitaSale&{channel:string})[]).filter(sale=>sale.channel==='Vita'),closing.period,closing.location,closing.half);
-    if(summary.undated||summary.signature!==closing.signature||summary.total!==closing.total||summary.count!==closing.count||JSON.stringify(summary.products)!==JSON.stringify(closing.products))return Response.json({error:'As saídas mudaram ou têm datas pendentes. Atualize a página e confira antes de fechar.'},{status:409});
+    if(summary.undated||summary.signature!==closing.signature||summary.total!==closing.total||summary.count!==closing.count||JSON.stringify(summary.products)!==JSON.stringify(closing.products))return Response.json({error:'As saídas mudaram ou têm datas de entrega pendentes. Atualize a página e confira antes de fechar.'},{status:409});
    }
   }
   const db=database(auth.user!),existing=await db.prepare('SELECT entity,data,version,deleted FROM operation_changes WHERE id=?').bind(value.id).first<{entity:string;data:string;version:number;deleted:number}>(),original=originalOperations[entity].get(value.id);

@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {summarizeVitaHalf,vitaClosingId} from '../lib/vita-closing.ts';
 import assert from 'node:assert/strict';
 import {DatabaseSync} from 'node:sqlite';
 import {createHash,randomUUID} from 'node:crypto';
@@ -52,5 +53,19 @@ test('matriz de acessos: dados, alterações, anexos, sessões e administração
  const form=new FormData();form.set('staffId',office.id);form.set('file',new File(['pdf'],'a.pdf',{type:'application/pdf'}));assert.equal((await docs.POST(new Request(origin+'/api/documents',{method:'POST',headers:{cookie:'artbec_session=qa-tech',origin},body:form}))).status,403);
  assert.equal(await auvo.isAdmin(new Request('http://localhost/api/auvo/integration',{headers:{'oai-authenticated-user-email':'admin@example.com'}})),false);assert.equal(await auvo.isAdmin(request('/api/auvo/integration','admin')),true);for(const user of ['none','tech','office'])assert.equal(await auvo.isAdmin(request('/api/auvo/integration',user)),false);
  assert.equal((await session.GET(request('/api/auth/session','tech'))).status,200);sqlite.prepare('UPDATE app_users SET active=0 WHERE id=?').run('tech');assert.equal((await session.GET(request('/api/auth/session','tech'))).status,401);assert.equal((await auth.authorizeAdmin(request('/api/auth/users','none'))).error.status,403);assert.equal((await session.GET(new Request(origin+'/api/auth/session',{headers:{cookie:'artbec_session=%broken'}}))).status,401);
+ // The actual closing endpoint must use delivery dates just like the Vita UI.
+ const vita=sales[1];vita.deliveryDate='2026-11-16';
+ const summary=summarizeVitaHalf([vita],'2026-11',vita.client,'second');
+ const closing={id:vitaClosingId('2026-11',vita.client,'second'),version:0,period:'2026-11',location:vita.client,half:'second',status:'closed',closedAt:'2026-11-30T12:00:00Z',total:summary.total,count:summary.count,products:summary.products,signature:summary.signature};
+ assert.equal(summary.total,200);assert.equal(summary.count,1);
+ assert.equal((await o.POST(request('/api/operations','sales','POST',{entity:'vitaClosing',item:closing}))).status,403);
+ assert.equal((await o.POST(request('/api/operations','vita','POST',{entity:'vitaClosing',item:{...closing,signature:'old-date-signature'}}))).status,409);
+ assert.equal((await o.POST(request('/api/operations','vita','POST',{entity:'vitaClosing',item:closing}))).status,200);
+ vita.deliveryDate='2026-11-17';
+ assert.equal((await o.POST(request('/api/operations','vita','POST',{entity:'vitaClosing',item:{...closing,version:1}}))).status,409);
+ vita.deliveryDate='';
+ const missing=summarizeVitaHalf([vita],'2026-10',vita.client,'first');
+ assert.equal(missing.undated,1);
+ assert.equal((await o.POST(request('/api/operations','vita','POST',{entity:'vitaClosing',item:{...closing,...missing,id:vitaClosingId('2026-10',vita.client,'first'),version:0,period:'2026-10',half:'first'}}))).status,409);
  assert.equal(sqlite.prepare('SELECT COUNT(*) as n FROM management_changes').get()!.n,1);assert.equal(sqlite.prepare('SELECT COUNT(*) as n FROM finance_changes').get()!.n,1);
 });
