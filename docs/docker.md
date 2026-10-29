@@ -173,3 +173,7 @@ de setembro explicitamente solicitadas após a primeira conferência da gasolina
 Preserva lançamentos manuais, alterações posteriores e outubro; roda uma única
 vez no mesmo volume, com auditoria e lote atômico. Consulte os detalhes e o teste
 em [recuperação da gasolina](fuel-sheet-recovery.md).
+
+O óleo de 2026 também é complementado no início do container por
+`docker/recover-oil-2026.mjs`. Histórico e referências da fórmula de troca
+são gravados uma única vez; consulte [recuperação do óleo](oil-2026-recovery.md).

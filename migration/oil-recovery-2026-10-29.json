@@ -1,0 +1,1735 @@
+{
+  "format": "artbec-oil-2026-recovery-v1",
+  "source": {
+    "file": "Artbec - Vendas - Estoque e Motos.xlsx",
+    "sha256": "a1f464280f2156d03cbe2e24e85ef8795bf1ff844f5cdf2504ea95b4aeadbbd7",
+    "sheet": "Controle Óleo 26",
+    "through": "2026-10-29"
+  },
+  "targets": [
+    {
+      "record": {
+        "date": "2026-09-14",
+        "technician": "Kevin",
+        "plate": "GIM5J14",
+        "amount": null,
+        "odometer": 77111,
+        "lastChange": "",
+        "notes": "",
+        "source": "Controle Óleo 26",
+        "sourceRow": 181,
+        "version": 1,
+        "entryType": "reading",
+        "id": "oil-f08039f7-f74c-a905-fb8b-2bc199ad0c43"
+      }
+    },
+    {
+      "record": {
+        "date": "2026-09-08",
+        "technician": "Esdras",
+        "plate": "FCC7G74",
+        "amount": null,
+        "odometer": 56190,
+        "lastChange": "",
+        "notes": "",
+        "source": "Controle Óleo 26",
+        "sourceRow": 186,
+        "version": 1,
+        "entryType": "reading",
+        "id": "oil-controle-oleo-26-186"
+      },
+      "expectedDeleted": {
+        "id": "oil-controle-oleo-26-186",
+        "entity": "oil",
+        "data": "{\"id\":\"oil-controle-oleo-26-186\",\"date\":\"2026-09-08\",\"technician\":\"Esdras\",\"plate\":\"FCC7G74\",\"amount\":null,\"odometer\":56190,\"lastChange\":\"\",\"notes\":\"\",\"source\":\"Controle Óleo 26\",\"sourceRow\":186,\"version\":2}",
+        "version": 3,
+        "deleted": 1,
+        "updated_at": "2026-10-06T02:53:22.751Z"
+      },
+      "original": {
+        "id": "oil-controle-oleo-26-186",
+        "date": "2026-09-08",
+        "technician": "Esdras",
+        "plate": "FCC7G74",
+        "amount": null,
+        "odometer": 56190,
+        "lastChange": "",
+        "notes": "",
+        "source": "Controle Óleo 26",
+        "sourceRow": 186,
+        "version": 0
+      }
+    },
+    {
+      "record": {
+        "date": "2026-09-14",
+        "technician": "Vasco",
+        "plate": "FCC7G74",
+        "amount": null,
+        "odometer": 56675,
+        "lastChange": "",
+        "notes": "",
+        "source": "Controle Óleo 26",
+        "sourceRow": 187,
+        "version": 1,
+        "entryType": "reading",
+        "id": "oil-controle-oleo-26-187"
+      },
+      "expectedDeleted": {
+        "id": "oil-controle-oleo-26-187",
+        "entity": "oil",
+        "data": "{\"id\":\"oil-controle-oleo-26-187\",\"date\":\"2026-09-14\",\"technician\":\"Vasco\",\"plate\":\"FCC7G74\",\"amount\":null,\"odometer\":56675,\"lastChange\":\"\",\"notes\":\"\",\"source\":\"Controle Óleo 26\",\"sourceRow\":187,\"version\":2}",
+        "version": 3,
+        "deleted": 1,
+        "updated_at": "2026-10-06T02:53:06.467Z"
+      },
+      "original": {
+        "id": "oil-controle-oleo-26-187",
+        "date": "2026-09-14",
+        "technician": "Vasco",
+        "plate": "FCC7G74",
+        "amount": null,
+        "odometer": 56675,
+        "lastChange": "",
+        "notes": "",
+        "source": "Controle Óleo 26",
+        "sourceRow": 187,
+        "version": 0
+      }
+    },
+    {
+      "record": {
+        "date": "2026-09-14",
+        "technician": "Genilson",
+        "plate": "GDM8147",
+        "amount": null,
+        "odometer": 176397,
+        "lastChange": "",
+        "notes": "",
+        "source": "Controle Óleo 26",
+        "sourceRow": 193,
+        "version": 1,
+        "entryType": "reading",
+        "id": "oil-1e109627-4f68-5b05-215c-e0a37fc9a0d7"
+      }
+    },
+    {
+      "record": {
+        "date": "2026-09-28",
+        "technician": "Genilson",
+        "plate": "GDM8147",
+        "amount": null,
+        "odometer": 177080,
+        "lastChange": "",
+        "notes": "",
+        "source": "Controle Óleo 26",
+        "sourceRow": 195,
+        "version": 1,
+        "entryType": "reading",
+        "id": "oil-f3890797-b169-bbcb-2dea-004656d7e15e"
+      }
+    },
+    {
+      "record": {
+        "date": "2026-09-14",
+        "technician": "Esdras",
+        "plate": "FUA2E40",
+        "amount": null,
+        "odometer": 257338,
+        "lastChange": "",
+        "notes": "Pedi para ele trocar",
+        "source": "Controle Óleo 26",
+        "sourceRow": 198,
+        "version": 1,
+        "entryType": "reading",
+        "id": "oil-controle-oleo-26-198"
+      },
+      "expectedDeleted": {
+        "id": "oil-controle-oleo-26-198",
+        "entity": "oil",
+        "data": "{\"id\":\"oil-controle-oleo-26-198\",\"date\":\"2026-09-14\",\"technician\":\"Esdras\",\"plate\":\"FUAE40\",\"amount\":null,\"odometer\":257338,\"lastChange\":\"\",\"notes\":\"Pedi para ele trocar\",\"source\":\"Controle Óleo 26\",\"sourceRow\":198,\"version\":2}",
+        "version": 3,
+        "deleted": 1,
+        "updated_at": "2026-10-06T02:57:19.130Z"
+      },
+      "original": {
+        "id": "oil-controle-oleo-26-198",
+        "date": "2026-09-14",
+        "technician": "Esdras",
+        "plate": "FUAE40",
+        "amount": null,
+        "odometer": 257338,
+        "lastChange": "",
+        "notes": "Pedi para ele trocar",
+        "source": "Controle Óleo 26",
+        "sourceRow": 198,
+        "version": 0
+      }
+    },
+    {
+      "record": {
+        "date": "2026-09-28",
+        "technician": "Esdras",
+        "plate": "FUA2E40",
+        "amount": null,
+        "odometer": 258523,
+        "lastChange": "",
+        "notes": "",
+        "source": "Controle Óleo 26",
+        "sourceRow": 200,
+        "version": 1,
+        "entryType": "reading",
+        "id": "oil-75d52854-00b8-2583-8355-beb2e918f157"
+      }
+    },
+    {
+      "record": {
+        "date": "2026-09-14",
+        "technician": "Keslen",
+        "plate": "FLO3A78",
+        "amount": null,
+        "odometer": 121617,
+        "lastChange": "",
+        "notes": "",
+        "source": "Controle Óleo 26",
+        "sourceRow": 204,
+        "version": 1,
+        "entryType": "reading",
+        "id": "oil-controle-oleo-26-204"
+      },
+      "expectedDeleted": {
+        "id": "oil-controle-oleo-26-204",
+        "entity": "oil",
+        "data": "{\"id\":\"oil-controle-oleo-26-204\",\"date\":\"2026-09-14\",\"technician\":\"Keslen\",\"plate\":\"FLO3A78\",\"amount\":null,\"odometer\":121617,\"lastChange\":\"\",\"notes\":\"\",\"source\":\"Controle Óleo 26\",\"sourceRow\":204,\"version\":2}",
+        "version": 3,
+        "deleted": 1,
+        "updated_at": "2026-10-06T02:53:56.180Z"
+      },
+      "original": {
+        "id": "oil-controle-oleo-26-204",
+        "date": "2026-09-14",
+        "technician": "Keslen",
+        "plate": "FLO3A78",
+        "amount": null,
+        "odometer": 121617,
+        "lastChange": "",
+        "notes": "",
+        "source": "Controle Óleo 26",
+        "sourceRow": 204,
+        "version": 0
+      }
+    },
+    {
+      "record": {
+        "date": "2026-09-21",
+        "technician": "Vasco",
+        "plate": "FLO3A78",
+        "amount": null,
+        "odometer": 121859,
+        "lastChange": "",
+        "notes": "",
+        "source": "Controle Óleo 26",
+        "sourceRow": 205,
+        "version": 1,
+        "entryType": "reading",
+        "id": "oil-d8ea1236-7d46-7586-2f49-e379be9d59fd"
+      }
+    },
+    {
+      "record": {
+        "date": "2026-10-06",
+        "technician": "Kevin",
+        "plate": "GIM5J14",
+        "amount": null,
+        "odometer": 78833,
+        "lastChange": "",
+        "notes": "",
+        "source": "Controle Óleo 26",
+        "sourceRow": 209,
+        "version": 1,
+        "entryType": "reading",
+        "id": "oil-a72c20b5-7bec-0361-0552-864d50fe271c"
+      }
+    },
+    {
+      "record": {
+        "date": "2026-10-13",
+        "technician": "Vasco",
+        "plate": "FCC7G74",
+        "amount": null,
+        "odometer": 58912,
+        "lastChange": "2026-10-19",
+        "notes": "well · Pedi para ele trocar",
+        "source": "Controle Óleo 26",
+        "sourceRow": 216,
+        "version": 1,
+        "entryType": "oil",
+        "id": "oil-235f7fc4-5e75-e03b-6884-2661d7fb23a9"
+      }
+    },
+    {
+      "record": {
+        "date": "2026-10-27",
+        "technician": "Vasco",
+        "plate": "FCC7G74",
+        "amount": null,
+        "odometer": 59527,
+        "lastChange": "",
+        "notes": "",
+        "source": "Controle Óleo 26",
+        "sourceRow": 218,
+        "version": 1,
+        "entryType": "reading",
+        "id": "oil-21b1ed43-6262-c9b6-e788-95fdf222faf9"
+      }
+    },
+    {
+      "record": {
+        "date": "2026-10-06",
+        "technician": "Genilson",
+        "plate": "GDM8147",
+        "amount": null,
+        "odometer": 177498,
+        "lastChange": "",
+        "notes": "",
+        "source": "Controle Óleo 26",
+        "sourceRow": 221,
+        "version": 1,
+        "entryType": "reading",
+        "id": "oil-c9215235-747f-7119-e7aa-a19fe0a5495e"
+      }
+    },
+    {
+      "record": {
+        "date": "2026-10-13",
+        "technician": "Genilson",
+        "plate": "GDM8147",
+        "amount": 4400,
+        "odometer": 177737,
+        "lastChange": "2026-10-14",
+        "notes": "Pedi para ele trocar",
+        "source": "Controle Óleo 26",
+        "sourceRow": 222,
+        "version": 1,
+        "entryType": "oil",
+        "id": "oil-9b677530-7590-9920-9b21-b5d543cdc8ed"
+      }
+    },
+    {
+      "record": {
+        "date": "2026-10-19",
+        "technician": "Genilson",
+        "plate": "GDM8147",
+        "amount": null,
+        "odometer": 177967,
+        "lastChange": "",
+        "notes": "",
+        "source": "Controle Óleo 26",
+        "sourceRow": 223,
+        "version": 1,
+        "entryType": "reading",
+        "id": "oil-73236265-2a46-b6dc-6309-9fafe9d60720"
+      }
+    },
+    {
+      "record": {
+        "date": "2026-10-27",
+        "technician": "Genilson",
+        "plate": "GDM8147",
+        "amount": null,
+        "odometer": 178235,
+        "lastChange": "",
+        "notes": "",
+        "source": "Controle Óleo 26",
+        "sourceRow": 224,
+        "version": 1,
+        "entryType": "reading",
+        "id": "oil-2dffb86b-f489-4431-4972-63759ec36398"
+      }
+    },
+    {
+      "record": {
+        "date": "2026-10-06",
+        "technician": "Esdras",
+        "plate": "FUA2E40",
+        "amount": null,
+        "odometer": 259460,
+        "lastChange": "",
+        "notes": "",
+        "source": "Controle Óleo 26",
+        "sourceRow": 226,
+        "version": 1,
+        "entryType": "reading",
+        "id": "oil-f35e4f88-0357-e24f-5dd0-d1d2f00e9d1f"
+      }
+    },
+    {
+      "record": {
+        "date": "2026-10-13",
+        "technician": "Esdras",
+        "plate": "FUA2E40",
+        "amount": 4200,
+        "odometer": 259816,
+        "lastChange": "2026-10-14",
+        "notes": "Pedi para ele trocar",
+        "source": "Controle Óleo 26",
+        "sourceRow": 227,
+        "version": 1,
+        "entryType": "oil",
+        "id": "oil-4878bb2d-f510-2467-03d0-6b9b6dce7c95"
+      }
+    },
+    {
+      "record": {
+        "date": "2026-10-23",
+        "technician": "Esdras",
+        "plate": "FUA2E40",
+        "amount": 4200,
+        "odometer": 260903,
+        "lastChange": "2026-10-23",
+        "notes": "Pedi para ele trocar",
+        "source": "Controle Óleo 26",
+        "sourceRow": 228,
+        "version": 1,
+        "entryType": "oil",
+        "id": "oil-aa3d4ff9-1a61-a3ff-0dce-4ed8bbb37ec1"
+      }
+    },
+    {
+      "record": {
+        "date": "2026-10-27",
+        "technician": "Esdras",
+        "plate": "FUA2E40",
+        "amount": null,
+        "odometer": 261202,
+        "lastChange": "",
+        "notes": "",
+        "source": "Controle Óleo 26",
+        "sourceRow": 229,
+        "version": 1,
+        "entryType": "reading",
+        "id": "oil-9250c4ea-1472-d7fa-193c-d61987137c54"
+      }
+    },
+    {
+      "record": {
+        "date": "2026-10-06",
+        "technician": "Nicolas",
+        "plate": "FLO3A78",
+        "amount": null,
+        "odometer": 123072,
+        "lastChange": "",
+        "notes": "",
+        "source": "Controle Óleo 26",
+        "sourceRow": 232,
+        "version": 1,
+        "entryType": "reading",
+        "id": "oil-bcb80a94-c15a-d7ae-025c-642c81d6b63c"
+      }
+    },
+    {
+      "record": {
+        "date": "2026-10-13",
+        "technician": "Nicolas",
+        "plate": "FLO3A78",
+        "amount": null,
+        "odometer": 123414,
+        "lastChange": "",
+        "notes": "Pedi para ele trocar",
+        "source": "Controle Óleo 26",
+        "sourceRow": 233,
+        "version": 1,
+        "entryType": "reading",
+        "id": "oil-a05073a6-af0a-eaa4-5a0b-fdea40c0455b"
+      }
+    },
+    {
+      "record": {
+        "date": "2026-10-20",
+        "technician": "Nicolas",
+        "plate": "FLO3A78",
+        "amount": 6800,
+        "odometer": 124094,
+        "lastChange": "2026-10-21",
+        "notes": "",
+        "source": "Controle Óleo 26",
+        "sourceRow": 234,
+        "version": 1,
+        "entryType": "oil",
+        "id": "oil-8989a5ba-539c-f4ed-9697-145d2e0644bb"
+      }
+    }
+  ],
+  "monitors": [
+    {
+      "record": {
+        "id": "oilMonitor-e57b957e-56e0-5fda-95d7-f22ff29ace0f",
+        "version": 1,
+        "technician": "Esdras",
+        "plate": "FUA2E40",
+        "currentKm": 261202,
+        "readingDate": "2026-10-27",
+        "oilKm": 260903,
+        "oilDate": "2026-10-23",
+        "serviceKm": null,
+        "serviceDate": "",
+        "history": [
+          {
+            "date": "2026-02-18",
+            "km": 9996,
+            "event": "reading",
+            "sourceRow": 20
+          },
+          {
+            "date": "2026-03-03",
+            "km": 24257,
+            "event": "reading",
+            "sourceRow": 35
+          },
+          {
+            "date": "2026-03-09",
+            "km": 24322,
+            "event": "reading",
+            "sourceRow": 36
+          },
+          {
+            "date": "2026-03-16",
+            "km": 24383,
+            "event": "reading",
+            "sourceRow": 37
+          },
+          {
+            "date": "2026-03-30",
+            "km": 24516,
+            "event": "reading",
+            "sourceRow": 39
+          },
+          {
+            "date": "2026-04-06",
+            "km": 245824,
+            "event": "reading",
+            "sourceRow": 60
+          },
+          {
+            "date": "2026-04-13",
+            "km": 246350,
+            "event": "reading",
+            "sourceRow": 61
+          },
+          {
+            "date": "2026-04-20",
+            "km": 247086,
+            "event": "reading",
+            "sourceRow": 62
+          },
+          {
+            "date": "2026-04-28",
+            "km": 247827,
+            "event": "reading",
+            "sourceRow": 63
+          },
+          {
+            "date": "2026-05-04",
+            "km": 248233,
+            "event": "reading",
+            "sourceRow": 81
+          },
+          {
+            "date": "2026-05-11",
+            "km": 248989,
+            "event": "reading",
+            "sourceRow": 82
+          },
+          {
+            "date": "2026-05-18",
+            "km": 249653,
+            "event": "reading",
+            "sourceRow": 83
+          },
+          {
+            "date": "2026-06-08",
+            "km": 250137,
+            "event": "reading",
+            "sourceRow": 103
+          },
+          {
+            "date": "2026-06-15",
+            "km": 250811,
+            "event": "reading",
+            "sourceRow": 104
+          },
+          {
+            "date": "2026-06-22",
+            "km": 251554,
+            "event": "reading",
+            "sourceRow": 105
+          },
+          {
+            "date": "2026-07-06",
+            "km": 252795,
+            "event": "reading",
+            "sourceRow": 130
+          },
+          {
+            "date": "2026-07-13",
+            "km": 253355,
+            "event": "reading",
+            "sourceRow": 131
+          },
+          {
+            "date": "2026-07-20",
+            "km": 254057,
+            "event": "reading",
+            "sourceRow": 132
+          },
+          {
+            "date": "2026-07-27",
+            "km": 254661,
+            "event": "reading",
+            "sourceRow": 133
+          },
+          {
+            "date": "2026-08-03",
+            "km": 255302,
+            "event": "reading",
+            "sourceRow": 147
+          },
+          {
+            "date": "2026-08-10",
+            "km": 255936,
+            "event": "reading",
+            "sourceRow": 148
+          },
+          {
+            "date": "2026-08-18",
+            "km": 256580,
+            "event": "reading",
+            "sourceRow": 149
+          },
+          {
+            "date": "2026-09-14",
+            "km": 257338,
+            "event": "reading",
+            "sourceRow": 198
+          },
+          {
+            "date": "2026-09-22",
+            "km": 257932,
+            "event": "reading",
+            "sourceRow": 199
+          },
+          {
+            "date": "2026-09-28",
+            "km": 258523,
+            "event": "reading",
+            "sourceRow": 200
+          },
+          {
+            "date": "2026-10-01",
+            "km": 258947,
+            "event": "reading",
+            "sourceRow": 201
+          },
+          {
+            "date": "2026-10-06",
+            "km": 259460,
+            "event": "reading",
+            "sourceRow": 226
+          },
+          {
+            "date": "2026-10-13",
+            "km": 259816,
+            "event": "reading",
+            "sourceRow": 227
+          },
+          {
+            "date": "2026-10-23",
+            "km": 260903,
+            "event": "reading",
+            "sourceRow": 228
+          },
+          {
+            "date": "2026-10-27",
+            "km": 261202,
+            "event": "reading",
+            "sourceRow": 229
+          },
+          {
+            "date": "2026-10-23",
+            "km": 260903,
+            "event": "oil",
+            "sourceRow": 228,
+            "approximate": true,
+            "oilKm": 260903,
+            "oilDate": "2026-10-23",
+            "currentKm": 261202,
+            "readingDate": "2026-10-27"
+          }
+        ],
+        "importReference": {
+          "source": "Controle Óleo 26",
+          "oilRow": 228,
+          "oilReadingDate": "2026-10-23",
+          "currentReadingDate": "2026-10-27",
+          "approximate": true,
+          "oilKm": 260903,
+          "oilDate": "2026-10-23",
+          "currentKm": 261202,
+          "readingDate": "2026-10-27"
+        }
+      },
+      "expectedExisting": {
+        "id": "oilMonitor-f4d32475-06f0-4ae7-9ad3-673df97f2d27",
+        "entity": "oilMonitor",
+        "data": "{\"id\":\"oilMonitor-f4d32475-06f0-4ae7-9ad3-673df97f2d27\",\"version\":4,\"technician\":\"Esdras\",\"plate\":\"FUA2E40\",\"currentKm\":258947,\"readingDate\":\"2026-10-01\",\"oilKm\":258947,\"oilDate\":\"2026-10-01\",\"serviceKm\":null,\"serviceDate\":\"\",\"history\":[{\"date\":\"2026-10-01\",\"km\":258947,\"event\":\"setup\",\"at\":\"2026-10-06T02:46:07.145Z\"},{\"date\":\"2026-10-01\",\"km\":258947,\"event\":\"oil\",\"at\":\"2026-10-06T02:47:00.545Z\",\"expenseId\":\"oil-44703452-fcc9-da17-40e3-e8d9224e52ce\",\"amount\":4200},{\"date\":\"2026-10-01\",\"km\":258947,\"event\":\"reading\",\"at\":\"2026-10-06T02:47:21.246Z\",\"expenseId\":\"oil-44703452-fcc9-da17-40e3-e8d9224e52ce\"}],\"oilRequests\":[{\"id\":\"6e68bfd4-1876-4df2-8102-45b652414358\",\"date\":\"2026-10-01\",\"at\":\"2026-10-06T02:46:51.362Z\",\"requestedBy\":\"Letícia\",\"technician\":\"Esdras\",\"plate\":\"FUA2E40\",\"completedDate\":\"2026-10-01\"}],\"lastLedgerWrite\":\"d86c7bdb-5c61-46e5-a7ff-ba120d3374be\",\"lastOilExpenseId\":\"oil-44703452-fcc9-da17-40e3-e8d9224e52ce\"}",
+        "version": 4,
+        "deleted": 0,
+        "updated_at": "2026-10-06T02:47:21.246Z"
+      }
+    },
+    {
+      "record": {
+        "id": "oilMonitor-76fb3a57-bebe-5552-8f34-28814b7753f5",
+        "version": 1,
+        "technician": "Vasco",
+        "plate": "FCC7G74",
+        "currentKm": 59527,
+        "readingDate": "2026-10-27",
+        "oilKm": 58912,
+        "oilDate": "2026-10-19",
+        "serviceKm": null,
+        "serviceDate": "",
+        "history": [
+          {
+            "date": "2026-01-22",
+            "km": 38016,
+            "event": "reading",
+            "sourceRow": 14
+          },
+          {
+            "date": "2026-02-12",
+            "km": 39819,
+            "event": "reading",
+            "sourceRow": 19
+          },
+          {
+            "date": "2026-03-03",
+            "km": 41196,
+            "event": "reading",
+            "sourceRow": 30
+          },
+          {
+            "date": "2026-03-09",
+            "km": 41721,
+            "event": "reading",
+            "sourceRow": 31
+          },
+          {
+            "date": "2026-03-16",
+            "km": 42250,
+            "event": "reading",
+            "sourceRow": 32
+          },
+          {
+            "date": "2026-03-23",
+            "km": 42707,
+            "event": "reading",
+            "sourceRow": 33
+          },
+          {
+            "date": "2026-03-30",
+            "km": 43322,
+            "event": "reading",
+            "sourceRow": 34
+          },
+          {
+            "date": "2026-04-06",
+            "km": 43937,
+            "event": "reading",
+            "sourceRow": 56
+          },
+          {
+            "date": "2026-04-13",
+            "km": 44595,
+            "event": "reading",
+            "sourceRow": 57
+          },
+          {
+            "date": "2026-04-20",
+            "km": 44256,
+            "event": "reading",
+            "sourceRow": 58
+          },
+          {
+            "date": "2026-04-27",
+            "km": 45852,
+            "event": "reading",
+            "sourceRow": 59
+          },
+          {
+            "date": "2026-05-04",
+            "km": 46368,
+            "event": "reading",
+            "sourceRow": 77
+          },
+          {
+            "date": "2026-05-11",
+            "km": 46986,
+            "event": "reading",
+            "sourceRow": 78
+          },
+          {
+            "date": "2026-05-18",
+            "km": 47661,
+            "event": "reading",
+            "sourceRow": 79
+          },
+          {
+            "date": "2026-05-25",
+            "km": 48275,
+            "event": "reading",
+            "sourceRow": 80
+          },
+          {
+            "date": "2026-06-01",
+            "km": 49063,
+            "event": "reading",
+            "sourceRow": 97
+          },
+          {
+            "date": "2026-06-08",
+            "km": 49628,
+            "event": "reading",
+            "sourceRow": 98
+          },
+          {
+            "date": "2026-06-15",
+            "km": 50116,
+            "event": "reading",
+            "sourceRow": 99
+          },
+          {
+            "date": "2026-06-22",
+            "km": 50430,
+            "event": "reading",
+            "sourceRow": 100
+          },
+          {
+            "date": "2026-06-29",
+            "km": 50920,
+            "event": "reading",
+            "sourceRow": 101
+          },
+          {
+            "date": "2026-07-06",
+            "km": 51431,
+            "event": "reading",
+            "sourceRow": 123
+          },
+          {
+            "date": "2026-07-13",
+            "km": 51949,
+            "event": "reading",
+            "sourceRow": 124
+          },
+          {
+            "date": "2026-07-20",
+            "km": 52497,
+            "event": "reading",
+            "sourceRow": 125
+          },
+          {
+            "date": "2026-07-27",
+            "km": 53058,
+            "event": "reading",
+            "sourceRow": 126
+          },
+          {
+            "date": "2026-08-03",
+            "km": 53521,
+            "event": "reading",
+            "sourceRow": 153
+          },
+          {
+            "date": "2026-08-11",
+            "km": 54132,
+            "event": "reading",
+            "sourceRow": 154
+          },
+          {
+            "date": "2026-08-18",
+            "km": 54560,
+            "event": "reading",
+            "sourceRow": 155
+          },
+          {
+            "date": "2026-08-24",
+            "km": 55095,
+            "event": "reading",
+            "sourceRow": 156
+          },
+          {
+            "date": "2026-08-31",
+            "km": 55565,
+            "event": "reading",
+            "sourceRow": 157
+          },
+          {
+            "date": "2026-09-08",
+            "km": 56190,
+            "event": "reading",
+            "sourceRow": 186
+          },
+          {
+            "date": "2026-09-14",
+            "km": 56675,
+            "event": "reading",
+            "sourceRow": 187
+          },
+          {
+            "date": "2026-09-22",
+            "km": 57329,
+            "event": "reading",
+            "sourceRow": 188
+          },
+          {
+            "date": "2026-09-28",
+            "km": 57789,
+            "event": "reading",
+            "sourceRow": 189
+          },
+          {
+            "date": "2026-10-13",
+            "km": 58912,
+            "event": "reading",
+            "sourceRow": 216
+          },
+          {
+            "date": "2026-10-27",
+            "km": 59527,
+            "event": "reading",
+            "sourceRow": 218
+          },
+          {
+            "date": "2026-10-19",
+            "km": 58912,
+            "event": "oil",
+            "sourceRow": 216,
+            "approximate": true,
+            "oilKm": 58912,
+            "oilDate": "2026-10-19",
+            "currentKm": 59527,
+            "readingDate": "2026-10-27"
+          }
+        ],
+        "importReference": {
+          "source": "Controle Óleo 26",
+          "oilRow": 216,
+          "oilReadingDate": "2026-10-13",
+          "currentReadingDate": "2026-10-27",
+          "approximate": true,
+          "oilKm": 58912,
+          "oilDate": "2026-10-19",
+          "currentKm": 59527,
+          "readingDate": "2026-10-27"
+        }
+      },
+      "expectedExisting": null
+    },
+    {
+      "record": {
+        "id": "oilMonitor-fc233268-b84b-5683-94e7-42674e69f6e0",
+        "version": 1,
+        "technician": "Genilson",
+        "plate": "GDM8147",
+        "currentKm": 178235,
+        "readingDate": "2026-10-27",
+        "oilKm": 177737,
+        "oilDate": "2026-10-14",
+        "serviceKm": null,
+        "serviceDate": "",
+        "history": [
+          {
+            "date": "2026-02-23",
+            "km": 165393,
+            "event": "reading",
+            "sourceRow": 21
+          },
+          {
+            "date": "2026-08-03",
+            "km": 174182,
+            "event": "reading",
+            "sourceRow": 160
+          },
+          {
+            "date": "2026-08-10",
+            "km": 174577,
+            "event": "reading",
+            "sourceRow": 161
+          },
+          {
+            "date": "2026-08-18",
+            "km": 174874,
+            "event": "reading",
+            "sourceRow": 162
+          },
+          {
+            "date": "2026-08-24",
+            "km": 175284,
+            "event": "reading",
+            "sourceRow": 163
+          },
+          {
+            "date": "2026-08-31",
+            "km": 175664,
+            "event": "reading",
+            "sourceRow": 164
+          },
+          {
+            "date": "2026-09-08",
+            "km": 176110,
+            "event": "reading",
+            "sourceRow": 192
+          },
+          {
+            "date": "2026-09-14",
+            "km": 176397,
+            "event": "reading",
+            "sourceRow": 193
+          },
+          {
+            "date": "2026-09-21",
+            "km": 176844,
+            "event": "reading",
+            "sourceRow": 194
+          },
+          {
+            "date": "2026-09-28",
+            "km": 177080,
+            "event": "reading",
+            "sourceRow": 195
+          },
+          {
+            "date": "2026-10-06",
+            "km": 177498,
+            "event": "reading",
+            "sourceRow": 221
+          },
+          {
+            "date": "2026-10-13",
+            "km": 177737,
+            "event": "reading",
+            "sourceRow": 222
+          },
+          {
+            "date": "2026-10-19",
+            "km": 177967,
+            "event": "reading",
+            "sourceRow": 223
+          },
+          {
+            "date": "2026-10-27",
+            "km": 178235,
+            "event": "reading",
+            "sourceRow": 224
+          },
+          {
+            "date": "2026-10-14",
+            "km": 177737,
+            "event": "oil",
+            "sourceRow": 222,
+            "approximate": true,
+            "oilKm": 177737,
+            "oilDate": "2026-10-14",
+            "currentKm": 178235,
+            "readingDate": "2026-10-27"
+          }
+        ],
+        "importReference": {
+          "source": "Controle Óleo 26",
+          "oilRow": 222,
+          "oilReadingDate": "2026-10-13",
+          "currentReadingDate": "2026-10-27",
+          "approximate": true,
+          "oilKm": 177737,
+          "oilDate": "2026-10-14",
+          "currentKm": 178235,
+          "readingDate": "2026-10-27"
+        }
+      },
+      "expectedExisting": null
+    },
+    {
+      "record": {
+        "id": "oilMonitor-81f071ed-d247-55d8-ba91-d0083906973a",
+        "version": 1,
+        "technician": "Kevin",
+        "plate": "GIM5J14",
+        "currentKm": 78833,
+        "readingDate": "2026-10-06",
+        "oilKm": 78230,
+        "oilDate": "2026-10-01",
+        "serviceKm": null,
+        "serviceDate": "",
+        "history": [
+          {
+            "date": "2026-03-02",
+            "km": 62013,
+            "event": "reading",
+            "sourceRow": 40
+          },
+          {
+            "date": "2026-03-09",
+            "km": 62605,
+            "event": "reading",
+            "sourceRow": 41
+          },
+          {
+            "date": "2026-03-12",
+            "km": 62979,
+            "event": "reading",
+            "sourceRow": 42
+          },
+          {
+            "date": "2026-03-16",
+            "km": 63147,
+            "event": "reading",
+            "sourceRow": 43
+          },
+          {
+            "date": "2026-03-23",
+            "km": 63726,
+            "event": "reading",
+            "sourceRow": 44
+          },
+          {
+            "date": "2026-03-30",
+            "km": 64244,
+            "event": "reading",
+            "sourceRow": 45
+          },
+          {
+            "date": "2026-04-06",
+            "km": 64648,
+            "event": "reading",
+            "sourceRow": 64
+          },
+          {
+            "date": "2026-04-13",
+            "km": 65166,
+            "event": "reading",
+            "sourceRow": 65
+          },
+          {
+            "date": "2026-04-20",
+            "km": 65795,
+            "event": "reading",
+            "sourceRow": 66
+          },
+          {
+            "date": "2026-04-27",
+            "km": 66234,
+            "event": "reading",
+            "sourceRow": 67
+          },
+          {
+            "date": "2026-05-04",
+            "km": 66706,
+            "event": "reading",
+            "sourceRow": 84
+          },
+          {
+            "date": "2026-05-11",
+            "km": 67336,
+            "event": "reading",
+            "sourceRow": 85
+          },
+          {
+            "date": "2026-05-18",
+            "km": 67510,
+            "event": "reading",
+            "sourceRow": 86
+          },
+          {
+            "date": "2026-05-25",
+            "km": 67877,
+            "event": "reading",
+            "sourceRow": 87
+          },
+          {
+            "date": "2026-06-02",
+            "km": 68625,
+            "event": "reading",
+            "sourceRow": 106
+          },
+          {
+            "date": "2026-06-08",
+            "km": 69122,
+            "event": "reading",
+            "sourceRow": 107
+          },
+          {
+            "date": "2026-06-15",
+            "km": 69775,
+            "event": "reading",
+            "sourceRow": 108
+          },
+          {
+            "date": "2026-06-22",
+            "km": 70297,
+            "event": "reading",
+            "sourceRow": 109
+          },
+          {
+            "date": "2026-07-06",
+            "km": 71226,
+            "event": "reading",
+            "sourceRow": 135
+          },
+          {
+            "date": "2026-07-13",
+            "km": 71736,
+            "event": "reading",
+            "sourceRow": 136
+          },
+          {
+            "date": "2026-07-20",
+            "km": 72342,
+            "event": "reading",
+            "sourceRow": 137
+          },
+          {
+            "date": "2026-07-27",
+            "km": 72963,
+            "event": "reading",
+            "sourceRow": 138
+          },
+          {
+            "date": "2026-08-03",
+            "km": 73561,
+            "event": "reading",
+            "sourceRow": 174
+          },
+          {
+            "date": "2026-08-10",
+            "km": 74288,
+            "event": "reading",
+            "sourceRow": 175
+          },
+          {
+            "date": "2026-08-25",
+            "km": 75339,
+            "event": "reading",
+            "sourceRow": 176
+          },
+          {
+            "date": "2026-09-08",
+            "km": 76657,
+            "event": "reading",
+            "sourceRow": 180
+          },
+          {
+            "date": "2026-09-14",
+            "km": 77111,
+            "event": "reading",
+            "sourceRow": 181
+          },
+          {
+            "date": "2026-09-28",
+            "km": 78230,
+            "event": "reading",
+            "sourceRow": 182
+          },
+          {
+            "date": "2026-10-06",
+            "km": 78833,
+            "event": "reading",
+            "sourceRow": 209
+          },
+          {
+            "date": "2026-10-01",
+            "km": 78230,
+            "event": "oil",
+            "sourceRow": 182,
+            "approximate": true,
+            "oilKm": 78230,
+            "oilDate": "2026-10-01",
+            "currentKm": 78833,
+            "readingDate": "2026-10-06"
+          }
+        ],
+        "importReference": {
+          "source": "Controle Óleo 26",
+          "oilRow": 182,
+          "oilReadingDate": "2026-09-28",
+          "currentReadingDate": "2026-10-06",
+          "approximate": true,
+          "oilKm": 78230,
+          "oilDate": "2026-10-01",
+          "currentKm": 78833,
+          "readingDate": "2026-10-06"
+        }
+      },
+      "expectedExisting": null
+    },
+    {
+      "record": {
+        "id": "oilMonitor-a83432fd-cfec-5b17-85cb-aa861d86ea5a",
+        "version": 1,
+        "technician": "Nicolas",
+        "plate": "FLO3A78",
+        "currentKm": 124094,
+        "readingDate": "2026-10-21",
+        "oilKm": 124094,
+        "oilDate": "2026-10-21",
+        "serviceKm": null,
+        "serviceDate": "",
+        "history": [
+          {
+            "date": "2026-01-07",
+            "km": 10611,
+            "event": "reading",
+            "sourceRow": 12
+          },
+          {
+            "date": "2026-01-28",
+            "km": 10739,
+            "event": "reading",
+            "sourceRow": 15
+          },
+          {
+            "date": "2026-02-07",
+            "km": 108143,
+            "event": "reading",
+            "sourceRow": 18
+          },
+          {
+            "date": "2026-03-02",
+            "km": 109425,
+            "event": "reading",
+            "sourceRow": 24
+          },
+          {
+            "date": "2026-03-09",
+            "km": 109835,
+            "event": "reading",
+            "sourceRow": 25
+          },
+          {
+            "date": "2026-03-16",
+            "km": 110338,
+            "event": "reading",
+            "sourceRow": 26
+          },
+          {
+            "date": "2026-03-20",
+            "km": 110660,
+            "event": "reading",
+            "sourceRow": 27
+          },
+          {
+            "date": "2026-03-24",
+            "km": 110795,
+            "event": "reading",
+            "sourceRow": 28
+          },
+          {
+            "date": "2026-03-30",
+            "km": 111123,
+            "event": "reading",
+            "sourceRow": 29
+          },
+          {
+            "date": "2026-04-06",
+            "km": 11157,
+            "event": "reading",
+            "sourceRow": 52
+          },
+          {
+            "date": "2026-04-20",
+            "km": 11248,
+            "event": "reading",
+            "sourceRow": 54
+          },
+          {
+            "date": "2026-04-27",
+            "km": 11282,
+            "event": "reading",
+            "sourceRow": 55
+          },
+          {
+            "date": "2026-05-04",
+            "km": 113133,
+            "event": "reading",
+            "sourceRow": 73
+          },
+          {
+            "date": "2026-05-11",
+            "km": 113680,
+            "event": "reading",
+            "sourceRow": 74
+          },
+          {
+            "date": "2026-05-20",
+            "km": 114249,
+            "event": "reading",
+            "sourceRow": 75
+          },
+          {
+            "date": "2026-05-25",
+            "km": 114494,
+            "event": "reading",
+            "sourceRow": 76
+          },
+          {
+            "date": "2026-06-01",
+            "km": 114946,
+            "event": "reading",
+            "sourceRow": 93
+          },
+          {
+            "date": "2026-06-08",
+            "km": 115298,
+            "event": "reading",
+            "sourceRow": 94
+          },
+          {
+            "date": "2026-06-15",
+            "km": 115800,
+            "event": "reading",
+            "sourceRow": 95
+          },
+          {
+            "date": "2026-06-22",
+            "km": 116262,
+            "event": "reading",
+            "sourceRow": 96
+          },
+          {
+            "date": "2026-07-06",
+            "km": 116799,
+            "event": "reading",
+            "sourceRow": 117
+          },
+          {
+            "date": "2026-07-13",
+            "km": 117070,
+            "event": "reading",
+            "sourceRow": 118
+          },
+          {
+            "date": "2026-07-20",
+            "km": 117645,
+            "event": "reading",
+            "sourceRow": 119
+          },
+          {
+            "date": "2026-07-27",
+            "km": 118304,
+            "event": "reading",
+            "sourceRow": 120
+          },
+          {
+            "date": "2026-08-03",
+            "km": 118780,
+            "event": "reading",
+            "sourceRow": 168
+          },
+          {
+            "date": "2026-08-11",
+            "km": 119366,
+            "event": "reading",
+            "sourceRow": 169
+          },
+          {
+            "date": "2026-08-18",
+            "km": 120021,
+            "event": "reading",
+            "sourceRow": 170
+          },
+          {
+            "date": "2026-08-24",
+            "km": 120406,
+            "event": "reading",
+            "sourceRow": 171
+          },
+          {
+            "date": "2026-08-31",
+            "km": 120797,
+            "event": "reading",
+            "sourceRow": 172
+          },
+          {
+            "date": "2026-09-08",
+            "km": 121201,
+            "event": "reading",
+            "sourceRow": 203
+          },
+          {
+            "date": "2026-09-14",
+            "km": 121617,
+            "event": "reading",
+            "sourceRow": 204
+          },
+          {
+            "date": "2026-09-21",
+            "km": 121859,
+            "event": "reading",
+            "sourceRow": 205
+          },
+          {
+            "date": "2026-09-28",
+            "km": 122331,
+            "event": "reading",
+            "sourceRow": 206
+          },
+          {
+            "date": "2026-10-06",
+            "km": 123072,
+            "event": "reading",
+            "sourceRow": 232
+          },
+          {
+            "date": "2026-10-13",
+            "km": 123414,
+            "event": "reading",
+            "sourceRow": 233
+          },
+          {
+            "date": "2026-10-20",
+            "km": 124094,
+            "event": "reading",
+            "sourceRow": 234
+          },
+          {
+            "date": "2026-10-21",
+            "km": 124094,
+            "event": "oil",
+            "sourceRow": 234,
+            "approximate": true,
+            "oilKm": 124094,
+            "oilDate": "2026-10-21",
+            "currentKm": 124094,
+            "readingDate": "2026-10-21"
+          }
+        ],
+        "importReference": {
+          "source": "Controle Óleo 26",
+          "oilRow": 234,
+          "oilReadingDate": "2026-10-20",
+          "currentReadingDate": "2026-10-20",
+          "approximate": true,
+          "oilKm": 124094,
+          "oilDate": "2026-10-21",
+          "currentKm": 124094,
+          "readingDate": "2026-10-21"
+        }
+      },
+      "expectedExisting": null
+    }
+  ],
+  "excluded": [
+    {
+      "row": 150,
+      "reason": "no-reading-change-or-expense"
+    },
+    {
+      "row": 151,
+      "reason": "no-reading-change-or-expense"
+    },
+    {
+      "row": 177,
+      "reason": "no-reading-change-or-expense"
+    },
+    {
+      "row": 210,
+      "reason": "no-reading-change-or-expense"
+    },
+    {
+      "row": 215,
+      "reason": "no-reading-change-or-expense"
+    },
+    {
+      "row": 217,
+      "reason": "no-reading-change-or-expense"
+    },
+    {
+      "row": 235,
+      "reason": "no-reading-change-or-expense"
+    },
+    {
+      "row": 189,
+      "reason": "manual-deletion-preserved"
+    }
+  ],
+  "existingSnapshot": [
+    {
+      "id": "oilMonitor-0b1e57d3-bd0e-430f-a01f-f8450348d1f0",
+      "entity": "oilMonitor",
+      "data": "{\"id\":\"oilMonitor-0b1e57d3-bd0e-430f-a01f-f8450348d1f0\",\"version\":2,\"technician\":\"Esdras\",\"plate\":\"FUA 2E40\",\"currentKm\":25495,\"readingDate\":\"2026-10-05\",\"oilKm\":25495,\"oilDate\":\"2026-10-05\",\"serviceKm\":null,\"serviceDate\":\"\",\"history\":[{\"date\":\"2026-10-05\",\"km\":25495,\"event\":\"setup\",\"at\":\"2026-10-05T11:50:43.951Z\"},{\"date\":\"2026-10-05\",\"km\":25495,\"event\":\"oil\",\"at\":\"2026-10-05T12:10:56.728Z\",\"amount\":4200,\"expenseId\":\"oil-9b11f6e4-99bf-4166-a42b-37e8bd45e536\"}],\"lastOilExpenseId\":\"oil-9b11f6e4-99bf-4166-a42b-37e8bd45e536\"}",
+      "version": 3,
+      "deleted": 1,
+      "updated_at": "2026-10-06T00:04:58.958Z"
+    },
+    {
+      "id": "oil-9b11f6e4-99bf-4166-a42b-37e8bd45e536",
+      "entity": "oil",
+      "data": "{\"id\":\"oil-9b11f6e4-99bf-4166-a42b-37e8bd45e536\",\"version\":1,\"date\":\"2026-10-05\",\"technician\":\"Esdras\",\"plate\":\"FUA 2E40\",\"amount\":4200,\"odometer\":25495,\"lastChange\":\"2026-10-05\",\"notes\":\"Troca registrada pelo controle de quilometragem.\",\"source\":\"Controle de óleo no site\",\"sourceRow\":0}",
+      "version": 2,
+      "deleted": 1,
+      "updated_at": "2026-10-06T00:04:52.478Z"
+    },
+    {
+      "id": "oil-controle-oleo-26-181",
+      "entity": "oil",
+      "data": "{\"id\":\"oil-controle-oleo-26-181\",\"version\":3,\"date\":\"2026-09-28\",\"technician\":\"Kevin\",\"plate\":\"GIM5J14\",\"amount\":4500,\"odometer\":78230,\"lastChange\":\"2026-10-01\",\"notes\":\"\",\"source\":\"Controle Óleo 26\",\"sourceRow\":181}",
+      "version": 3,
+      "deleted": 0,
+      "updated_at": "2026-10-06T02:59:45.351Z"
+    },
+    {
+      "id": "oil-controle-oleo-26-187",
+      "entity": "oil",
+      "data": "{\"id\":\"oil-controle-oleo-26-187\",\"date\":\"2026-09-14\",\"technician\":\"Vasco\",\"plate\":\"FCC7G74\",\"amount\":null,\"odometer\":56675,\"lastChange\":\"\",\"notes\":\"\",\"source\":\"Controle Óleo 26\",\"sourceRow\":187,\"version\":2}",
+      "version": 3,
+      "deleted": 1,
+      "updated_at": "2026-10-06T02:53:06.467Z"
+    },
+    {
+      "id": "oil-controle-oleo-26-193",
+      "entity": "oil",
+      "data": "{\"id\":\"oil-controle-oleo-26-193\",\"version\":3,\"date\":\"2026-09-21\",\"technician\":\"Genilson\",\"plate\":\"GDM8147\",\"amount\":4200,\"odometer\":176844,\"lastChange\":\"2026-09-22\",\"notes\":\"\",\"source\":\"Controle Óleo 26\",\"sourceRow\":193}",
+      "version": 3,
+      "deleted": 0,
+      "updated_at": "2026-10-06T02:58:21.317Z"
+    },
+    {
+      "id": "oil-controle-oleo-26-198",
+      "entity": "oil",
+      "data": "{\"id\":\"oil-controle-oleo-26-198\",\"date\":\"2026-09-14\",\"technician\":\"Esdras\",\"plate\":\"FUAE40\",\"amount\":null,\"odometer\":257338,\"lastChange\":\"\",\"notes\":\"Pedi para ele trocar\",\"source\":\"Controle Óleo 26\",\"sourceRow\":198,\"version\":2}",
+      "version": 3,
+      "deleted": 1,
+      "updated_at": "2026-10-06T02:57:19.130Z"
+    },
+    {
+      "id": "oil-controle-oleo-26-204",
+      "entity": "oil",
+      "data": "{\"id\":\"oil-controle-oleo-26-204\",\"date\":\"2026-09-14\",\"technician\":\"Keslen\",\"plate\":\"FLO3A78\",\"amount\":null,\"odometer\":121617,\"lastChange\":\"\",\"notes\":\"\",\"source\":\"Controle Óleo 26\",\"sourceRow\":204,\"version\":2}",
+      "version": 3,
+      "deleted": 1,
+      "updated_at": "2026-10-06T02:53:56.180Z"
+    },
+    {
+      "id": "oil-controle-oleo-26-180",
+      "entity": "oil",
+      "data": "{\"id\":\"oil-controle-oleo-26-180\",\"date\":\"2026-09-08\",\"technician\":\"Simão\",\"plate\":\"GIM5J14\",\"amount\":4500,\"odometer\":76657,\"lastChange\":\"2026-08-11\",\"notes\":\"Pedi para ele trocar\",\"source\":\"Controle Óleo 26\",\"sourceRow\":180,\"version\":2}",
+      "version": 2,
+      "deleted": 0,
+      "updated_at": "2026-10-06T00:24:34.047Z"
+    },
+    {
+      "id": "oil-controle-oleo-26-186",
+      "entity": "oil",
+      "data": "{\"id\":\"oil-controle-oleo-26-186\",\"date\":\"2026-09-08\",\"technician\":\"Esdras\",\"plate\":\"FCC7G74\",\"amount\":null,\"odometer\":56190,\"lastChange\":\"\",\"notes\":\"\",\"source\":\"Controle Óleo 26\",\"sourceRow\":186,\"version\":2}",
+      "version": 3,
+      "deleted": 1,
+      "updated_at": "2026-10-06T02:53:22.751Z"
+    },
+    {
+      "id": "oil-controle-oleo-26-192",
+      "entity": "oil",
+      "data": "{\"id\":\"oil-controle-oleo-26-192\",\"date\":\"2026-09-08\",\"technician\":\"Genilson\",\"plate\":\"GDM8147\",\"amount\":4200,\"odometer\":176110,\"lastChange\":\"2026-09-08\",\"notes\":\"\",\"source\":\"Controle Óleo 26\",\"sourceRow\":192,\"version\":2}",
+      "version": 2,
+      "deleted": 0,
+      "updated_at": "2026-10-06T00:24:34.047Z"
+    },
+    {
+      "id": "oil-controle-oleo-26-203",
+      "entity": "oil",
+      "data": "{\"id\":\"oil-controle-oleo-26-203\",\"date\":\"2026-09-08\",\"technician\":\"Keslen\",\"plate\":\"FLO3A78\",\"amount\":4750,\"odometer\":121201,\"lastChange\":\"2026-09-11\",\"notes\":\"Pedi para ele trocar\",\"source\":\"Controle Óleo 26\",\"sourceRow\":203,\"version\":2}",
+      "version": 2,
+      "deleted": 0,
+      "updated_at": "2026-10-06T00:24:34.047Z"
+    },
+    {
+      "id": "oilMonitor-6f29968b-4222-47bd-a722-345db43a9933",
+      "entity": "oilMonitor",
+      "data": "{\"id\":\"oilMonitor-6f29968b-4222-47bd-a722-345db43a9933\",\"version\":1,\"technician\":\"Simão\",\"plate\":\"GIM5J14\",\"currentKm\":76657,\"readingDate\":\"2026-10-05\",\"oilKm\":74288,\"oilDate\":\"2026-08-12\",\"serviceKm\":null,\"serviceDate\":\"\",\"history\":[{\"date\":\"2026-10-05\",\"km\":76657,\"event\":\"setup\",\"at\":\"2026-10-06T00:14:08.397Z\"}]}",
+      "version": 2,
+      "deleted": 1,
+      "updated_at": "2026-10-06T00:15:23.769Z"
+    },
+    {
+      "id": "oilMonitor-c5520fb0-b8af-471c-979b-e9739969ff86",
+      "entity": "oilMonitor",
+      "data": "{\"id\":\"oilMonitor-c5520fb0-b8af-471c-979b-e9739969ff86\",\"version\":2,\"technician\":\"Esdras\",\"plate\":\"FUA2E40\",\"currentKm\":257338,\"readingDate\":\"2026-09-22\",\"oilKm\":256580,\"oilDate\":\"2026-08-21\",\"serviceKm\":null,\"serviceDate\":\"\",\"history\":[{\"date\":\"2026-09-22\",\"km\":257338,\"event\":\"setup\",\"at\":\"2026-10-06T02:16:34.686Z\"}],\"oilRequests\":[{\"id\":\"d2df16fd-fe84-45d7-afe4-74bb572f831f\",\"date\":\"2026-10-05\",\"at\":\"2026-10-06T02:24:50.012Z\",\"requestedBy\":\"Letícia\",\"technician\":\"Esdras\",\"plate\":\"FUA2E40\"}]}",
+      "version": 3,
+      "deleted": 1,
+      "updated_at": "2026-10-06T02:25:13.192Z"
+    },
+    {
+      "id": "oilMonitor-483ea3e9-9317-4c18-8b64-d32563dc3c0b",
+      "entity": "oilMonitor",
+      "data": "{\"id\":\"oilMonitor-483ea3e9-9317-4c18-8b64-d32563dc3c0b\",\"version\":3,\"technician\":\"Esdras\",\"plate\":\"FUA2E40\",\"currentKm\":258947,\"readingDate\":\"2026-10-05\",\"oilKm\":258947,\"oilDate\":\"2026-10-05\",\"serviceKm\":null,\"serviceDate\":\"\",\"history\":[{\"date\":\"2026-10-01\",\"km\":258947,\"event\":\"setup\",\"at\":\"2026-10-06T02:37:38.561Z\"},{\"date\":\"2026-10-05\",\"km\":258947,\"event\":\"oil\",\"at\":\"2026-10-06T02:38:02.201Z\",\"expenseId\":\"oil-dd2883a0-62f4-5785-3634-3cd4f5a2b5ee\",\"amount\":4200}],\"oilRequests\":[{\"id\":\"76124eed-29f6-4f78-887e-6510fce7d49f\",\"date\":\"2026-10-01\",\"at\":\"2026-10-06T02:37:46.610Z\",\"requestedBy\":\"Letícia\",\"technician\":\"Esdras\",\"plate\":\"FUA2E40\",\"completedDate\":\"2026-10-05\"}],\"lastLedgerWrite\":\"dab4b4be-1e6e-4ec3-b3d3-e8d83621a3be\",\"lastOilExpenseId\":\"oil-dd2883a0-62f4-5785-3634-3cd4f5a2b5ee\"}",
+      "version": 4,
+      "deleted": 1,
+      "updated_at": "2026-10-06T02:45:22.158Z"
+    },
+    {
+      "id": "oil-dd2883a0-62f4-5785-3634-3cd4f5a2b5ee",
+      "entity": "oil",
+      "data": "{\"id\":\"oil-dd2883a0-62f4-5785-3634-3cd4f5a2b5ee\",\"version\":2,\"entryType\":\"oil\",\"date\":\"2026-10-01\",\"technician\":\"Esdras\",\"plate\":\"FUA2E40\",\"amount\":4200,\"odometer\":258947,\"lastChange\":\"2026-10-05\",\"notes\":\"Troca registrada pelo controle de quilometragem.\",\"source\":\"Controle de óleo no site\",\"sourceRow\":0}",
+      "version": 3,
+      "deleted": 1,
+      "updated_at": "2026-10-06T02:48:16.265Z"
+    },
+    {
+      "id": "oilMonitor-f4d32475-06f0-4ae7-9ad3-673df97f2d27",
+      "entity": "oilMonitor",
+      "data": "{\"id\":\"oilMonitor-f4d32475-06f0-4ae7-9ad3-673df97f2d27\",\"version\":4,\"technician\":\"Esdras\",\"plate\":\"FUA2E40\",\"currentKm\":258947,\"readingDate\":\"2026-10-01\",\"oilKm\":258947,\"oilDate\":\"2026-10-01\",\"serviceKm\":null,\"serviceDate\":\"\",\"history\":[{\"date\":\"2026-10-01\",\"km\":258947,\"event\":\"setup\",\"at\":\"2026-10-06T02:46:07.145Z\"},{\"date\":\"2026-10-01\",\"km\":258947,\"event\":\"oil\",\"at\":\"2026-10-06T02:47:00.545Z\",\"expenseId\":\"oil-44703452-fcc9-da17-40e3-e8d9224e52ce\",\"amount\":4200},{\"date\":\"2026-10-01\",\"km\":258947,\"event\":\"reading\",\"at\":\"2026-10-06T02:47:21.246Z\",\"expenseId\":\"oil-44703452-fcc9-da17-40e3-e8d9224e52ce\"}],\"oilRequests\":[{\"id\":\"6e68bfd4-1876-4df2-8102-45b652414358\",\"date\":\"2026-10-01\",\"at\":\"2026-10-06T02:46:51.362Z\",\"requestedBy\":\"Letícia\",\"technician\":\"Esdras\",\"plate\":\"FUA2E40\",\"completedDate\":\"2026-10-01\"}],\"lastLedgerWrite\":\"d86c7bdb-5c61-46e5-a7ff-ba120d3374be\",\"lastOilExpenseId\":\"oil-44703452-fcc9-da17-40e3-e8d9224e52ce\"}",
+      "version": 4,
+      "deleted": 0,
+      "updated_at": "2026-10-06T02:47:21.246Z"
+    },
+    {
+      "id": "oil-44703452-fcc9-da17-40e3-e8d9224e52ce",
+      "entity": "oil",
+      "data": "{\"id\":\"oil-44703452-fcc9-da17-40e3-e8d9224e52ce\",\"version\":2,\"date\":\"2026-10-01\",\"technician\":\"Esdras\",\"plate\":\"FUA2E40\",\"amount\":4200,\"odometer\":258947,\"lastChange\":\"2026-10-01\",\"notes\":\"Troca registrada pelo controle de quilometragem.\",\"source\":\"Controle de óleo no site\",\"sourceRow\":0,\"entryType\":\"oil\"}",
+      "version": 2,
+      "deleted": 0,
+      "updated_at": "2026-10-06T02:47:21.246Z"
+    },
+    {
+      "id": "oil-1dafc09a-86ff-446e-985a-7e698df77e94",
+      "entity": "oil",
+      "data": "{\"id\":\"oil-1dafc09a-86ff-446e-985a-7e698df77e94\",\"version\":1,\"date\":\"2026-09-22\",\"technician\":\"Vasco\",\"plate\":\"FCC7G74\",\"amount\":null,\"odometer\":57329,\"lastChange\":\"2026-09-22\",\"notes\":\"Troca realizada no Wellington\",\"source\":\"Cadastro no site\",\"sourceRow\":0}",
+      "version": 1,
+      "deleted": 0,
+      "updated_at": "2026-10-06T02:51:09.811Z"
+    },
+    {
+      "id": "oil-1a2806fc-9fe1-4415-9ba4-7654d438322a",
+      "entity": "oil",
+      "data": "{\"id\":\"oil-1a2806fc-9fe1-4415-9ba4-7654d438322a\",\"version\":1,\"date\":\"2026-09-28\",\"technician\":\"Vasco\",\"plate\":\"FCC7G74\",\"amount\":null,\"odometer\":57789,\"lastChange\":\"2026-09-28\",\"notes\":\"\",\"source\":\"Cadastro no site\",\"sourceRow\":0}",
+      "version": 2,
+      "deleted": 1,
+      "updated_at": "2026-10-06T02:52:49.960Z"
+    },
+    {
+      "id": "oil-68ec8432-d261-41dd-937f-a4c02c21a07a",
+      "entity": "oil",
+      "data": "{\"id\":\"oil-68ec8432-d261-41dd-937f-a4c02c21a07a\",\"version\":1,\"date\":\"2026-09-28\",\"technician\":\"Nicolas\",\"plate\":\"FLO3A78\",\"amount\":5500,\"odometer\":122331,\"lastChange\":\"2026-09-29\",\"notes\":\"\",\"source\":\"Cadastro no site\",\"sourceRow\":0}",
+      "version": 1,
+      "deleted": 0,
+      "updated_at": "2026-10-06T02:54:54.109Z"
+    },
+    {
+      "id": "oil-25a234d3-ed0c-450e-99b1-814cc78deeaf",
+      "entity": "oil",
+      "data": "{\"id\":\"oil-25a234d3-ed0c-450e-99b1-814cc78deeaf\",\"version\":2,\"date\":\"2026-09-22\",\"technician\":\"Esdras\",\"plate\":\"FUA2E40\",\"amount\":3600,\"odometer\":257932,\"lastChange\":\"2026-09-22\",\"notes\":\"\",\"source\":\"Cadastro no site\",\"sourceRow\":0}",
+      "version": 2,
+      "deleted": 0,
+      "updated_at": "2026-10-06T02:57:05.463Z"
+    }
+  ]
+}
