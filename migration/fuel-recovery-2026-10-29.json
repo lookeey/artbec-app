@@ -1,0 +1,404 @@
+{
+  "format": "artbec-fuel-sheet-recovery-v1",
+  "source": {
+    "file": "Artbec - Vendas - Estoque e Motos.xlsx",
+    "sha256": "6150dafd6b6df2b66405c23d976b4a1e7e3eae41c866a4f0f7b94dec6a553593",
+    "sheet": "Controle Gasolina.2026",
+    "through": "2026-10-29"
+  },
+  "compared": {
+    "existingRows": 293,
+    "validRows": 331
+  },
+  "excluded": [
+    {
+      "sourceRow": 230,
+      "range": "E230:H230",
+      "technician": "Esdras",
+      "rawDate": "02/10/-2026",
+      "reason": "Linha sem data ou valor válidos; não corrigida automaticamente"
+    }
+  ],
+  "fuel": [
+    {
+      "id": "fuel-import-20261029-2dda4ca0b86d9114f4b4eb51",
+      "technician": "Vasco",
+      "date": "2026-09-23",
+      "plate": "FCC7J74",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 80,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-d53cc943b9ca61c22c9ac994",
+      "technician": "Vasco",
+      "date": "2026-09-27",
+      "plate": "FCC7J74",
+      "amount": 5002,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 81,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-0200caa8c4e19e6333ccc3cd",
+      "technician": "Vasco",
+      "date": "2026-09-29",
+      "plate": "FCC7J74",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 82,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-4bee0e0c132c8e480e279275",
+      "technician": "Vasco",
+      "date": "2026-10-03",
+      "plate": "FCC7J74",
+      "amount": 5001,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 83,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-2b5f47f3e6699b5cfbb2ff5b",
+      "technician": "Vasco",
+      "date": "2026-10-07",
+      "plate": "FCC7J74",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 84,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-e2634ea552bfd89b697ed8ef",
+      "technician": "Vasco",
+      "date": "2026-10-10",
+      "plate": "FCC7J74",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 85,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-074334b1213e03e5b6005ba0",
+      "technician": "Vasco",
+      "date": "2026-10-16",
+      "plate": "FCC7J74",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 86,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-2b71348958f7af63f90ccf31",
+      "technician": "Vasco",
+      "date": "2026-10-22",
+      "plate": "FCC7J74",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 87,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-1e322cc217e85a52a8be4cab",
+      "technician": "Vasco",
+      "date": "2026-10-26",
+      "plate": "FCC7J74",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 88,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-09bd6f111e72eb06cc84ba8c",
+      "technician": "Esdras",
+      "date": "2026-09-18",
+      "plate": "FUA2E40",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 225,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-69450c2346b87ec7b466a08d",
+      "technician": "Esdras",
+      "date": "2026-09-21",
+      "plate": "FUA2E40",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 226,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-06301f4059960e54f3cb2312",
+      "technician": "Esdras",
+      "date": "2026-09-24",
+      "plate": "FUA2E40",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 227,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-2c971e1c26edfad79b81daf7",
+      "technician": "Esdras",
+      "date": "2026-09-29",
+      "plate": "FUA2E40",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 228,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-167948b61c6b2b5a183f8b35",
+      "technician": "Esdras",
+      "date": "2026-09-30",
+      "plate": "FUA2E40",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 229,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-49e9917b54c23fb26d7f7441",
+      "technician": "Esdras",
+      "date": "2026-10-06",
+      "plate": "FUA2E40",
+      "amount": 3657,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 231,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-6e8dac35ebcdc4bf1f187fd8",
+      "technician": "Esdras",
+      "date": "2026-10-10",
+      "plate": "FUA2E40",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 232,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-d7bd0cfedb1548f28e82524f",
+      "technician": "Esdras",
+      "date": "2026-10-16",
+      "plate": "FUA2E40",
+      "amount": 5008,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 234,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-5bd77db9a5874b7775cbc6c6",
+      "technician": "Esdras",
+      "date": "2026-10-19",
+      "plate": "FUA2E40",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 235,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-736262950ed9b7bafe5c52ec",
+      "technician": "Esdras",
+      "date": "2026-10-20",
+      "plate": "FUA2E40",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 236,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-a831ee9497d93d2078f9e668",
+      "technician": "Esdras",
+      "date": "2026-10-22",
+      "plate": "FUA2E40",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 237,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-1961679c8f98cedc62997cdd",
+      "technician": "Esdras",
+      "date": "2026-10-26",
+      "plate": "FUA2E40",
+      "amount": 5004,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 238,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-d3de40704dc6da1e123d6bc1",
+      "technician": "Genilson",
+      "date": "2026-09-18",
+      "plate": "GDM8I47",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 277,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-04fd34aee47fbab6649c973d",
+      "technician": "Genilson",
+      "date": "2026-09-30",
+      "plate": "GDM8I47",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 278,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-fd71621bacfe317a3d8c0d8e",
+      "technician": "Genilson",
+      "date": "2026-10-05",
+      "plate": "GDM8I47",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 279,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-49e8750b6cd25ae7e83be025",
+      "technician": "Genilson",
+      "date": "2026-10-08",
+      "plate": "GDM8I47",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 280,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-1526e26401d70c50768748e8",
+      "technician": "Genilson",
+      "date": "2026-10-14",
+      "plate": "GDM8I47",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 281,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-71146c1d7d1615880e8d5035",
+      "technician": "Genilson",
+      "date": "2026-10-21",
+      "plate": "GDM8I47",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 282,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-c248bf4bc9b1a59dd9412e7a",
+      "technician": "Genilson",
+      "date": "2026-10-23",
+      "plate": "GDM8I47",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 283,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-dbd00a2f1e68760e393e0fe4",
+      "technician": "Nicolas",
+      "date": "2026-09-28",
+      "plate": "FLO3A78",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 305,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-ba816e1e27952567c8ea9b8c",
+      "technician": "Nicolas",
+      "date": "2026-10-01",
+      "plate": "FLO3A78",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 306,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-a208aaa7e4179ea1bad27bc7",
+      "technician": "Nicolas",
+      "date": "2026-10-06",
+      "plate": "FLO3A78",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 307,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-bee49ce900c17daa2ad96918",
+      "technician": "Nicolas",
+      "date": "2026-10-08",
+      "plate": "FLO3A78",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 308,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-8900379dfb05015cdcd9f32b",
+      "technician": "Nicolas",
+      "date": "2026-10-13",
+      "plate": "FLO3A78",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 309,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-d853f7f9f1db7183049a05dc",
+      "technician": "Nicolas",
+      "date": "2026-10-16",
+      "plate": "FLO3A78",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 310,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-234b19ed76228c5c51f103a6",
+      "technician": "Nicolas",
+      "date": "2026-10-19",
+      "plate": "FLO3A78",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 311,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-063c85b091c6b0b075a4db84",
+      "technician": "Nicolas",
+      "date": "2026-10-21",
+      "plate": "FLO3A78",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 312,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-6b7a8df5c28b63a2a0bf3431",
+      "technician": "Nicolas",
+      "date": "2026-10-26",
+      "plate": "FLO3A78",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 313,
+      "version": 1
+    },
+    {
+      "id": "fuel-import-20261029-793694b2f3877f10891cb740",
+      "technician": "Kevin",
+      "date": "2026-09-29",
+      "plate": "GIM5J14",
+      "amount": 5000,
+      "source": "Controle Gasolina.2026",
+      "sourceRow": 357,
+      "version": 1
+    }
+  ]
+}

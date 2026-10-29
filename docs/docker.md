@@ -66,6 +66,11 @@ persistido impede repetir a recuperação nos reinícios. Em seguida,
 vazios desses cadastros, mantendo Tratamento Semanal sem valor e preservando
 preços manuais, outubro e estoque. Essa etapa também tem seu próprio marcador.
 
+O entrypoint também aplica a [recuperação de gasolina de 29/10/2026](fuel-sheet-recovery.md),
+depois da importação inicial. Ela inclui somente abastecimentos ausentes da
+planilha atualizada, preservando manuais, exclusões, técnicos removidos e outras
+áreas. Um marcador impede repetir a recuperação nos reinícios.
+
 ## Configuração
 
 O compose aceita variáveis pelo shell ou por um `.env` local:

@@ -5,3 +5,4 @@ docker/*.sh text eol=lf
 # Keep the Vita recovery payload byte-identical on Windows and Docker Linux.
 migration/vita-history-2026-04-08.json text eol=lf
 migration/vita-history-prices-2026-04-08.json text eol=lf
+migration/fuel-recovery-2026-10-29.json text eol=lf

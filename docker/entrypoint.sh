@@ -5,6 +5,7 @@ node /app/node_modules/wrangler/bin/wrangler.js d1 migrations apply DB \
   --local --config /app/dist/server/wrangler.docker.json \
   --persist-to /app/.wrangler/state
 node /app/docker/import-initial-data.mjs
+node /app/docker/recover-fuel-sheet.mjs
 node /app/docker/recover-vita-history.mjs
 node /app/docker/price-vita-history.mjs
 node /app/docker/regularize-historical-sales.mjs
