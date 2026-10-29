@@ -76,3 +76,48 @@ Os testes usam o export real em D1/Miniflare: conferem os 35 novos registros,
 os totais por técnico/mês, valores em centavos, preservação exata das tabelas
 existentes e manuais, auditoria, rollback, exclusões por ID e por histórico,
 e reinício persistente com edições posteriores.
+
+## Complemento de setembro solicitado em 29/10/2026
+
+A conferência posterior identificou 14 exclusões antigas de abastecimentos de
+setembro dos responsáveis ainda cadastrados. Elas foram preservadas pela
+importação anterior. A solicitação de completar setembro autoriza recuperar
+esse histórico: 13 exclusões são restauradas e uma permanece excluída porque
+Esdras em 01/09 já tem lançamento manual ativo. Não se cria uma duplicata.
+
+O pacote `migration/fuel-september-restore-2026.json` relaciona os registros
+originais com as linhas da aba `Controle Gasolina.2026` conferidas na planilha
+atualizada. O extrator `scripts/extract-september-fuel-restore.py` somente lê o
+XLSX. Valores, placas e datas restaurados correspondem à planilha e à base
+original, mantendo os IDs existentes.
+
+`docker/restore-september-fuel.mjs` roda após a recuperação anterior e antes do
+servidor. Restaura somente exclusões que ainda tenham exatamente a versão,
+data de alteração e conteúdo do export inicial. Edições e exclusões posteriores
+são preservadas, assim como qualquer lançamento ativo da mesma pessoa e data.
+As alterações, auditoria, valores anteriores e marcador
+`restore-september-2026-fuel-2026-10-29-v1` são gravados em lote atômico.
+Reinícios não repetem a restauração nem desfazem alterações posteriores.
+
+Referência de setembro após as duas recuperações, para os responsáveis atuais:
+
+| Técnico | Registros | Total |
+| --- | ---: | ---: |
+| Esdras | 11 | R$ 553,08 |
+| Genilson | 6 | R$ 300,00 |
+| Kevin | 3 | R$ 125,00 |
+| Nicolas | 1 | R$ 50,00 |
+| Vasco | 5 | R$ 250,09 |
+| Total | 26 | R$ 1.278,17 |
+
+Outubro, os cadastros de técnicos e as outras áreas permanecem intactos. Os
+antigos funcionários não são recadastrados por esta restauração.
+
+```sh
+python scripts/extract-september-fuel-restore.py "caminho/Artbec - Vendas - Estoque e Motos.xlsx" migration/fuel-september-restore-2026.json
+node --test docker/restore-september-fuel.test.mjs
+```
+
+Os testes usam o banco exportado real e D1/Miniflare: conferem os 13 registros,
+os totais, o manual preservado, outubro, as outras tabelas, a auditoria, o
+rollback integral e o reinício persistente após novas edições e exclusões.

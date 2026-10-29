@@ -167,3 +167,9 @@ node --experimental-strip-types --test tests/audited-saves.test.mjs
 
 Referência do armazenamento local e da opção `--persist-to`:
 [documentação do D1](https://developers.cloudflare.com/d1/best-practices/local-development/).
+
+O complemento `docker/restore-september-fuel.mjs` recupera 13 exclusões antigas
+de setembro explicitamente solicitadas após a primeira conferência da gasolina.
+Preserva lançamentos manuais, alterações posteriores e outubro; roda uma única
+vez no mesmo volume, com auditoria e lote atômico. Consulte os detalhes e o teste
+em [recuperação da gasolina](fuel-sheet-recovery.md).

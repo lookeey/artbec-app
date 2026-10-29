@@ -1,0 +1,285 @@
+{
+  "format": "artbec-fuel-september-restore-v1",
+  "source": {
+    "file": "Artbec - Vendas - Estoque e Motos.xlsx",
+    "sha256": "6150dafd6b6df2b66405c23d976b4a1e7e3eae41c866a4f0f7b94dec6a553593",
+    "sheet": "Controle Gasolina.2026",
+    "period": "2026-09"
+  },
+  "expectedCurrent": {
+    "Esdras": {
+      "count": 11,
+      "amount": 55308
+    },
+    "Genilson": {
+      "count": 6,
+      "amount": 30000
+    },
+    "Kevin": {
+      "count": 3,
+      "amount": 12500
+    },
+    "Nicolas": {
+      "count": 1,
+      "amount": 5000
+    },
+    "Vasco": {
+      "count": 5,
+      "amount": 25009
+    }
+  },
+  "targets": [
+    {
+      "record": {
+        "id": "fuel-controle-gasolina-2026-209",
+        "date": "2026-09-01",
+        "technician": "Esdras",
+        "plate": "FCC7J74",
+        "amount": 5000,
+        "source": "Controle Gasolina.2026",
+        "sourceRow": 209,
+        "version": 0
+      },
+      "worksheetRow": 219,
+      "expectedDeleted": {
+        "version": 1,
+        "updatedAt": "2026-10-06T03:07:07.000Z",
+        "data": "{}"
+      }
+    },
+    {
+      "record": {
+        "id": "fuel-controle-gasolina-2026-210",
+        "date": "2026-09-02",
+        "technician": "Esdras",
+        "plate": "FCC7J74",
+        "amount": 5000,
+        "source": "Controle Gasolina.2026",
+        "sourceRow": 210,
+        "version": 0
+      },
+      "worksheetRow": 220,
+      "expectedDeleted": {
+        "version": 1,
+        "updatedAt": "2026-10-06T03:06:53.264Z",
+        "data": "{}"
+      }
+    },
+    {
+      "record": {
+        "id": "fuel-controle-gasolina-2026-211",
+        "date": "2026-09-03",
+        "technician": "Esdras",
+        "plate": "FCC7J74",
+        "amount": 5000,
+        "source": "Controle Gasolina.2026",
+        "sourceRow": 211,
+        "version": 0
+      },
+      "worksheetRow": 221,
+      "expectedDeleted": {
+        "version": 1,
+        "updatedAt": "2026-10-06T03:07:04.565Z",
+        "data": "{}"
+      }
+    },
+    {
+      "record": {
+        "id": "fuel-controle-gasolina-2026-212",
+        "date": "2026-09-05",
+        "technician": "Esdras",
+        "plate": "FCC7J74",
+        "amount": 5003,
+        "source": "Controle Gasolina.2026",
+        "sourceRow": 212,
+        "version": 0
+      },
+      "worksheetRow": 222,
+      "expectedDeleted": {
+        "version": 1,
+        "updatedAt": "2026-10-06T03:06:58.485Z",
+        "data": "{}"
+      }
+    },
+    {
+      "record": {
+        "id": "fuel-controle-gasolina-2026-213",
+        "date": "2026-09-11",
+        "technician": "Esdras",
+        "plate": "FCC7J74",
+        "amount": 4993,
+        "source": "Controle Gasolina.2026",
+        "sourceRow": 213,
+        "version": 0
+      },
+      "worksheetRow": 223,
+      "expectedDeleted": {
+        "version": 1,
+        "updatedAt": "2026-10-06T03:06:55.931Z",
+        "data": "{}"
+      }
+    },
+    {
+      "record": {
+        "id": "fuel-controle-gasolina-2026-214",
+        "date": "2026-09-14",
+        "technician": "Esdras",
+        "plate": "FUA2E40",
+        "amount": 5312,
+        "source": "Controle Gasolina.2026",
+        "sourceRow": 214,
+        "version": 0
+      },
+      "worksheetRow": 224,
+      "expectedDeleted": {
+        "version": 1,
+        "updatedAt": "2026-10-06T03:06:51.290Z",
+        "data": "{}"
+      }
+    },
+    {
+      "record": {
+        "id": "fuel-controle-gasolina-2026-249",
+        "date": "2026-09-01",
+        "technician": "Genilson",
+        "plate": "GDM8I47",
+        "amount": 5000,
+        "source": "Controle Gasolina.2026",
+        "sourceRow": 249,
+        "version": 0
+      },
+      "worksheetRow": 273,
+      "expectedDeleted": {
+        "version": 1,
+        "updatedAt": "2026-10-06T03:06:47.282Z",
+        "data": "{}"
+      }
+    },
+    {
+      "record": {
+        "id": "fuel-controle-gasolina-2026-250",
+        "date": "2026-09-04",
+        "technician": "Genilson",
+        "plate": "GDM8I47",
+        "amount": 5000,
+        "source": "Controle Gasolina.2026",
+        "sourceRow": 250,
+        "version": 0
+      },
+      "worksheetRow": 274,
+      "expectedDeleted": {
+        "version": 1,
+        "updatedAt": "2026-10-06T03:06:44.540Z",
+        "data": "{}"
+      }
+    },
+    {
+      "record": {
+        "id": "fuel-controle-gasolina-2026-251",
+        "date": "2026-09-11",
+        "technician": "Genilson",
+        "plate": "GDM8I47",
+        "amount": 5000,
+        "source": "Controle Gasolina.2026",
+        "sourceRow": 251,
+        "version": 0
+      },
+      "worksheetRow": 275,
+      "expectedDeleted": {
+        "version": 1,
+        "updatedAt": "2026-10-06T03:06:28.076Z",
+        "data": "{}"
+      }
+    },
+    {
+      "record": {
+        "id": "fuel-controle-gasolina-2026-252",
+        "date": "2026-09-15",
+        "technician": "Genilson",
+        "plate": "GDM8I47",
+        "amount": 5000,
+        "source": "Controle Gasolina.2026",
+        "sourceRow": 252,
+        "version": 0
+      },
+      "worksheetRow": 276,
+      "expectedDeleted": {
+        "version": 1,
+        "updatedAt": "2026-10-06T03:06:22.276Z",
+        "data": "{}"
+      }
+    },
+    {
+      "record": {
+        "id": "fuel-controle-gasolina-2026-312",
+        "date": "2026-09-16",
+        "technician": "Kevin",
+        "plate": "GIM5J14",
+        "amount": 2500,
+        "source": "Controle Gasolina.2026",
+        "sourceRow": 312,
+        "version": 0
+      },
+      "worksheetRow": 355,
+      "expectedDeleted": {
+        "version": 1,
+        "updatedAt": "2026-10-06T03:06:16.864Z",
+        "data": "{}"
+      }
+    },
+    {
+      "record": {
+        "id": "fuel-controle-gasolina-2026-313",
+        "date": "2026-09-17",
+        "technician": "Kevin",
+        "plate": "GIM5J14",
+        "amount": 5000,
+        "source": "Controle Gasolina.2026",
+        "sourceRow": 313,
+        "version": 0
+      },
+      "worksheetRow": 356,
+      "expectedDeleted": {
+        "version": 1,
+        "updatedAt": "2026-10-06T03:06:14.407Z",
+        "data": "{}"
+      }
+    },
+    {
+      "record": {
+        "id": "fuel-controle-gasolina-2026-78",
+        "date": "2026-09-11",
+        "technician": "Vasco",
+        "plate": "FUA2E40",
+        "amount": 5005,
+        "source": "Controle Gasolina.2026",
+        "sourceRow": 78,
+        "version": 0
+      },
+      "worksheetRow": 78,
+      "expectedDeleted": {
+        "version": 1,
+        "updatedAt": "2026-10-06T03:06:10.981Z",
+        "data": "{}"
+      }
+    },
+    {
+      "record": {
+        "id": "fuel-controle-gasolina-2026-79",
+        "date": "2026-09-15",
+        "technician": "Vasco",
+        "plate": "FCC7J74",
+        "amount": 5002,
+        "source": "Controle Gasolina.2026",
+        "sourceRow": 79,
+        "version": 0
+      },
+      "worksheetRow": 79,
+      "expectedDeleted": {
+        "version": 1,
+        "updatedAt": "2026-10-06T03:06:08.374Z",
+        "data": "{}"
+      }
+    }
+  ]
+}
