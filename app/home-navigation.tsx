@@ -6,7 +6,7 @@ type Link={v:string;t:string;Icon:LucideIcon};
 const groups=[
  {title:'Financeiro',description:'Recebimentos e contas',color:'blue',Icon:Wallet,views:['monthly','annual-adjustments','services','notes','cash-flow','history']},
  {title:'Comercial',description:'Propostas e vendas',color:'purple',Icon:ShoppingBag,views:['quotes','product-sales','product-agenda','vita-sales','academy-sales','product-growth']},
- {title:'Operação',description:'Produtos, tarefas e veículos',color:'green',Icon:Wrench,views:['clients','complaints','inventory','resolution-tasks','reminders','preventive-maintenance','processes','expense-overview','fuel','oil','fleet']},
+ {title:'Operação',description:'Produtos, tarefas e veículos',color:'green',Icon:Wrench,views:['clients','complaints','inventory','resolution-tasks','reminders','preventive-maintenance','expense-overview','fuel','oil','fleet']},
  {title:'Equipe e gestão',description:'Pessoas e administração',color:'orange',Icon:Users,views:['technicians','administrative','payroll','fines','performance','profitability','access','data-security','monthly-review','backup']},
  {title:'Resultados',description:'Indicadores e evolução',color:'cyan',Icon:ChartNoAxesColumnIncreasing,views:['personal-tasks','overview','executive-summary','auvo-center','growth']},
 ];
