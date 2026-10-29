@@ -1,0 +1,35 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFile,mkdtemp,rm} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+import {createHash} from 'node:crypto';
+import {Miniflare} from 'miniflare';
+import {recoverOil2026} from './recover-oil-2026.mjs';
+import {annotateWellington,validateWellington,wellingtonRepairId,wellingtonPayloadHash} from './annotate-oil-wellington.mjs';
+const payload=JSON.parse(await readFile('migration/oil-wellington-2026.json','utf8')),recovery=JSON.parse(await readFile('migration/oil-recovery-2026-10-29.json','utf8')),base=JSON.parse(await readFile('migration/initial/base/operations.json','utf8'));
+const options={modules:true,script:'',d1Databases:['DB']};
+const snapshot=async(db,table='operation_changes')=>(await db.prepare(`SELECT * FROM "${table}" ORDER BY 1`).all()).results;
+async function setup(db){const dump=JSON.parse(await readFile('migration/initial/database/database.json','utf8')),sql=[];for(const [name,table] of Object.entries(dump.tables)){sql.push(db.prepare(table.schema));for(const row of table.rows){const keys=Object.keys(row);sql.push(db.prepare(`INSERT INTO "${name}" (${keys.map(key=>'"'+key+'"').join(',')}) VALUES (${keys.map(()=>'?').join(',')})`).bind(...keys.map(key=>Array.isArray(row[key])?new Uint8Array(row[key]):row[key])));}}for(const object of dump.objects)if(object.sql)sql.push(db.prepare(object.sql));await db.batch(sql);await recoverOil2026({db,payload:recovery,baseOil:base.oil});return dump;}
+function ledger(rows){const map=new Map(base.oil.map(item=>[item.id,item]));for(const row of rows.filter(row=>row.entity==='oil')){if(row.deleted)map.delete(row.id);else map.set(row.id,{...map.get(row.id),...JSON.parse(row.data),version:row.version});}return [...map.values()].sort((a,b)=>a.id.localeCompare(b.id));}
+
+test('real data: labels 12 explicit Well changes, keeps prices, dates, KM, all other data and later edits on restart',async()=>{
+ const folder=await mkdtemp(join(tmpdir(),'artbec-wellington-'));let mf=new Miniflare({...options,d1Persist:folder});
+ try{let db=await mf.getD1Database('DB');const dump=await setup(db),before=await snapshot(db),oldLedger=ledger(before),others={};for(const name of Object.keys(dump.tables).filter(name=>!['operation_changes','audit_context','audit_events','audit_originals'].includes(name)))others[name]=await snapshot(db,name);
+  assert.deepEqual(await annotateWellington({db,payload,baseOil:base.oil}),{skipped:false,annotated:12,preserved:0});const after=await snapshot(db),next=ledger(after);assert.equal(next.length,oldLedger.length);
+  const ids=new Set(payload.targets.map(t=>t.before.id));
+  for(const item of next){const previous=oldLedger.find(row=>row.id===item.id);if(ids.has(item.id)){assert.match(item.notes,/^Trocado no Wellington/);assert.equal(item.entryType,'oil');assert.equal(item.version,previous.version+1);assert.deepEqual({...item,notes:previous.notes,entryType:previous.entryType,version:previous.version},{...previous,entryType:previous.entryType});}else assert.deepEqual(item,previous);}
+  for(const row of before.filter(row=>row.entity!=='oil'))assert.deepEqual(after.find(item=>item.id===row.id),row);for(const [name,rows] of Object.entries(others))assert.deepEqual(await snapshot(db,name),rows,name);
+  assert.equal(next.find(item=>item.id==='oil-controle-oleo-26-102').notes,'Moto estava no Wellington');assert.equal(next.find(item=>item.id==='oil-controle-oleo-26-21').amount,null);assert.match(next.find(item=>item.id==='oil-controle-oleo-26-109').notes,/Pedi para ele trocar/);
+  const audit=(await db.prepare('SELECT * FROM audit_events WHERE actor_id=?').bind('system:'+wellingtonRepairId).all()).results;assert.equal(audit.length,12);assert.equal(await db.prepare('SELECT COUNT(*) AS n FROM audit_context').first('n'),0);
+  await db.prepare("UPDATE operation_changes SET data=json_set(data,'$.notes','Nota posterior'),version=version+1 WHERE id=?").bind(payload.targets[0].before.id).run();await db.prepare('UPDATE operation_changes SET deleted=1,version=version+1 WHERE id=?').bind(payload.targets[1].before.id).run();const edited=await snapshot(db),editedAudit=await snapshot(db,'audit_events');await mf.dispose();mf=new Miniflare({...options,d1Persist:folder});db=await mf.getD1Database('DB');assert.deepEqual(await annotateWellington({db,payload,baseOil:base.oil}),{skipped:true});assert.deepEqual(await snapshot(db),edited);assert.deepEqual(await snapshot(db,'audit_events'),editedAudit);
+ }finally{await mf.dispose();await rm(folder,{recursive:true,force:true});}
+});
+
+test('newer notes and deleted entries are preserved; failures roll back the whole label batch',async()=>{
+ const mf=new Miniflare(options);try{const db=await mf.getD1Database('DB');await setup(db);const manual={...payload.targets.find(t=>t.worksheetRow===55).before,notes:'Informação corrigida pela equipe',version:1};await db.prepare("INSERT INTO operation_changes VALUES(?,'oil',?,1,0,'new')").bind(manual.id,JSON.stringify(manual)).run();const imported=payload.targets.find(t=>t.worksheetRow===216).before;await db.prepare('UPDATE operation_changes SET deleted=1,version=version+1 WHERE id=?').bind(imported.id).run();const before=await snapshot(db),audit=await snapshot(db,'audit_events');await db.prepare("CREATE TRIGGER fail_wellington BEFORE INSERT ON operation_changes WHEN NEW.id='oil-controle-oleo-26-87' BEGIN SELECT RAISE(ABORT,'forced wellington rollback'); END").run();await assert.rejects(annotateWellington({db,payload,baseOil:base.oil}),/forced wellington rollback/);assert.deepEqual(await snapshot(db),before);assert.deepEqual(await snapshot(db,'audit_events'),audit);assert.equal(await db.prepare('SELECT COUNT(*) AS n FROM _artbec_data_repairs WHERE id=?').bind(wellingtonRepairId).first('n'),0);assert.equal(await db.prepare('SELECT COUNT(*) AS n FROM audit_context').first('n'),0);await db.prepare('DROP TRIGGER fail_wellington').run();assert.deepEqual(await annotateWellington({db,payload,baseOil:base.oil}),{skipped:false,annotated:10,preserved:2});const after=await snapshot(db);for(const id of [manual.id,imported.id])assert.deepEqual(after.find(row=>row.id===id),before.find(row=>row.id===id));}finally{await mf.dispose();}
+});
+
+test('checksum, scope and confirmed source evidence',async()=>{
+ validateWellington(payload);assert.equal(createHash('sha256').update(await readFile('migration/oil-wellington-2026.json')).digest('hex'),wellingtonPayloadHash);assert.deepEqual(payload.targets.map(t=>t.worksheetRow),[21,55,87,89,94,99,109,117,149,162,188,216]);const bad=structuredClone(payload);bad.targets[0].updated.amount=0;assert.throws(()=>validateWellington(bad));const vague=structuredClone(payload);vague.targets[0].evidence=[{cell:'K102',value:'Moto estava no Wellington'}];assert.throws(()=>validateWellington(vague));const entry=await readFile('docker/entrypoint.sh','utf8');assert.ok(entry.indexOf('recover-oil-2026.mjs')<entry.indexOf('annotate-oil-wellington.mjs'));assert.ok(entry.indexOf('annotate-oil-wellington.mjs')<entry.indexOf('exec node'));
+});

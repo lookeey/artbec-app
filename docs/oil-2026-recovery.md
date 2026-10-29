@@ -71,3 +71,30 @@ R$ 238,00 em preços informados, incluindo a troca manual de Esdras de R$ 42,00.
 
 Os novos lançamentos usam o mesmo ID diário (placa/data) do controle de óleo.
 Atualizar a leitura importada no mesmo dia reaproveita o registro, sem duplicar.
+
+## Trocas no Wellington
+
+A conferência das células H:K da aba `Controle Óleo 26` encontrou 12 indicações
+explícitas de `Well`, `Welly`, `Well trocou`, `Well.trocou` ou equivalentes de
+caixa. Elas passam a constar como **Trocado no Wellington**. A observação também
+aparece nos detalhes dos cartões de gastos, além da lista completa e da edição.
+
+O complemento `docker/annotate-oil-wellington.mjs` roda após a importação do óleo,
+com pacote `migration/oil-wellington-2026.json` extraído sem editar o XLSX.
+Corrige somente observação, tipo de lançamento para troca e versão. Datas,
+quilometragens, valores, cartões e a fórmula permanecem iguais. Preços ausentes
+continuam ausentes. Observações históricas separadas são preservadas; dizer
+apenas que a moto estava no Wellington não comprova troca e não recebe o rótulo.
+
+Somente registros exatamente iguais aos conferidos são anotados. Novas edições
+ou exclusões prevalecem. O lote de observações, auditoria, valores anteriores e
+marcador `oil-wellington-labels-2026-10-29-v1` é atômico e executado uma vez.
+Reinícios preservam notas, exclusões e alterações posteriores.
+
+```sh
+python scripts/extract-oil-wellington.py "caminho/Artbec - Vendas - Estoque e Motos.xlsx" migration/oil-wellington-2026.json
+node --test docker/annotate-oil-wellington.test.mjs
+```
+
+O cartão da última troca mostra o local somente quando placa, KM e data da troca
+coincidem com o lançamento confirmado. Uma troca posterior não herda esse local.

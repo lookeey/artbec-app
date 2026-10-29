@@ -1,0 +1,462 @@
+{
+  "format": "artbec-oil-wellington-v1",
+  "source": {
+    "file": "Artbec - Vendas - Estoque e Motos.xlsx",
+    "sha256": "e2b53165246fccc7b52a643e5d0616be805cefa38834e6c956713458a4031455",
+    "sheet": "Controle Óleo 26"
+  },
+  "targets": [
+    {
+      "before": {
+        "id": "oil-controle-oleo-26-21",
+        "date": "2026-02-23",
+        "technician": "Kevin",
+        "plate": "GDM8147",
+        "amount": null,
+        "odometer": 165393,
+        "lastChange": "2026-02-23",
+        "notes": "",
+        "source": "Controle Óleo 26",
+        "sourceRow": 21,
+        "version": 0
+      },
+      "expected": null,
+      "updated": {
+        "id": "oil-controle-oleo-26-21",
+        "date": "2026-02-23",
+        "technician": "Kevin",
+        "plate": "GDM8147",
+        "amount": null,
+        "odometer": 165393,
+        "lastChange": "2026-02-23",
+        "notes": "Trocado no Wellington",
+        "source": "Controle Óleo 26",
+        "sourceRow": 21,
+        "version": 1,
+        "entryType": "oil"
+      },
+      "worksheetRow": 21,
+      "evidence": [
+        {
+          "cell": "H21",
+          "value": "Welly "
+        }
+      ]
+    },
+    {
+      "before": {
+        "id": "oil-controle-oleo-26-55",
+        "date": "2026-04-27",
+        "technician": "Murilo",
+        "plate": "FLO3A78",
+        "amount": null,
+        "odometer": 11282,
+        "lastChange": "2026-04-25",
+        "notes": "Disse que o Well trocou",
+        "source": "Controle Óleo 26",
+        "sourceRow": 55,
+        "version": 0
+      },
+      "expected": null,
+      "updated": {
+        "id": "oil-controle-oleo-26-55",
+        "date": "2026-04-27",
+        "technician": "Murilo",
+        "plate": "FLO3A78",
+        "amount": null,
+        "odometer": 11282,
+        "lastChange": "2026-04-25",
+        "notes": "Trocado no Wellington",
+        "source": "Controle Óleo 26",
+        "sourceRow": 55,
+        "version": 1,
+        "entryType": "oil"
+      },
+      "worksheetRow": 55,
+      "evidence": [
+        {
+          "cell": "K55",
+          "value": "Disse que o Well trocou"
+        }
+      ]
+    },
+    {
+      "before": {
+        "id": "oil-controle-oleo-26-87",
+        "date": "2026-05-25",
+        "technician": "Kevin",
+        "plate": "GIM5J14",
+        "amount": null,
+        "odometer": 67877,
+        "lastChange": "",
+        "notes": "",
+        "source": "Controle Óleo 26",
+        "sourceRow": 87,
+        "version": 0
+      },
+      "expected": null,
+      "updated": {
+        "id": "oil-controle-oleo-26-87",
+        "date": "2026-05-25",
+        "technician": "Kevin",
+        "plate": "GIM5J14",
+        "amount": null,
+        "odometer": 67877,
+        "lastChange": "",
+        "notes": "Trocado no Wellington",
+        "source": "Controle Óleo 26",
+        "sourceRow": 87,
+        "version": 1,
+        "entryType": "oil"
+      },
+      "worksheetRow": 87,
+      "evidence": [
+        {
+          "cell": "H87",
+          "value": "WELL TROCOU"
+        }
+      ]
+    },
+    {
+      "before": {
+        "id": "oil-controle-oleo-26-89",
+        "date": "2026-05-11",
+        "technician": "Rogério",
+        "plate": "GDM8I47",
+        "amount": null,
+        "odometer": 169015,
+        "lastChange": "2026-05-12",
+        "notes": "Pedi para ele trocar",
+        "source": "Controle Óleo 26",
+        "sourceRow": 89,
+        "version": 0
+      },
+      "expected": null,
+      "updated": {
+        "id": "oil-controle-oleo-26-89",
+        "date": "2026-05-11",
+        "technician": "Rogério",
+        "plate": "GDM8I47",
+        "amount": null,
+        "odometer": 169015,
+        "lastChange": "2026-05-12",
+        "notes": "Trocado no Wellington · Pedi para ele trocar",
+        "source": "Controle Óleo 26",
+        "sourceRow": 89,
+        "version": 1,
+        "entryType": "oil"
+      },
+      "worksheetRow": 89,
+      "evidence": [
+        {
+          "cell": "H89",
+          "value": "Well.trocou"
+        }
+      ]
+    },
+    {
+      "before": {
+        "id": "oil-controle-oleo-26-94",
+        "date": "2026-06-08",
+        "technician": "Johnn",
+        "plate": "FLO3A78",
+        "amount": null,
+        "odometer": 115298,
+        "lastChange": "",
+        "notes": "Well trocou · Pedi para ele trocar",
+        "source": "Controle Óleo 26",
+        "sourceRow": 94,
+        "version": 0
+      },
+      "expected": null,
+      "updated": {
+        "id": "oil-controle-oleo-26-94",
+        "date": "2026-06-08",
+        "technician": "Johnn",
+        "plate": "FLO3A78",
+        "amount": null,
+        "odometer": 115298,
+        "lastChange": "",
+        "notes": "Trocado no Wellington · Pedi para ele trocar",
+        "source": "Controle Óleo 26",
+        "sourceRow": 94,
+        "version": 1,
+        "entryType": "oil"
+      },
+      "worksheetRow": 94,
+      "evidence": [
+        {
+          "cell": "J94",
+          "value": "Well trocou"
+        }
+      ]
+    },
+    {
+      "before": {
+        "id": "oil-controle-oleo-26-99",
+        "date": "2026-06-15",
+        "technician": "Esdras",
+        "plate": "FCC7G74",
+        "amount": null,
+        "odometer": 50116,
+        "lastChange": "2026-06-15",
+        "notes": "Pedi para ele trocar",
+        "source": "Controle Óleo 26",
+        "sourceRow": 99,
+        "version": 0
+      },
+      "expected": null,
+      "updated": {
+        "id": "oil-controle-oleo-26-99",
+        "date": "2026-06-15",
+        "technician": "Esdras",
+        "plate": "FCC7G74",
+        "amount": null,
+        "odometer": 50116,
+        "lastChange": "2026-06-15",
+        "notes": "Trocado no Wellington · Pedi para ele trocar",
+        "source": "Controle Óleo 26",
+        "sourceRow": 99,
+        "version": 1,
+        "entryType": "oil"
+      },
+      "worksheetRow": 99,
+      "evidence": [
+        {
+          "cell": "H99",
+          "value": "Well trocou"
+        }
+      ]
+    },
+    {
+      "before": {
+        "id": "oil-controle-oleo-26-109",
+        "date": "2026-06-22",
+        "technician": "Kevin",
+        "plate": "GIM5J14",
+        "amount": null,
+        "odometer": 70297,
+        "lastChange": "2026-06-22",
+        "notes": "Pedi para ele trocar",
+        "source": "Controle Óleo 26",
+        "sourceRow": 109,
+        "version": 0
+      },
+      "expected": null,
+      "updated": {
+        "id": "oil-controle-oleo-26-109",
+        "date": "2026-06-22",
+        "technician": "Kevin",
+        "plate": "GIM5J14",
+        "amount": null,
+        "odometer": 70297,
+        "lastChange": "2026-06-22",
+        "notes": "Trocado no Wellington · Pedi para ele trocar",
+        "source": "Controle Óleo 26",
+        "sourceRow": 109,
+        "version": 1,
+        "entryType": "oil"
+      },
+      "worksheetRow": 109,
+      "evidence": [
+        {
+          "cell": "H109",
+          "value": "WELL"
+        }
+      ]
+    },
+    {
+      "before": {
+        "id": "oil-controle-oleo-26-117",
+        "date": "2026-07-06",
+        "technician": "Johnn",
+        "plate": "FLO3A78",
+        "amount": null,
+        "odometer": 116799,
+        "lastChange": "2026-07-06",
+        "notes": "",
+        "source": "Controle Óleo 26",
+        "sourceRow": 117,
+        "version": 0
+      },
+      "expected": null,
+      "updated": {
+        "id": "oil-controle-oleo-26-117",
+        "date": "2026-07-06",
+        "technician": "Johnn",
+        "plate": "FLO3A78",
+        "amount": null,
+        "odometer": 116799,
+        "lastChange": "2026-07-06",
+        "notes": "Trocado no Wellington",
+        "source": "Controle Óleo 26",
+        "sourceRow": 117,
+        "version": 1,
+        "entryType": "oil"
+      },
+      "worksheetRow": 117,
+      "evidence": [
+        {
+          "cell": "H117",
+          "value": "well trocou"
+        }
+      ]
+    },
+    {
+      "before": {
+        "id": "oil-controle-oleo-26-149",
+        "date": "2026-08-18",
+        "technician": "Simão",
+        "plate": "FUA2E40",
+        "amount": null,
+        "odometer": 256580,
+        "lastChange": "2026-08-21",
+        "notes": "Pedi para ele trocar",
+        "source": "Controle Óleo 26",
+        "sourceRow": 149,
+        "version": 0
+      },
+      "expected": null,
+      "updated": {
+        "id": "oil-controle-oleo-26-149",
+        "date": "2026-08-18",
+        "technician": "Simão",
+        "plate": "FUA2E40",
+        "amount": null,
+        "odometer": 256580,
+        "lastChange": "2026-08-21",
+        "notes": "Trocado no Wellington · Pedi para ele trocar",
+        "source": "Controle Óleo 26",
+        "sourceRow": 149,
+        "version": 1,
+        "entryType": "oil"
+      },
+      "worksheetRow": 149,
+      "evidence": [
+        {
+          "cell": "H149",
+          "value": "well"
+        }
+      ]
+    },
+    {
+      "before": {
+        "id": "oil-controle-oleo-26-162",
+        "date": "2026-08-18",
+        "technician": "Genilson",
+        "plate": "GDM8147",
+        "amount": null,
+        "odometer": 174874,
+        "lastChange": "",
+        "notes": "",
+        "source": "Controle Óleo 26",
+        "sourceRow": 162,
+        "version": 0
+      },
+      "expected": null,
+      "updated": {
+        "id": "oil-controle-oleo-26-162",
+        "date": "2026-08-18",
+        "technician": "Genilson",
+        "plate": "GDM8147",
+        "amount": null,
+        "odometer": 174874,
+        "lastChange": "",
+        "notes": "Trocado no Wellington",
+        "source": "Controle Óleo 26",
+        "sourceRow": 162,
+        "version": 1,
+        "entryType": "oil"
+      },
+      "worksheetRow": 162,
+      "evidence": [
+        {
+          "cell": "H162",
+          "value": "well"
+        }
+      ]
+    },
+    {
+      "before": {
+        "id": "oil-1dafc09a-86ff-446e-985a-7e698df77e94",
+        "version": 1,
+        "date": "2026-09-22",
+        "technician": "Vasco",
+        "plate": "FCC7G74",
+        "amount": null,
+        "odometer": 57329,
+        "lastChange": "2026-09-22",
+        "notes": "Troca realizada no Wellington",
+        "source": "Cadastro no site",
+        "sourceRow": 0
+      },
+      "expected": {
+        "id": "oil-1dafc09a-86ff-446e-985a-7e698df77e94",
+        "entity": "oil",
+        "data": "{\"id\":\"oil-1dafc09a-86ff-446e-985a-7e698df77e94\",\"version\":1,\"date\":\"2026-09-22\",\"technician\":\"Vasco\",\"plate\":\"FCC7G74\",\"amount\":null,\"odometer\":57329,\"lastChange\":\"2026-09-22\",\"notes\":\"Troca realizada no Wellington\",\"source\":\"Cadastro no site\",\"sourceRow\":0}",
+        "version": 1,
+        "deleted": 0,
+        "updated_at": "2026-10-06T02:51:09.811Z"
+      },
+      "updated": {
+        "id": "oil-1dafc09a-86ff-446e-985a-7e698df77e94",
+        "version": 2,
+        "date": "2026-09-22",
+        "technician": "Vasco",
+        "plate": "FCC7G74",
+        "amount": null,
+        "odometer": 57329,
+        "lastChange": "2026-09-22",
+        "notes": "Trocado no Wellington",
+        "source": "Cadastro no site",
+        "sourceRow": 0,
+        "entryType": "oil"
+      },
+      "worksheetRow": 188,
+      "evidence": [
+        {
+          "cell": "H188",
+          "value": "WELL"
+        }
+      ]
+    },
+    {
+      "before": {
+        "date": "2026-10-13",
+        "technician": "Vasco",
+        "plate": "FCC7G74",
+        "amount": null,
+        "odometer": 58912,
+        "lastChange": "2026-10-19",
+        "notes": "well · Pedi para ele trocar",
+        "source": "Controle Óleo 26",
+        "sourceRow": 216,
+        "version": 1,
+        "entryType": "oil",
+        "id": "oil-235f7fc4-5e75-e03b-6884-2661d7fb23a9"
+      },
+      "expected": "oil-recovery",
+      "updated": {
+        "date": "2026-10-13",
+        "technician": "Vasco",
+        "plate": "FCC7G74",
+        "amount": null,
+        "odometer": 58912,
+        "lastChange": "2026-10-19",
+        "notes": "Trocado no Wellington · Pedi para ele trocar",
+        "source": "Controle Óleo 26",
+        "sourceRow": 216,
+        "version": 2,
+        "entryType": "oil",
+        "id": "oil-235f7fc4-5e75-e03b-6884-2661d7fb23a9"
+      },
+      "worksheetRow": 216,
+      "evidence": [
+        {
+          "cell": "H216",
+          "value": "well"
+        }
+      ]
+    }
+  ]
+}
