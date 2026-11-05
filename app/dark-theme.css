@@ -388,6 +388,24 @@ html.dark .payroll-v2-overview td.balance{color:var(--app-text);}
 html.dark .payroll-v2-overview td.negative{color:var(--app-muted);}
 html.dark .payroll-v2-overview td button{background:hsl(192 28% 18%);color:var(--app-text);}
 html.dark .payroll-v2-overview td button:hover{background:hsl(192 28% 18%);}
+html.dark .payroll-v2-person{border-color:var(--app-border);background:var(--app-surface);}
+html.dark .payroll-v2-person>header{background:linear-gradient(115deg,var(--app-surface) 55%,var(--app-raised));}
+html.dark .payroll-v2-person>header input,html.dark .payroll-v2-field input,html.dark .payroll-v2-notes textarea{color:var(--app-text);}
+html.dark .payroll-v2-person>header small,html.dark .payroll-v2-group p,html.dark .payroll-v2-field>span,html.dark .payroll-v2-notes{color:var(--app-muted);}
+html.dark .payroll-v2-person>header>button,html.dark .payroll-v2-field>div,html.dark .payroll-v2-notes textarea{border-color:var(--app-border);background:var(--app-raised);}
+html.dark .payroll-v2-person-math span{background:var(--app-raised);color:var(--app-muted);}
+html.dark .payroll-v2-person-math strong{color:var(--app-text);}
+html.dark .payroll-v2-group,html.dark .payroll-v2-details,html.dark .payroll-edit-disclosure{border-color:var(--app-border);}
+html.dark .payroll-edit-disclosure>summary{color:var(--app-text);}
+html.dark .payroll-v2-person>footer{border-color:var(--app-border);background:var(--app-surface);}
+html.dark .profit-manual{color:var(--app-text);}
+html.dark .profit-manual-heading h2,html.dark .profit-manual-section h3,html.dark .profit-manual-tech-title,html.dark .profit-manual-table-scroll td:first-child strong{color:var(--app-text);}
+html.dark .profit-manual-heading p,html.dark .profit-manual-section header p,html.dark .profit-manual-tech-title span,html.dark .profit-manual-field,html.dark .profit-manual-bottom,html.dark .profit-manual-table-scroll td small{color:var(--app-muted);}
+html.dark .profit-manual-section,html.dark .profit-manual-bottom,html.dark .profit-manual-table-scroll th,html.dark .profit-manual-table-scroll td{border-color:var(--app-border);}
+html.dark .profit-manual-tech-grid>article,html.dark .profit-manual-field>input,html.dark .profit-manual-field>div,html.dark .profit-manual-table-scroll th{background:var(--app-raised);}
+html.dark .profit-manual-field>input,html.dark .profit-manual-field>div input,html.dark .profit-manual-table-scroll td>input{border-color:var(--app-border);background:var(--app-surface);color:var(--app-text);}
+html.dark .profit-manual-field>div small,html.dark .profit-manual-table-scroll th,html.dark .profit-manual-table-scroll td{color:var(--app-muted);}
+html.dark .profit-manual-table-scroll td:first-child strong{color:var(--app-text);}
 html.dark .payroll-v2-empty{color:var(--app-muted);}
 html.dark .payroll-v2-show-all{background:hsl(192 28% 18%);color:var(--app-text);}
 html.dark .payroll-v2-person{border:1px solid var(--app-border);background:var(--app-surface);}
