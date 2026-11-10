@@ -1,6 +1,7 @@
 import {z} from 'zod';
 import {authorize} from '@/lib/auth';
-import {database} from '@/lib/finance-store';
+import {database,getRecords} from '@/lib/finance-store';
+import {getManagement} from '@/lib/management-store';
 import {billingEntrySchema} from '@/lib/profitability-billing';
 
 const query=z.object({period:z.string().regex(/^\d{4}-(0[1-9]|1[0-2])$/)});
@@ -11,10 +12,11 @@ const closedPeriod=async(period:string)=>{const row=await database().prepare("SE
 export async function GET(request:Request){
  const auth=await authorize(request,['profitability-billing']);if(auth.error)return auth.error;
  const parsed=query.safeParse(Object.fromEntries(new URL(request.url).searchParams));if(!parsed.success)return Response.json({error:'Competência inválida.'},{status:400});
- try{const period=parsed.data.period,db=database(),[rows,close]=await Promise.all([db.prepare("SELECT id,data,version FROM operation_changes WHERE entity='profitabilityBillingEntry' AND deleted=0").all<{id:string;data:string;version:number}>(),db.prepare("SELECT data,version FROM operation_changes WHERE id=? AND entity='profitabilityBillingClose' AND deleted=0").bind(`billing-close-${period}`).first<{data:string;version:number}>()]);
+ try{const period=parsed.data.period,db=database(),[rows,close,management,records]=await Promise.all([db.prepare("SELECT id,data,version FROM operation_changes WHERE entity='profitabilityBillingEntry' AND deleted=0").all<{id:string;data:string;version:number}>(),db.prepare("SELECT data,version FROM operation_changes WHERE id=? AND entity='profitabilityBillingClose' AND deleted=0").bind(`billing-close-${period}`).first<{data:string;version:number}>(),getManagement(),getRecords()]);
   const entries=rows.results.map(row=>billingEntrySchema.safeParse({...JSON.parse(row.data),version:row.version})).flatMap(result=>result.success?[result.data]:[]).filter(row=>row.period===period);
   const closeData=close?JSON.parse(close.data) as {closed:boolean;closedAt:string|null}:null;
-  return Response.json({entries,closed:!!closeData?.closed,closedAt:closeData?.closedAt??null,version:close?.version??0,admin:auth.user?.role==='admin'},{headers:{'Cache-Control':'no-store'}});
+  const monthly=new Map<string,number>();for(const record of records.filter(item=>item.kind==='Mensalidade'&&item.period===period)){monthly.set(record.client,(monthly.get(record.client)??0)+(record.amount??0))}
+  return Response.json({entries,clients:[...new Set(management.customers.map(item=>item.name).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'pt-BR')),monthlyClients:[...monthly].map(([name,amount])=>({name,amount})).sort((a,b)=>a.name.localeCompare(b.name,'pt-BR')),closed:!!closeData?.closed,closedAt:closeData?.closedAt??null,version:close?.version??0,admin:auth.user?.role==='admin'},{headers:{'Cache-Control':'no-store'}});
  }catch(error){console.error('Profitability billing read failed',error);return Response.json({error:'Não foi possível carregar o faturamento.'},{status:503})}
 }
 
