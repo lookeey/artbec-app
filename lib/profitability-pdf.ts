@@ -57,10 +57,10 @@ export async function renderProfitabilityPdf(report:ProfitabilityReport,technici
  paragraph(`Custos diretos a cobrir: ${money(summary.directCost)}. ${summary.profit>=0?'Receita acima dos custos registrados':'Receita faltante para cobrir os custos atuais'}: ${money(Math.abs(summary.profit))}. Não inclui despesas gerais, encargos patronais nem impostos da empresa.`);
  heading('Comparativo de receita e custos');
  table(['Colaborador','Visitas','Receita','Custo direto','Resultado','Margem'],[240,60,130,130,130,80],technicians.map(person=>[person.name,String(person.visits),money(person.revenue),money(person.directCost),money(person.profit),percent(person.margin)]),[1,2,3,4,5],'Comparativo da equipe');
- if(!technicians.length)paragraph('Nenhum atendimento encontrado nesta competência. Sincronize as tarefas do Auvo para preencher a análise.');
+ if(!technicians.length)paragraph('Nenhum técnico ativo vinculado nesta competência.');
  for(const person of technicians){
   addPage('Análise por colaborador');heading(person.name);
-  text(`${person.clients} clientes | ${person.visits} visitas | ${person.daysWorked} dias com atendimento | Média: ${minutes(person.averageMinutes)}`,M,y,10,regular,muted);y+=27;
+  text(`${person.clients} clientes | ${person.visits} visitas | Média: ${minutes(person.averageMinutes)}`,M,y,10,regular,muted);y+=27;
   table(['Composição do custo','Valor','Folha e descontos','Valor'],[230,140,260,140],[
    ['Folha bruta ajustada',money(person.payrollCost),'Salário base',money(person.baseSalary)],
    ['Gasolina',money(person.fuelCost),'Periculosidade',money(person.hazardPay)],
@@ -70,8 +70,8 @@ export async function renderProfitabilityPdf(report:ProfitabilityReport,technici
    ['Custo por visita',money(person.costPerVisit),'Adiantamentos',money(person.advance+person.advance15)],
    ['Custo por cliente',money(person.costPerClient),'Saldo da folha',money(person.remainingPay)],
   ],[1,3],person.name);
-  paragraph(`Horas em atendimento: ${person.serviceHours}h | Horas disponíveis: ${person.availableHours}h | Ocupação: ${percent(person.utilization)} | Cobertura dos horários: ${percent(person.timingCoverage)}. ${person.payrollMatched?'Folha vinculada.':'Folha não localizada; custo incompleto.'}`);
-  paragraph(`Custo por cliente: ${money(person.costPerClient)} | Resultado parcial por cliente: ${person.clients?money(Math.round(person.profit/person.clients)):'Sem clientes'} | Receita por hora registrada: ${person.totalMinutes?money(person.revenuePerHour):'Sem horários'} | Custo por hora registrada: ${person.costPerRecordedHour===null?'Sem horários':money(person.costPerRecordedHour)}. Indicadores por hora dividem os valores atribuídos pelas horas de chegada e saída registradas no Auvo; horários incompletos limitam a comparação.`);
+  paragraph(`Horas informadas: ${person.serviceHours}h | Horas disponíveis: ${person.availableHours}h | Ocupação: ${percent(person.utilization)} | Visitas e horas são informadas manualmente. ${person.payrollMatched?'Folha vinculada.':'Folha não localizada; custo incompleto.'}`);
+  paragraph(`Custo por cliente: ${money(person.costPerClient)} | Resultado parcial por cliente: ${person.clients?money(Math.round(person.profit/person.clients)):'Sem clientes'} | Receita por hora registrada: ${person.totalMinutes?money(person.revenuePerHour):'Sem horários'} | Custo por hora registrada: ${person.costPerRecordedHour===null?'Sem horários':money(person.costPerRecordedHour)}. Os indicadores por hora usam as horas informadas manualmente.`);
   ensure(110,'Clientes e piscinas atendidos');heading('Clientes e piscinas atendidos');
   const rows=person.customers.filter(customer=>`${customer.name} ${person.name}`.toLocaleLowerCase('pt-BR').includes(query.trim().toLocaleLowerCase('pt-BR'))).sort((a,b)=>a.name.localeCompare(b.name,'pt-BR'));
   if(query)paragraph(`Busca de clientes: ${query}. Os totais do colaborador incluem toda a carteira; a busca filtra somente o detalhamento abaixo.`);
@@ -82,7 +82,7 @@ export async function renderProfitabilityPdf(report:ProfitabilityReport,technici
  paragraph('Resultado parcial = receita atribuída menos custos diretos identificados. Este relatório apresenta uma estimativa operacional; não representa o lucro líquido contábil. Adiantamentos e descontos da folha são apresentados separadamente do custo da equipe.');
  paragraph(report.methodology);
  heading('Qualidade dos dados da operação');
- paragraph(`Horários completos: ${percent(report.quality.timingCoverage)}. Clientes com mensalidade vinculada: ${percent(report.quality.revenueCoverage)} (${report.quality.matchedClients} de ${report.quality.totalClients}).`);
+ paragraph(`Clientes com mensalidade vinculada: ${percent(report.quality.revenueCoverage)} (${report.quality.matchedClients} de ${report.quality.totalClients}).`);
  if(report.quality.unmatchedPayroll.length)paragraph(`Folhas não localizadas: ${report.quality.unmatchedPayroll.join(', ')}.`);
  if(report.quality.shortVisits)paragraph(`${report.quality.shortVisits} visitas com duração de até 5 minutos precisam de conferência.`);
  pdf.getPages().forEach((p,index)=>{page=p;box(M,H-32,C,1,pale);text('ARTBEC PISCINAS  |  Uso interno  |  Valores em reais',M,H-24,8,regular,muted);text(`${index+1} / ${pdf.getPageCount()}`,W-M-45,H-24,8,regular,muted)});
