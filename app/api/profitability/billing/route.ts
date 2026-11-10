@@ -12,7 +12,7 @@ export async function GET(request:Request){
  const auth=await authorize(request,['profitability']);if(auth.error)return auth.error;
  const parsed=query.safeParse(Object.fromEntries(new URL(request.url).searchParams));if(!parsed.success)return Response.json({error:'Competência inválida.'},{status:400});
  try{const period=parsed.data.period,db=database(),[rows,close]=await Promise.all([db.prepare("SELECT id,data,version FROM operation_changes WHERE entity='profitabilityBillingEntry' AND deleted=0").all<{id:string;data:string;version:number}>(),db.prepare("SELECT data,version FROM operation_changes WHERE id=? AND entity='profitabilityBillingClose' AND deleted=0").bind(`billing-close-${period}`).first<{data:string;version:number}>()]);
-  const entries=rows.results.map(row=>({...JSON.parse(row.data),version:row.version})).filter(row=>row.period===period);
+  const entries=rows.results.map(row=>billingEntrySchema.safeParse({...JSON.parse(row.data),version:row.version})).flatMap(result=>result.success?[result.data]:[]).filter(row=>row.period===period);
   const closeData=close?JSON.parse(close.data) as {closed:boolean;closedAt:string|null}:null;
   return Response.json({entries,closed:!!closeData?.closed,closedAt:closeData?.closedAt??null,version:close?.version??0,admin:auth.user?.role==='admin'},{headers:{'Cache-Control':'no-store'}});
  }catch(error){console.error('Profitability billing read failed',error);return Response.json({error:'Não foi possível carregar o faturamento.'},{status:503})}
