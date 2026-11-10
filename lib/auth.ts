@@ -2,7 +2,7 @@ import {applyConfiguredPasswordUpdate} from './configured-password-update';
 import {database} from '@/lib/finance-store';
 
 export const SESSION_COOKIE='artbec_session';
-export const ALL_VIEWS=['monthly-review','personal-tasks','overview','executive-summary','auvo-center','growth','monthly','annual-adjustments','services','notes','receivables','cash-flow','product-sales','product-agenda','vita-sales','academy-sales','product-growth','quotes','processes','resolution-tasks','complaints','reminders','preventive-maintenance','clients','inventory','expense-overview','fuel','oil','fleet','technicians','performance','profitability','fines','payroll','administrative','history'] as const;
+export const ALL_VIEWS=['monthly-review','personal-tasks','overview','executive-summary','auvo-center','growth','monthly','annual-adjustments','services','notes','receivables','cash-flow','product-sales','product-agenda','vita-sales','academy-sales','product-growth','quotes','processes','resolution-tasks','complaints','reminders','preventive-maintenance','clients','inventory','expense-overview','fuel','oil','fleet','technicians','performance','profitability','profitability-billing','fines','payroll','administrative','history'] as const;
 export type ViewPermission=(typeof ALL_VIEWS)[number];
 export type AuthUser={id:string;username:string;displayName:string;role:'admin'|'member';permissions:ViewPermission[];active:boolean};
 type UserRow={id:string;username:string;displayName:string;passwordHash:string;passwordSalt:string;role:string;permissions:string;active:number};

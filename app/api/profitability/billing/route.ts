@@ -9,7 +9,7 @@ const validRequest=(request:Request)=>request.headers.get('origin')===new URL(re
 const closedPeriod=async(period:string)=>{const row=await database().prepare("SELECT data FROM operation_changes WHERE id=? AND entity='profitabilityBillingClose' AND deleted=0").bind(`billing-close-${period}`).first<{data:string}>();return !!(row&&JSON.parse(row.data).closed)};
 
 export async function GET(request:Request){
- const auth=await authorize(request,['profitability']);if(auth.error)return auth.error;
+ const auth=await authorize(request,['profitability-billing']);if(auth.error)return auth.error;
  const parsed=query.safeParse(Object.fromEntries(new URL(request.url).searchParams));if(!parsed.success)return Response.json({error:'Competência inválida.'},{status:400});
  try{const period=parsed.data.period,db=database(),[rows,close]=await Promise.all([db.prepare("SELECT id,data,version FROM operation_changes WHERE entity='profitabilityBillingEntry' AND deleted=0").all<{id:string;data:string;version:number}>(),db.prepare("SELECT data,version FROM operation_changes WHERE id=? AND entity='profitabilityBillingClose' AND deleted=0").bind(`billing-close-${period}`).first<{data:string;version:number}>()]);
   const entries=rows.results.map(row=>billingEntrySchema.safeParse({...JSON.parse(row.data),version:row.version})).flatMap(result=>result.success?[result.data]:[]).filter(row=>row.period===period);
@@ -19,7 +19,7 @@ export async function GET(request:Request){
 }
 
 export async function POST(request:Request){
- const auth=await authorize(request,['profitability']);if(auth.error)return auth.error;if(auth.user!.role!=='admin')return Response.json({error:'Somente a administradora pode editar o faturamento.'},{status:403});
+ const auth=await authorize(request,['profitability-billing']);if(auth.error)return auth.error;if(auth.user!.role!=='admin')return Response.json({error:'Somente a administradora pode editar o faturamento.'},{status:403});
  if(!validRequest(request))return Response.json({error:'Origem ou formato inválido.'},{status:403});
  try{const raw=await request.text();if(raw.length>10000)return Response.json({error:'Lançamento muito extenso.'},{status:413});const parsed=billingEntrySchema.safeParse(JSON.parse(raw));if(!parsed.success)return Response.json({error:'Confira data, categoria, descrição e valor.'},{status:400});const input=parsed.data;
   if(input.date.slice(0,7)!==input.period)return Response.json({error:'A data precisa pertencer à competência selecionada.'},{status:400});
@@ -38,7 +38,7 @@ export async function POST(request:Request){
 }
 
 export async function DELETE(request:Request){
- const auth=await authorize(request,['profitability']);if(auth.error)return auth.error;if(auth.user!.role!=='admin')return Response.json({error:'Somente a administradora pode excluir lançamentos.'},{status:403});if(!validRequest(request))return Response.json({error:'Origem ou formato inválido.'},{status:403});
+ const auth=await authorize(request,['profitability-billing']);if(auth.error)return auth.error;if(auth.user!.role!=='admin')return Response.json({error:'Somente a administradora pode excluir lançamentos.'},{status:403});if(!validRequest(request))return Response.json({error:'Origem ou formato inválido.'},{status:403});
  try{const parsed=removeSchema.safeParse(await request.json());if(!parsed.success)return Response.json({error:'Lançamento inválido.'},{status:400});const input=parsed.data;if(!input.id.startsWith(`billing-${input.period}-`))return Response.json({error:'Competência inválida.'},{status:400});if(await closedPeriod(input.period))return Response.json({error:'Este mês está fechado. Reabra o mês para fazer alterações.'},{status:409});
   const result=await database(auth.user!).prepare("UPDATE operation_changes SET deleted=1,version=version+1,updated_at=? WHERE id=? AND entity='profitabilityBillingEntry' AND version=? AND deleted=0 RETURNING id").bind(new Date().toISOString(),input.id,input.version).run<{id:string}>();if(!result.results.some(item=>item.id===input.id))return Response.json({error:'O lançamento mudou em outra tela. Atualize e tente novamente.'},{status:409});return Response.json({ok:true},{headers:{'Cache-Control':'no-store'}});
  }catch(error){console.error('Profitability billing delete failed',error);return Response.json({error:'Não foi possível excluir este lançamento.'},{status:503})}

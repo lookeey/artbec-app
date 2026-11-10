@@ -3,7 +3,7 @@ import {database} from '@/lib/finance-store';
 import {billingCloseSchema} from '@/lib/profitability-billing';
 
 export async function POST(request:Request){
- const auth=await authorize(request,['profitability']);if(auth.error)return auth.error;if(auth.user!.role!=='admin')return Response.json({error:'Somente a administradora pode fechar o mês.'},{status:403});
+ const auth=await authorize(request,['profitability-billing']);if(auth.error)return auth.error;if(auth.user!.role!=='admin')return Response.json({error:'Somente a administradora pode fechar o mês.'},{status:403});
  if(request.headers.get('origin')!==new URL(request.url).origin||!request.headers.get('content-type')?.includes('application/json'))return Response.json({error:'Origem ou formato inválido.'},{status:403});
  try{const raw=await request.text();if(raw.length>2000)return Response.json({error:'Pedido inválido.'},{status:413});const parsed=billingCloseSchema.safeParse(JSON.parse(raw));if(!parsed.success)return Response.json({error:'Competência inválida.'},{status:400});const input=parsed.data,id=`billing-close-${input.period}`,db=database(auth.user!),row=await db.prepare("SELECT entity,version,deleted FROM operation_changes WHERE id=?").bind(id).first<{entity:string;version:number;deleted:number}>();
   if(row&&(row.entity!=='profitabilityBillingClose'||row.deleted))return Response.json({error:'O fechamento não está disponível.'},{status:409});if((row?.version??0)!==input.version)return Response.json({error:'O fechamento mudou em outra tela. Atualize e tente novamente.'},{status:409});
