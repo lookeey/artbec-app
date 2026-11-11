@@ -18,7 +18,7 @@ const validMinutes=(value:number|null)=>typeof value==='number'&&value>0&&value<
 const payrollAmount=(salary:Payroll|undefined)=>salary?Math.max(0,salary.baseSalary+salary.hazardPay+salary.overtime+salary.bonus-salary.absences):0;
 
 function periodBounds(period:string){const [year,month]=period.split('-').map(Number),end=new Date(Date.UTC(year,month,0)).toISOString().slice(0,10);return {start:`${period}-01`,end}}
-function workingMinutes(period:string){const {start,end}=periodBounds(period),through=businessToday();if(through<start)return 0;let days=0;for(let current=new Date(`${start}T12:00:00Z`);current<=new Date(`${end<through?end:through}T12:00:00Z`);current.setUTCDate(current.getUTCDate()+1)){const day=current.getUTCDay();if(day!==0&&day!==6)days++}return days*8*60}
+function workingMinutes(period:string){const {start,end}=periodBounds(period),through=businessToday();if(through<start)return 0;let days=0;for(let current=new Date(`${start}T12:00:00Z`);current<=new Date(`${end<through?end:through}T12:00:00Z`);current.setUTCDate(current.getUTCDate()+1)){const day=current.getUTCDay();if(day!==0&&day!==6)days++}return days*44*60/5}
 function findRevenue(name:string,entries:{name:string;key:string;amount:number|null}[]){const key=normalize(name),exact=entries.find(item=>item.key===key);if(exact)return exact;const candidates=entries.filter(item=>item.key.length>=5&&key.length>=5&&(item.key.includes(key)||key.includes(item.key)));return candidates.length===1?candidates[0]:null}
 
 export async function getProfitability(period:string){

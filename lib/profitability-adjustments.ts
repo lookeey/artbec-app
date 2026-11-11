@@ -7,7 +7,7 @@ const hours=z.number().min(0).max(10000).nullable();
 export const profitabilityAdjustmentSchema=z.object({
  id:z.string().regex(/^profitability-\d{4}-(0[1-9]|1[0-2])$/),version:z.number().int().min(0),period,
  technicians:z.record(z.string().max(100),z.object({visits:count,hours,revenueUnassigned:cents,payrollCost:cents,fuelCost:cents,oilCost:cents,maintenanceCost:cents,otherCost:cents})),
- customers:z.record(z.string().max(500),z.object({visits:count,hours,revenue:cents,technicianIds:z.array(z.string().max(100)).max(2).default([])})),
+ customers:z.record(z.string().max(500),z.object({visits:count,hours,revenue:cents,technicianIds:z.array(z.string().max(100)).max(50).default([])})),
 }).strict();
 export type ProfitabilityAdjustment=z.infer<typeof profitabilityAdjustmentSchema>;
 export type TechnicianAdjustment=ProfitabilityAdjustment['technicians'][string];
