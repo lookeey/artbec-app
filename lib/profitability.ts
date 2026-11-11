@@ -1,7 +1,6 @@
 import {database,getRecords} from '@/lib/finance-store';
 import {getOperations} from '@/lib/operations-store';
 import {getManagement} from '@/lib/management-store';
-import {businessToday} from '@/lib/month-rollover';
 import {emptyProfitabilityAdjustment,profitabilityAdjustmentSchema,profitabilityCustomerKey} from '@/lib/profitability-adjustments';
 
 type Payroll={employee:string;period:string;baseSalary:number;hazardPay:number;overtime:number;bonus:number;inss:number;absences:number;advance:number;loan:number;fines:number;advance15:number};
@@ -17,8 +16,7 @@ const round=(value:number)=>Math.round(value);
 const validMinutes=(value:number|null)=>typeof value==='number'&&value>0&&value<=720?value:null;
 const payrollAmount=(salary:Payroll|undefined)=>salary?Math.max(0,salary.baseSalary+salary.hazardPay+salary.overtime+salary.bonus-salary.absences):0;
 
-function periodBounds(period:string){const [year,month]=period.split('-').map(Number),end=new Date(Date.UTC(year,month,0)).toISOString().slice(0,10);return {start:`${period}-01`,end}}
-function workingMinutes(period:string){const {start,end}=periodBounds(period),through=businessToday();if(through<start)return 0;let days=0;for(let current=new Date(`${start}T12:00:00Z`);current<=new Date(`${end<through?end:through}T12:00:00Z`);current.setUTCDate(current.getUTCDate()+1)){const day=current.getUTCDay();if(day!==0&&day!==6)days++}return days*44*60/5}
+const MONTHLY_REFERENCE_MINUTES=176*60;
 function findRevenue(name:string,entries:{name:string;key:string;amount:number|null}[]){const key=normalize(name),exact=entries.find(item=>item.key===key);if(exact)return exact;const candidates=entries.filter(item=>item.key.length>=5&&key.length>=5&&(item.key.includes(key)||key.includes(item.key)));return candidates.length===1?candidates[0]:null}
 
 export async function getProfitability(period:string){
@@ -49,7 +47,7 @@ export async function getProfitability(period:string){
  const costRows=team.map(person=>{
   const salary=payroll.find(item=>item.period===period&&person.aliases.some(alias=>matchPerson(alias,item.employee))),baseSalary=salary?.baseSalary??0,hazardPay=salary?.hazardPay??0,overtime=salary?.overtime??0,bonus=salary?.bonus??0,absences=salary?.absences??0,grossPay=baseSalary+hazardPay+overtime+bonus,payrollCost=payrollAmount(salary),inss=salary?.inss??0,advance=salary?.advance??0,advance15=salary?.advance15??0,loan=salary?.loan??0,fines=salary?.fines??0,netPay=Math.max(0,payrollCost-inss-loan-fines),remainingPay=Math.max(0,netPay-advance-advance15);
   const fuelCost=fuel.filter(item=>item.date.startsWith(period)&&person.aliases.some(alias=>matchPerson(alias,item.technician))).reduce((sum,item)=>sum+(item.amount??0),0),oilCost=oil.filter(item=>item.date.startsWith(period)&&person.aliases.some(alias=>matchPerson(alias,item.technician))).reduce((sum,item)=>sum+(item.amount??0),0),maintenanceCost=maintenance.filter(item=>item.date.startsWith(period)&&person.aliases.some(alias=>matchPerson(alias,item.driver))).reduce((sum,item)=>sum+(item.amount??0),0);
-  const assignedCustomers=customers.filter(customer=>customer.technicianIds.includes(person.technicianId)),visits=assignedCustomers.reduce((sum,item)=>sum+item.visits,0),totalMinutes=assignedCustomers.reduce((sum,item)=>sum+item.minutes,0),availableMinutes=workingMinutes(period),directCost=payrollCost+fuelCost+oilCost+maintenanceCost;
+  const assignedCustomers=customers.filter(customer=>customer.technicianIds.includes(person.technicianId)),visits=assignedCustomers.reduce((sum,item)=>sum+item.visits,0),totalMinutes=assignedCustomers.reduce((sum,item)=>sum+item.minutes,0),availableMinutes=MONTHLY_REFERENCE_MINUTES,directCost=payrollCost+fuelCost+oilCost+maintenanceCost;
   return {...person,visits,clients:assignedCustomers.length,daysWorked:0,timingSamples:0,timingCoverage:0,averageMinutes:visits&&totalMinutes?round(totalMinutes/visits):null,totalMinutes,serviceHours:Math.round(totalMinutes/6)/10,availableHours:Math.round(availableMinutes/6)/10,utilization:availableMinutes?Math.round(totalMinutes/availableMinutes*1000)/10:0,baseSalary,hazardPay,overtime,bonus,absences,grossPay,inss,advance,advance15,loan,fines,netPay,remainingPay,payrollCost,fuelCost,oilCost,maintenanceCost,directCost,revenue:0,profit:-directCost,margin:null as number|null,costPerVisit:visits?round(directCost/visits):0,costPerClient:assignedCustomers.length?round(directCost/assignedCustomers.length):0,costPerRecordedHour:totalMinutes?round(directCost/(totalMinutes/60)):null,revenuePerHour:0,payrollMatched:!!salary,customers:[] as Client[],revenueUnassigned:0,otherCost:0,manual:{visits:false,hours:false,revenueUnassigned:false,payrollCost:false,fuelCost:false,oilCost:false,maintenanceCost:false,otherCost:false}};
  });
  const teamById=new Map(costRows.map(person=>[person.technicianId,person]));
