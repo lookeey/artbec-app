@@ -1,6 +1,7 @@
 'use client';
 import ClientCardsPanel from './client-cards-panel';
 import {currentPeriod} from '@/lib/month-rollover';
+import {monthlyClientCount} from '@/lib/monthly-client-count';
 
 import {useEffect,useState} from 'react';
 import {CalendarDays,ChartNoAxesColumnIncreasing,Filter,Pencil,Plus,Search,Trash2,Users,WalletCards,Wrench} from 'lucide-react';
@@ -66,7 +67,7 @@ export default function ManagementPanel({view,initial,records,ready}:{view:strin
 }
 
 function GrowthPanel({initial,customers,records,goal,setGoal}:{initial:ManagementSource;customers:ClientItem[];records:MonthlyRecord[];goal:number;setGoal:(value:number)=>void}){
- const thisPeriod=currentPeriod(),currentYear=thisPeriod.slice(0,4),monthlyPeriods=records.filter(item=>item.kind==='Mensalidade'&&item.period<=thisPeriod).map(item=>item.period).filter(item=>/^\d{4}-\d{2}$/.test(item)),basePeriod=monthlyPeriods.sort().at(-1)??thisPeriod,activeRecords=records.filter(item=>item.kind==='Mensalidade'&&item.period===basePeriod),activeNames=new Set(activeRecords.map(item=>item.client.trim().toLocaleLowerCase('pt-BR')).filter(Boolean)),activeCount=activeNames.size,grossMonthly=activeRecords.reduce((sum,item)=>sum+(item.amount??0),0),newThisYear=customers.filter(item=>item.startDate.startsWith(currentYear)&&activeNames.has(item.name.trim().toLocaleLowerCase('pt-BR'))).length;
+ const thisPeriod=currentPeriod(),currentYear=thisPeriod.slice(0,4),monthlyPeriods=records.filter(item=>item.kind==='Mensalidade'&&item.period<=thisPeriod).map(item=>item.period).filter(item=>/^\d{4}-\d{2}$/.test(item)),basePeriod=monthlyPeriods.sort().at(-1)??thisPeriod,activeRecords=records.filter(item=>item.kind==='Mensalidade'&&item.period===basePeriod),activeNames=new Set(activeRecords.map(item=>item.client.trim().toLocaleLowerCase('pt-BR')).filter(Boolean)),activeCount=monthlyClientCount(activeNames),grossMonthly=activeRecords.reduce((sum,item)=>sum+(item.amount??0),0),newThisYear=customers.filter(item=>item.startDate.startsWith(currentYear)&&activeNames.has(item.name.trim().toLocaleLowerCase('pt-BR'))).length;
  const annualTotals=new Map<string,{total:number;months:Set<string>}>();
  for(const record of records){if(record.kind!=='Mensalidade'||record.period==='sem-data')continue;const year=record.period.slice(0,4),value=annualTotals.get(year)??{total:0,months:new Set<string>()};value.total+=record.amount??0;value.months.add(record.period);annualTotals.set(year,value)}
  const growth=initial.growth.map(item=>({...item})),previous=growth.at(-2)?.totalCustomers??1,latest=growth.at(-1)!;
