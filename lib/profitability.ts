@@ -27,8 +27,8 @@ export async function getProfitability(period:string){
  const monthPayroll=payroll.filter(item=>item.period===period),latestPayrollPeriod=[...payroll].map(item=>item.period).sort().at(-1)??period,rosterPayroll=monthPayroll.length?monthPayroll:payroll.filter(item=>item.period===latestPayrollPeriod);
  const staff=(management.staff as Staff[]).filter(person=>!person.endDate&&person.role.toLocaleLowerCase('pt-BR').includes('técnico'));
  const team=staff.flatMap(person=>{
-  const aliases=[person.source||person.name],matched=rosterPayroll.find(item=>aliases.some(alias=>normalize(alias)===normalize(item.employee)))??rosterPayroll.find(item=>aliases.some(alias=>matchPerson(alias,item.employee)));
-  const name=matched?.employee??person.source??person.name;
+  const aliases=[person.name,...(person.source&&!/^cadastro\b/i.test(person.source)?[person.source]:[])],matched=rosterPayroll.find(item=>aliases.some(alias=>normalize(alias)===normalize(item.employee)))??rosterPayroll.find(item=>aliases.some(alias=>matchPerson(alias,item.employee)));
+  const name=matched?.employee??person.name;
   return [{technicianId:person.id,name,aliases:[...new Set([...aliases,name])]}];
  });
  const revenueEntries:{name:string;key:string;amount:number|null}[]=[];
