@@ -1,13 +1,13 @@
 import {z} from 'zod';
 import {authorize} from '@/lib/auth';
 import {database} from '@/lib/finance-store';
-import {emptyProfitabilityAdjustment,profitabilityAdjustmentSchema} from '@/lib/profitability-adjustments';
+import {emptyProfitabilityAdjustment,profitabilityAdjustmentSchema,showLegacyHoursInFirstWeek} from '@/lib/profitability-adjustments';
 
 const query=z.object({period:z.string().regex(/^\d{4}-(0[1-9]|1[0-2])$/)});
 export async function GET(request:Request){
  const auth=await authorize(request,['profitability']);if(auth.error)return auth.error;
  const parsed=query.safeParse(Object.fromEntries(new URL(request.url).searchParams));if(!parsed.success)return Response.json({error:'Competência inválida.'},{status:400});
- try{const row=await database().prepare("SELECT data,version FROM operation_changes WHERE id=? AND entity='profitabilityAdjustment' AND deleted=0").bind(`profitability-${parsed.data.period}`).first<{data:string;version:number}>();if(!row)return Response.json({adjustments:emptyProfitabilityAdjustment(parsed.data.period)},{headers:{'Cache-Control':'no-store'}});const saved=profitabilityAdjustmentSchema.safeParse({...JSON.parse(row.data),version:row.version});return saved.success?Response.json({adjustments:saved.data},{headers:{'Cache-Control':'no-store'}}):Response.json({error:'Os ajustes salvos estão inválidos.'},{status:503})}catch{return Response.json({error:'Não foi possível carregar os ajustes manuais.'},{status:503})}
+ try{const row=await database().prepare("SELECT data,version FROM operation_changes WHERE id=? AND entity='profitabilityAdjustment' AND deleted=0").bind(`profitability-${parsed.data.period}`).first<{data:string;version:number}>();if(!row)return Response.json({adjustments:emptyProfitabilityAdjustment(parsed.data.period)},{headers:{'Cache-Control':'no-store'}});const saved=profitabilityAdjustmentSchema.safeParse({...JSON.parse(row.data),version:row.version});return saved.success?Response.json({adjustments:showLegacyHoursInFirstWeek(saved.data)},{headers:{'Cache-Control':'no-store'}}):Response.json({error:'Os ajustes salvos estão inválidos.'},{status:503})}catch{return Response.json({error:'Não foi possível carregar os ajustes manuais.'},{status:503})}
 }
 export async function POST(request:Request){
  const auth=await authorize(request,['profitability']);if(auth.error)return auth.error;if(auth.user!.role!=='admin')return Response.json({error:'Somente a administradora pode editar os ajustes.'},{status:403});

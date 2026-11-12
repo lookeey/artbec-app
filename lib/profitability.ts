@@ -1,7 +1,7 @@
 import {database,getRecords} from '@/lib/finance-store';
 import {getOperations} from '@/lib/operations-store';
 import {getManagement} from '@/lib/management-store';
-import {emptyProfitabilityAdjustment,profitabilityAdjustmentSchema,profitabilityCustomerKey} from '@/lib/profitability-adjustments';
+import {emptyProfitabilityAdjustment,profitabilityAdjustmentSchema,profitabilityCustomerKey,showLegacyHoursInFirstWeek} from '@/lib/profitability-adjustments';
 import {monthlyClientCount} from '@/lib/monthly-client-count';
 import {billingEntrySchema} from '@/lib/profitability-billing';
 import {allocateBillingCosts,type CostField} from '@/lib/profitability-billing-costs';
@@ -38,7 +38,7 @@ export async function getProfitability(period:string){
   if(existing)existing.amount=existing.amount===null||row.amount===null?null:existing.amount+(row.amount??0);
   else revenueEntries.push({name:row.client,key,amount:row.amount??null});
  }
- const savedAdjustment=await database().prepare("SELECT data,version FROM operation_changes WHERE id=? AND entity='profitabilityAdjustment' AND deleted=0").bind(`profitability-${period}`).first<{data:string;version:number}>(),parsed=savedAdjustment?profitabilityAdjustmentSchema.safeParse({...JSON.parse(savedAdjustment.data),version:savedAdjustment.version}):null,adjustments=parsed?.success?parsed.data:emptyProfitabilityAdjustment(period);
+ const savedAdjustment=await database().prepare("SELECT data,version FROM operation_changes WHERE id=? AND entity='profitabilityAdjustment' AND deleted=0").bind(`profitability-${period}`).first<{data:string;version:number}>(),parsed=savedAdjustment?profitabilityAdjustmentSchema.safeParse({...JSON.parse(savedAdjustment.data),version:savedAdjustment.version}):null,adjustments=showLegacyHoursInFirstWeek(parsed?.success?parsed.data:emptyProfitabilityAdjustment(period));
  const customers:Client[]=revenueEntries.map((entry,index)=>{
   const key=profitabilityCustomerKey(entry.name),manual=adjustments.customers[key]??{visits:null,hours:null,revenue:null,technicianIds:[]};
   let assigned=manual.technicianIds.filter(id=>team.some(person=>person.technicianId===id));

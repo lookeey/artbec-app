@@ -13,4 +13,10 @@ export type ProfitabilityAdjustment=z.infer<typeof profitabilityAdjustmentSchema
 export type TechnicianAdjustment=ProfitabilityAdjustment['technicians'][string];
 export type CustomerAdjustment=ProfitabilityAdjustment['customers'][string];
 export const emptyProfitabilityAdjustment=(period:string):ProfitabilityAdjustment=>({id:`profitability-${period}`,version:0,period,technicians:{},customers:{}});
+export function showLegacyHoursInFirstWeek(adjustments:ProfitabilityAdjustment):ProfitabilityAdjustment{
+ if(adjustments.period!=='2026-11')return adjustments;
+ return {...adjustments,technicians:Object.fromEntries(Object.entries(adjustments.technicians).map(([id,person])=>[
+  id,person.hours!==null&&person.weeklyHours.every(value=>value===null)?{...person,weeklyHours:[person.hours,null,null,null,null]}:person,
+ ]))};
+}
 export const profitabilityCustomerKey=(name:string)=>`client:${name.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('pt-BR').replace(/[^a-z0-9]+/g,' ').trim()}`;
