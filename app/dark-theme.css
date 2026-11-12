@@ -421,6 +421,7 @@ html.dark .profit-team-simple th,html.dark .profit-team-simple td,html.dark .pro
 html.dark .profit-team-simple td,html.dark .profit-billing-items strong,html.dark .profit-billing-items h3{color:var(--app-text)}
 html.dark .profit-team-simple tr.selected{background:var(--app-raised)}
 html.dark .profit-billing-items small,html.dark .profit-billing-items p,html.dark .profit-team-simple>p{color:var(--app-muted)}
+html.dark .profit-billing-items article>button{border-color:var(--app-border);background:var(--app-raised);color:var(--app-text)}
 html.dark .payroll-v2-empty{color:var(--app-muted);}
 html.dark .payroll-v2-show-all{background:hsl(192 28% 18%);color:var(--app-text);}
 html.dark .payroll-v2-person{border:1px solid var(--app-border);background:var(--app-surface);}

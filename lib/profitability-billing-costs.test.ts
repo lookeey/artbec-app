@@ -54,3 +54,10 @@ test('três lançamentos separados de convênio atribuem ao Nicolas só o dele',
  const {costs,companyCosts}=allocateBillingCosts(rows,people,new Map(),['Nicolas','Maria','Ana']);
  assert.equal(costs.get('n')?.otherCost,300);assert.equal(costs.get('a')?.otherCost,500);assert.equal(companyCosts,400);
 });
+
+test('excluir um gasto retira só a parcela do técnico e mantém o custo da empresa',()=>{
+ const fuel=entry('fuel','Gasolina',3000);
+ const {costs,companyCosts,items}=allocateBillingCosts([fuel],team,new Map(),[],new Map([['a',[fuel.id]]]));
+ assert.equal(costs.get('a')?.fuelCost,0);assert.equal(costs.get('b')?.fuelCost,2000);
+ assert.equal(companyCosts,1000);assert.equal(items.get('a')?.[0].excluded,true);
+});
