@@ -414,6 +414,9 @@ html.dark .billing-category-detail{border-color:var(--app-border);background:var
 html.dark .billing-category-detail summary>strong,html.dark .billing-category-history strong{color:var(--app-text)}
 html.dark .billing-category-detail[open] summary,html.dark .billing-category-history>div{border-color:var(--app-border)}
 html.dark .billing-category-history small{color:var(--app-muted)}
+html.dark .billing-technician-picker{border-color:var(--app-border);background:var(--app-raised)}
+html.dark .billing-technician-picker strong,html.dark .billing-technician-picker label{color:var(--app-text)}
+html.dark .billing-technician-picker p{color:var(--app-muted)}
 html.dark .payroll-v2-empty{color:var(--app-muted);}
 html.dark .payroll-v2-show-all{background:hsl(192 28% 18%);color:var(--app-text);}
 html.dark .payroll-v2-person{border:1px solid var(--app-border);background:var(--app-surface);}
