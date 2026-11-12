@@ -410,6 +410,10 @@ html.dark .profit-weekly-hours>strong,html.dark .profit-weekly-hours label{color
 html.dark .profit-weekly-hours input{border-color:var(--app-border);background:var(--app-surface);color:var(--app-text)}
 html.dark .billing-group-period{color:var(--app-muted)}
 html.dark .billing-group-period input{border-color:var(--app-border);background:var(--app-surface);color:var(--app-text)}
+html.dark .billing-category-detail{border-color:var(--app-border);background:var(--app-raised)}
+html.dark .billing-category-detail summary>strong,html.dark .billing-category-history strong{color:var(--app-text)}
+html.dark .billing-category-detail[open] summary,html.dark .billing-category-history>div{border-color:var(--app-border)}
+html.dark .billing-category-history small{color:var(--app-muted)}
 html.dark .payroll-v2-empty{color:var(--app-muted);}
 html.dark .payroll-v2-show-all{background:hsl(192 28% 18%);color:var(--app-text);}
 html.dark .payroll-v2-person{border:1px solid var(--app-border);background:var(--app-surface);}
