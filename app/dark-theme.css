@@ -408,6 +408,8 @@ html.dark .profit-manual-field>div small,html.dark .profit-manual-table-scroll t
 html.dark .profit-manual-table-scroll td:first-child strong{color:var(--app-text);}
 html.dark .profit-weekly-hours>strong,html.dark .profit-weekly-hours label{color:var(--app-muted)}
 html.dark .profit-weekly-hours input{border-color:var(--app-border);background:var(--app-surface);color:var(--app-text)}
+html.dark .billing-group-period{color:var(--app-muted)}
+html.dark .billing-group-period input{border-color:var(--app-border);background:var(--app-surface);color:var(--app-text)}
 html.dark .payroll-v2-empty{color:var(--app-muted);}
 html.dark .payroll-v2-show-all{background:hsl(192 28% 18%);color:var(--app-text);}
 html.dark .payroll-v2-person{border:1px solid var(--app-border);background:var(--app-surface);}
