@@ -14,10 +14,10 @@ test('reparte gasolina e folha conforme os gastos reais e outros custos igualmen
  assert.deepEqual([...covered.get('fuelCost')!],['a','b']);
 });
 
-test('respeita técnico escolhido e inclui desconto de entrada como custo',()=>{
+test('respeita técnico escolhido e não atribui desconto da mensalidade',()=>{
  const discounted={...entry('income','Mensalidade',8800),direction:'income' as const,grossAmount:10000,amount:8800,clients:['Cliente A']};
  const {costs}=allocateBillingCosts([entry('food','iFood',500,['b']),discounted],team,new Map([['cliente a',['a']]]));
- assert.equal(costs.get('a')?.otherCost,1200);assert.equal(costs.get('b')?.otherCost,500);
+ assert.equal(costs.get('a')?.otherCost,0);assert.equal(costs.get('b')?.otherCost,500);
 });
 
 test('condução e Uber vão para Leandro; óleo fica com quem tem troca registrada',()=>{
@@ -28,4 +28,22 @@ test('condução e Uber vão para Leandro; óleo fica com quem tem troca registr
  assert.equal(costs.get('a')?.oilCost,1000);assert.equal(costs.get('b')?.oilCost,2000);
  assert.equal(costs.get('l')?.maintenanceCost,300);
  assert.ok(items.get('l')?.some(item=>item.category==='Seguro de vida'));
+});
+
+test('Auvo, Conta Azul e convênio com várias pessoas são custos da empresa',()=>{
+ const people=[...team,{technicianId:'n',name:'Nicolas',aliases:['Nicolas'],payrollCost:10000,fuelCost:0,oilCost:0,maintenanceCost:0}];
+ const rows=[entry('auvo','Auvo',1000),entry('account','Contal Azul',500),{...entry('health','Convênio',900),description:'Nicolas, Maria e Ana'}];
+ const {costs,companyCosts}=allocateBillingCosts(rows,people,new Map(),['Nicolas','Maria','Ana']);
+ assert.equal(companyCosts,2400);assert.equal(costs.get('n')?.otherCost,0);
+});
+
+test('gasolina do faturamento segue a proporção individual de outubro',()=>{
+ const people=[{...team[0],fuelCost:0,fuelReferenceCost:1000},{...team[1],fuelCost:0,fuelReferenceCost:3000}];
+ const {costs}=allocateBillingCosts([entry('fuel','Gasolina',4000)],people,new Map());
+ assert.equal(costs.get('a')?.fuelCost,1000);assert.equal(costs.get('b')?.fuelCost,3000);
+});
+
+test('internet do faturamento não duplica os R$ 40 fixos por técnico',()=>{
+ const {costs,companyCosts}=allocateBillingCosts([entry('internet','Internet',8000)],team,new Map());
+ assert.equal(costs.get('a')?.otherCost,0);assert.equal(costs.get('b')?.otherCost,0);assert.equal(companyCosts,0);
 });
