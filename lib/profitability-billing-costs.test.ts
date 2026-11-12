@@ -61,3 +61,14 @@ test('excluir um gasto retira só a parcela do técnico e mantém o custo da emp
  assert.equal(costs.get('a')?.fuelCost,0);assert.equal(costs.get('b')?.fuelCost,2000);
  assert.equal(companyCosts,1000);assert.equal(items.get('a')?.[0].excluded,true);
 });
+
+test('editar a parcela de um técnico recalcula sua rentabilidade sem mudar o lançamento',()=>{
+ const fuel=entry('fuel','Gasolina',3000);
+ const {costs,companyCosts,items}=allocateBillingCosts([fuel],team,new Map(),[],new Map(),new Map([['a',{[fuel.id]:500}]]));
+ assert.equal(fuel.amount,3000);
+ assert.equal(costs.get('a')?.fuelCost,500);
+ assert.equal(costs.get('b')?.fuelCost,2000);
+ assert.equal(companyCosts,500);
+ assert.equal(items.get('a')?.[0].originalAmount,1000);
+ assert.equal(items.get('a')?.[0].amount,500);
+});

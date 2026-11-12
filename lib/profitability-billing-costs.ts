@@ -5,9 +5,9 @@ export type CostTechnician={technicianId:string;name:string;aliases:string[];pay
 const normalize=(value:string)=>value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
 export function billingCostField(category:string):CostField{const value=normalize(category);if(/salario|folha|ferias|fgts|decimo terceiro|13 salario/.test(value))return 'payrollCost';if(/gasolina|combustivel|abastecimento/.test(value))return 'fuelCost';if(/manutenc|oficina|pecas|reparo|revisao/.test(value))return 'maintenanceCost';if(/oleo|lubrificante/.test(value))return 'oilCost';return 'otherCost'}
 
-export function allocateBillingCosts(entries:BillingEntry[],technicians:CostTechnician[],clientTechnicians:Map<string,string[]>,staffNames:string[]=[],excludedByTechnician=new Map<string,string[]>()){
+export function allocateBillingCosts(entries:BillingEntry[],technicians:CostTechnician[],clientTechnicians:Map<string,string[]>,staffNames:string[]=[],excludedByTechnician=new Map<string,string[]>(),amountOverrides=new Map<string,Record<string,number>>()){
  const result=new Map(technicians.map(person=>[person.technicianId,{payrollCost:0,fuelCost:0,oilCost:0,maintenanceCost:0,otherCost:0,billingCost:0}]));
- const items=new Map(technicians.map(person=>[person.technicianId,[] as {id:string;category:string;description:string;amount:number;excluded:boolean}[]]));
+ const items=new Map(technicians.map(person=>[person.technicianId,[] as {id:string;category:string;description:string;amount:number;originalAmount:number;excluded:boolean}[]]));
  const covered=new Map<CostField,Set<string>>();
  let companyCosts=0;
  for(const entry of entries){
@@ -36,7 +36,7 @@ export function allocateBillingCosts(entries:BillingEntry[],technicians:CostTech
   const weightFor=(id:string)=>{const person=technicians.find(item=>item.technicianId===id);return field==='fuelCost'?person?.fuelReferenceCost??person?.fuelCost??0:field==='otherCost'?0:person?.[field]??0};
   const weighted=field!=='otherCost'&&targets.reduce((sum,id)=>sum+weightFor(id),0)>0;
   const weights=targets.map(id=>weighted?weightFor(id):1),weightTotal=weights.reduce((sum,value)=>sum+value,0);
-  let allocated=0;targets.forEach((id,index)=>{const share=index===targets.length-1?amount-allocated:Math.floor(amount*weights[index]/weightTotal);allocated+=share;const excluded=excludedByTechnician.get(id)?.includes(entry.id)??false;items.get(id)!.push({id:entry.id,category:entry.category,description:entry.description,amount:share,excluded});if(excluded){companyCosts+=share;return}const row=result.get(id)!;row[field]+=share;row.billingCost+=share});
+  let allocated=0;targets.forEach((id,index)=>{const share=index===targets.length-1?amount-allocated:Math.floor(amount*weights[index]/weightTotal);allocated+=share;const excluded=excludedByTechnician.get(id)?.includes(entry.id)??false;const effectiveAmount=amountOverrides.get(id)?.[entry.id]??share;items.get(id)!.push({id:entry.id,category:entry.category,description:entry.description,amount:effectiveAmount,originalAmount:share,excluded});if(excluded){companyCosts+=share;return}companyCosts+=share-effectiveAmount;const row=result.get(id)!;row[field]+=effectiveAmount;row.billingCost+=effectiveAmount});
  }
  return {costs:result,covered,items,companyCosts};
 }
