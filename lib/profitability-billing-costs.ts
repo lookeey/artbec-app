@@ -18,11 +18,13 @@ export function allocateBillingCosts(entries:BillingEntry[],technicians:CostTech
   const field:CostField=billingCostField(entry.category);
   const explicit=entry.technicianIds.filter(id=>result.has(id));
   const byClient=entry.clients.flatMap(name=>clientTechnicians.get(normalize(name))??[]).filter(id=>result.has(id));
-  const description=normalize(entry.description);
+  const description=normalize(entry.category+' '+entry.description);
   const firstNames=staffNames.map(name=>normalize(name).split(' ')[0]).filter(Boolean);
-  const namedStaff=staffNames.filter(name=>{const normalized=normalize(name),first=normalized.split(' ')[0];return normalized.length>=4&&(description.includes(normalized)||first.length>=4&&firstNames.filter(value=>value===first).length===1&&(' '+description+' ').includes(' '+first+' '))});
+  const namedStaff=staffNames.filter(name=>{const normalized=normalize(name),first=normalized.split(' ')[0];return normalized.length>=3&&(description.includes(normalized)||first.length>=3&&firstNames.filter(value=>value===first).length===1&&(' '+description+' ').includes(' '+first+' '))});
   if(/convenio/.test(normalize(entry.category))&&!explicit.length&&namedStaff.length>1){companyCosts+=amount;continue}
-  const byName=technicians.filter(person=>person.aliases.some(alias=>{const name=normalize(alias);return name.length>=4&&description.includes(name)})).map(person=>person.technicianId);
+  const teamFirstNames=technicians.map(person=>normalize(person.name).split(' ')[0]);
+  const byName=technicians.filter(person=>person.aliases.some(alias=>{const name=normalize(alias),first=name.split(' ')[0];return name.length>=3&&(description.includes(name)||first.length>=3&&teamFirstNames.filter(value=>value===first).length===1&&(' '+description+' ').includes(' '+first+' '))})).map(person=>person.technicianId);
+  if(/convenio/.test(normalize(entry.category))&&!explicit.length&&namedStaff.length===1&&!byName.length){companyCosts+=amount;continue}
   const transport=/\b(uber|conducao|passagem|transporte)\b/.test(normalize(entry.category+' '+entry.description));
   const leandro=transport?technicians.filter(person=>normalize(person.name).startsWith('leandro')).map(person=>person.technicianId):[];
   const actualOilUsers=field==='oilCost'?technicians.filter(person=>person.oilCost>0).map(person=>person.technicianId):[];

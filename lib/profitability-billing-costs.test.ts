@@ -47,3 +47,10 @@ test('internet do faturamento não duplica os R$ 40 fixos por técnico',()=>{
  const {costs,companyCosts}=allocateBillingCosts([entry('internet','Internet',8000)],team,new Map());
  assert.equal(costs.get('a')?.otherCost,0);assert.equal(costs.get('b')?.otherCost,0);assert.equal(companyCosts,0);
 });
+
+test('três lançamentos separados de convênio atribuem ao Nicolas só o dele',()=>{
+ const people=[...team,{technicianId:'n',name:'Nicolas',aliases:['Nicolas'],payrollCost:10000,fuelCost:0,oilCost:0,maintenanceCost:0}];
+ const rows=[entry('nico','Convênio Nicolas',300),entry('maria','Convênio Maria',400),entry('ana','Convênio Ana',500)];
+ const {costs,companyCosts}=allocateBillingCosts(rows,people,new Map(),['Nicolas','Maria','Ana']);
+ assert.equal(costs.get('n')?.otherCost,300);assert.equal(costs.get('a')?.otherCost,500);assert.equal(companyCosts,400);
+});
