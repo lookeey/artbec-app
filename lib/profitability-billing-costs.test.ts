@@ -19,3 +19,13 @@ test('respeita técnico escolhido e inclui desconto de entrada como custo',()=>{
  const {costs}=allocateBillingCosts([entry('food','iFood',500,['b']),discounted],team,new Map([['cliente a',['a']]]));
  assert.equal(costs.get('a')?.otherCost,1200);assert.equal(costs.get('b')?.otherCost,500);
 });
+
+test('condução e Uber vão para Leandro; óleo fica com quem tem troca registrada',()=>{
+ const people=[...team,{technicianId:'l',name:'Leandro',aliases:['Leandro'],payrollCost:10000,fuelCost:0,oilCost:0,maintenanceCost:0}];
+ people[0].oilCost=1000;people[1].oilCost=2000;
+ const {costs,items}=allocateBillingCosts([entry('uber','Uber',800),entry('ride','Condução',400),entry('oil','Óleo',3000),entry('repair','Manutenções',900),entry('life','Seguro de vida',600),entry('food','iFood',300)],people,new Map());
+ assert.equal(costs.get('l')?.oilCost,0);assert.equal(costs.get('l')?.otherCost,1500);
+ assert.equal(costs.get('a')?.oilCost,1000);assert.equal(costs.get('b')?.oilCost,2000);
+ assert.equal(costs.get('l')?.maintenanceCost,300);
+ assert.ok(items.get('l')?.some(item=>item.category==='Seguro de vida'));
+});
