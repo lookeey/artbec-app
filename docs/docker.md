@@ -91,6 +91,14 @@ Para salvar credenciais Auvo, defina uma chave de criptografia com pelo menos
 
 ## Dokploy
 
+Se a aplicação for publicada pelo **Dockerfile** no Dokploy, o `compose.yaml`
+local não configura os volumes da aplicação. Em **Advanced → Volumes/Mounts**,
+crie um **Volume Mount** com o nome `artbec-data` e o caminho dentro do container
+`/app/.wrangler/state`. Use **uma réplica**: o banco D1 local desse app não é
+compartilhado entre réplicas. Configure o volume e preserve uma cópia dos dados
+do container atual **antes** de fazer novo deploy; montar um volume novo sobre
+um container que já recebeu alterações não transfere essas alterações.
+
 No domínio do Dokploy, configure o destino com protocolo **HTTP** e porta
 interna **3000**. Ative HTTPS no domínio público e defina a variável:
 
