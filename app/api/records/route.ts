@@ -6,6 +6,7 @@ import {database,getRecords,originals} from '@/lib/finance-store';
 import {authorize,canAccess} from '@/lib/auth';
 const amount=z.number().int().min(0).max(99999999900).nullable();
 const schema=z.object({id:z.string().regex(/^(import-\d+-\d+|new-[0-9a-f-]{36})$/),version:z.number().int().min(0),kind:z.enum(['Mensalidade','Serviço']),...serviceExecutionFields,period:z.string().regex(/^(\d{4}-(0[1-9]|1[012])|sem-data)$/),client:z.string().trim().min(1).max(200),date:calendarDate,amount,net:amount,payment:z.string().max(500),description:z.string().max(1000),netNote:z.string().max(1000),status:z.enum(['paid','pending','overdue','review'])}).refine(validServiceExecution,{message:'Informe a data da realização.',path:['serviceDate']});
+const paymentSchema=z.object({id:z.string().regex(/^(import-\d+-\d+|new-[0-9a-f-]{36})$/),status:z.enum(['paid','pending','overdue','review'])}).strict();
 export async function GET(request:Request){const auth=await authorize(request,['overview','monthly','services','growth','history']);if(auth.error)return auth.error;try{const rows=await getRecords(),user=auth.user!,records=rows.filter(record=>record.kind==='Mensalidade'?['overview','monthly','growth','history'].some(view=>canAccess(user,view)):['overview','services'].some(view=>canAccess(user,view)));return Response.json({records},{headers:{'Cache-Control':'no-store'}})}catch(e){console.error('Finance read failed',e);return Response.json({error:'O armazenamento está temporariamente indisponível.'},{status:503})}}
 export async function POST(request:Request){
 const auth=await authorize(request,['monthly','services']);if(auth.error)return auth.error;
@@ -27,6 +28,27 @@ try{
  if(!saved.results.some(row=>row.id===record.id))return Response.json({error:'O lançamento mudou. Recarregue a página e tente novamente.'},{status:409});
  return Response.json({record},{headers:{'Cache-Control':'no-store'}});
 }catch(e){console.error('Finance write failed',e);return Response.json({error:'Não foi possível salvar. Os dados do formulário foram mantidos.'},{status:503})}}
+
+export async function PATCH(request:Request){
+ const auth=await authorize(request,['monthly']);if(auth.error)return auth.error;
+ if(request.headers.get('origin')!==new URL(request.url).origin||!request.headers.get('content-type')?.includes('application/json'))return Response.json({error:'Origem ou formato inválido.'},{status:403});
+ try{
+  const raw=await request.text();if(raw.length>1000)return Response.json({error:'Pedido muito extenso.'},{status:413});
+  const parsed=paymentSchema.safeParse(JSON.parse(raw));if(!parsed.success)return Response.json({error:'Situação inválida.'},{status:400});
+  const {id,status}=parsed.data,db=database(auth.user!);
+  for(let attempt=0;attempt<3;attempt++){
+   const existing=await db.prepare('SELECT data,version FROM finance_changes WHERE id=?').bind(id).first<{data:string;version:number}>();
+   const current=existing?JSON.parse(existing.data):originals.get(id);
+   if(!current||current.kind!=='Mensalidade')return Response.json({error:'Mensalidade não encontrada.'},{status:404});
+   if(monthlyCancelled(current,await monthlyCancellations(db)))return Response.json({error:'Esta mensalidade foi retirada.'},{status:410});
+   if(current.status===status)return Response.json({record:{...current,version:existing?.version??0}},{headers:{'Cache-Control':'no-store'}});
+   const version=existing?.version??0,record={...current,status,version:version+1};
+   const saved=await db.prepare('INSERT INTO finance_changes (id,data,version,updated_at) VALUES (?,?,?,?) ON CONFLICT(id) DO UPDATE SET data=excluded.data,version=excluded.version,updated_at=excluded.updated_at WHERE finance_changes.version=? RETURNING id').bind(id,JSON.stringify(record),record.version,new Date().toISOString(),version).run<{id:string}>();
+   if(saved.results.some(row=>row.id===id))return Response.json({record},{headers:{'Cache-Control':'no-store'}});
+  }
+  return Response.json({error:'Outra alteração ocorreu ao mesmo tempo. Tente novamente.'},{status:409});
+ }catch(e){console.error('Monthly payment write failed',e);return Response.json({error:'Não foi possível salvar o pagamento.'},{status:503})}
+}
 
 const deletion=z.object({id:z.string().regex(/^(import-\d+-\d+|new-[0-9a-f-]{36})$/),version:z.number().int().min(0),confirmation:z.literal('EXCLUIR')}).strict();
 export async function DELETE(request:Request){
